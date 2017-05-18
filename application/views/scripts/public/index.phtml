@@ -1,4 +1,5 @@
-<div style="margin-left: 90px"><img style="width:93%;" src="<?=$this->baseUrl('img/carousel/home2.jpg')?>" alt=""/></div>
+<div class="mainBody container">
+<img style="width:100%;" src="<?=$this->baseUrl('img/home.jpg')?>" alt=""/>
 
 
 
@@ -17,7 +18,7 @@
 
 
 
-<div class="span12" style="margin-left: 7%">		
+<div>		
 			<div class="well well-small">
 			<h4>Le offerte più recenti </h4>
 			<div class="row-fluid">
@@ -28,7 +29,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/2.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -38,7 +39,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/2.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -48,7 +49,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/2.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					   <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -58,7 +59,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/2.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					   <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -72,7 +73,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -82,7 +83,7 @@
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -91,7 +92,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					   <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -100,7 +101,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""></a>
+					<a href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					   <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
@@ -119,7 +120,14 @@
 			  <ul class="thumbnails">
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="
+                                            <?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -132,7 +140,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -144,7 +152,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -156,7 +164,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -168,7 +176,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -180,7 +188,7 @@
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/carousel/1.jpg')?>" alt=""/></a>
+					<a  href="product_details.html"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
@@ -191,6 +199,7 @@
 				  </div>
 				</li>
 			  </ul>
+</div>
 </div>
 
 <!-- TODO spostare in bootstrap.php -->
