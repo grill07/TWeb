@@ -10,12 +10,12 @@
 <form class="form-inline navbar-search" method="post" action="products.html" >
 		<input id="srchFld" class="srchTxt" type="text" />
                     <select class="srchTxt">
-			<option>All</option>
-			<option>CLOTHES </option>
-			<option>FOOD AND BEVERAGES </option>
-			<option>HEALTH & BEAUTY </option>
-			<option>SPORTS & LEISURE </option>
-			<option>BOOKS & ENTERTAINMENTS </option>
+			<option>TUTTO</option>
+			<option>ABBIGLIAMENTO </option>
+			<option>ALIMENTI </option>
+			<option>CURA DELLA PERSONA </option>
+			<option>ARTICOLI SPORTIVI </option>
+			<option>LIBRI </option>
                     </select> 
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 </form>
@@ -31,10 +31,10 @@
                     ); 
                  ?>"
                  >Offerte</a></li>
-	 <li class=""><a href="
-                         <?= $this->url(array(
+        <li class=""><a href="
+                        <?= $this->url(array(
                         'controller' => 'public',
-                        'action'     => 'aziende',
+                        'action'     => 'offerte',
                         ), 
                         'default',true
                     ); 
@@ -43,12 +43,21 @@
 	 <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'public',
-                        'action'     => 'faq',
+                        'action'     => 'aziende',
                         ), 
                         'default',true
                     ); 
                  ?>"
                  >FAQ</a></li>
+	 <li class=""><a href="
+                         <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'faq',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+                 >Contattaci</a></li>
 	 <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'public',
