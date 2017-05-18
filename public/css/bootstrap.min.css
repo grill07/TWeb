@@ -16,7 +16,7 @@ hr.soften {margin: 8px 0 4px; background:#ddd;}
 #featured img{max-height:160px;}
 #featured,#featured .span3{margin-bottom:0}
 #featured .carousel-control {background:none; color:#002A80; border-color:#002A80;}
-.form-horizontal.qtyFrm .control-label{text-align: left;}
+.form-horizontal.qtyFrm .control-label{text-align: center;}
 .form-horizontal.qtyFrm .control-label span{font-size:18px}
 .moreOptopm.carousel .item img{padding:2px; border:1px solid #ddd}
 .moreOptopm.carousel .item img:hover{ border:1px solid pink}
