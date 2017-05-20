@@ -7,6 +7,7 @@ class PublicController extends Zend_Controller_Action {
     public function init() {
         /*$this->_helper->layout->setLayout('main');
         $this->_logger = Zend_Registry::get('log');*/
+        $this->_publicModel = new Application_Model_Public();
     }
 
     public function indexAction() {
@@ -14,7 +15,13 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function offerteAction() {
-        
+        $cats=$this->_publicModel->getCats();
+        $this->view->assign(array(
+            		'cats' => $cats,
+            		'products' => $cats
+            		)
+        );
+
     }
     
     public function aziendeAction() {

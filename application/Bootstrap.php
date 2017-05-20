@@ -42,5 +42,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headTitle('COUPONshop');
     }
 
+protected function _initDefaultModuleAutoloader()
+    {
+    	$loader = Zend_Loader_Autoloader::getInstance();
+		$loader->registerNamespace('App_');
+        $this->getResourceLoader()
+             ->addResourceType('modelResource','models/resources','Resource');
+  	}
 
 }

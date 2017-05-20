@@ -7,6 +7,10 @@
         <li><a>Abbigliamento</a></li>
         <li><a>Alimentari</a></li>
         <li><a>Casa</a></li>
+        <?php foreach ($this->cats as $category) {
+		     echo '<li><a>' . $category->tipologia . '</a></li>';
+	      }
+	      ?>
     </ul>
     
 </div>
