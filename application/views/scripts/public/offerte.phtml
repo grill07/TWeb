@@ -2,16 +2,9 @@
 	<div class="container">
 	<div class="row">
 <div id="sidebar" class="span3">
-    <ul id="sideManu" class="nav nav-tabs nav-stacked">
-        <li><a>Elettronica</a></li> 
-        <li><a>Abbigliamento</a></li>
-        <li><a>Alimentari</a></li>
-        <li><a>Casa</a></li>
-        <?php foreach ($this->cats as $category) {
-		     echo '<li><a>' . $category->tipologia . '</a></li>';
-	      }
-	      ?>
-    </ul>
+    <div class="well">
+        <?php echo $this->ricercaForm ?>
+    </div>
     
 </div>
 
