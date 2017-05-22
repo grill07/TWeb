@@ -16,16 +16,37 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+        /* serve per provare l'inserimento nel db
+        $utente=array(
+            		'nome' => 'Giacomo',
+            		'cognome' => 'Grilli',
+                        'genere' => 'M',
+            		'eta' => '23',
+                        'mail' => 'guev',
+            		'telefono' => '143432',
+                        'username' => 'gg2',
+            		'password' => 'gg2',
+                        'tipo' => '2'
+            		);
+        $this->_publicModel->saveUtente($utente);
         
+        
+        $this->_adminModel = new Application_Model_Admin();
+        $faq=array(
+            'domanda' => 'Qual è la differenza tra mi piaci e ti amo?',
+            'risposta' => 'Quando ti piace un fiore lo prendi, quando ami un fiore lo annaffi ogni giorno'
+        );
+        $this->_adminModel->saveFaq($faq);*/
     }
     
     public function offerteAction() {
+        /* serve per richiamere il model e passare le variabili alla view
         $cats=$this->_publicModel->getCats();
         $this->view->assign(array(
             		'cats' => $cats,
             		'products' => $cats
             		)
-        );
+        );*/
 
     }
     
@@ -34,7 +55,11 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function faqAction() {
-        
+        $faq=$this->_publicModel->getFaq();
+        $this->view->assign(array(
+            		'faq' => $faq
+                )
+                );
     }
     
     public function loginAction() {

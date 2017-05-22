@@ -10,14 +10,23 @@ class Application_Resource_TipoProd extends Zend_Db_Table_Abstract
     {
     }
     
-    public function getCats()
+    public function getTable()
     {
-        /*$cats=array("alimentari","elettronica");
-        return $cats;*/
 	$select = $this->select();
         return $this->fetchAll($select);
     }
-
+    
+    public function addElement($el)
+    {
+    	return $this->insert($el);
+    }
+    
+    /* da sistemare
+    public function deleteElement($key)
+    {
+        $where=(_primary .' = ?', $key);
+        $this->delete($where);
+    }*/
 
 }
 
