@@ -10,9 +10,9 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
     {
     }
     
-    public function getElementByUser($user)
+    public function getElement($key)
     {
-        return $this->fetchRow($this->select()->where('username = ?', $user));
+        return $this->fetchRow($this->select()->where('username = ?', $key));
     }
     
     public function getTable()
