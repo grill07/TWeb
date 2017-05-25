@@ -46,8 +46,9 @@ class PublicController extends Zend_Controller_Action {
             		'cats' => $cats,
             		'products' => $cats
             		)
-        );*/
-
+        );*/       
+        $offerte=$this->_publicModel->getOfferte();
+        $this->view->assign(array('offerte' => $offerte));
     }
     
     public function aziendeAction() {
@@ -74,6 +75,19 @@ class PublicController extends Zend_Controller_Action {
         
     }
     
+    public function risultatiAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+		$form=$this->_form;
+		if (!$form->isValid($_POST)) {
+			return $this->render('offerte');
+		}
+                $nome = $form->getValue('nome');
+		$offerta=$this->_publicModel->getOffertaByNome($nome);
+		$this->view->assign(array('offerta' => $offerta ));        
+    }
+    
     private function checkAction() //controllo su db delle credenziali
     {
         
@@ -81,10 +95,6 @@ class PublicController extends Zend_Controller_Action {
     
     private function nuovoutenteAction() //registrare il nuovo utente sul db
     {
-        
-    }
-    
-    private function cercaprodottoAction(){
         
     }
     
@@ -118,7 +128,7 @@ class PublicController extends Zend_Controller_Action {
 		$this->_form = new Application_Form_Public_Ricerca();
 		$this->_form->setAction($urlHelper->url(array(
 				'controller' => 'public',
-				'action' => 'cercaprodotto'),
+				'action' => 'risultati'),
 				'default'
 				));
 		return $this->_form;              

@@ -7,18 +7,6 @@
                     ); 
                  ?>"
                  >COUPONshop</a>
-<form class="form-inline navbar-search" method="post" action="products.html" >
-		<input id="srchFld" class="srchTxt" type="text" />
-                    <select class="srchTxt">
-			<option>TUTTO</option>
-			<option>ABBIGLIAMENTO </option>
-			<option>ALIMENTI </option>
-			<option>CURA DELLA PERSONA </option>
-			<option>ARTICOLI SPORTIVI </option>
-			<option>LIBRI </option>
-                    </select> 
-		  <button type="submit" id="submitButton" class="btn btn-primary">Vai</button>
-</form>
 
 
 <ul id="topMenu" class="nav pull-right">
@@ -49,6 +37,15 @@
                     ); 
                  ?>"
                  >FAQ</a></li>
+         <li class=""><a href="
+                         <?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'insprom',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+                 >Area Staff</a></li>
 	 <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'public',

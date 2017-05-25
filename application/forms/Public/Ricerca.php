@@ -4,24 +4,23 @@ class Application_Form_Public_Ricerca extends Zend_Form
 {
     public function init()
     {
-        //$this->_publicModel = new Application_Model_Public();
         $this->setMethod('post');
         $this->setName('Cerca');
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
         
-        $this->addElement('text', 'Ricerca', array(
+        $this->addElement('text', 'nome', array(
             'label' => 'Ricerca prodotto',
             'filters' => array('StringTrim'),
             'required' => false,
             'validators' => array(array('StringLength',true, array(1,25))),
 		));
         
-        $this->addElement('submit', 'cercaprodotto', array(
+        $this->addElement('submit', 'riceroff', array(
             'label' => 'Cerca',
 		));
         
-        $this->addElement('multiCheckbox', 'categorie', array(
+        $this->addElement('multiCheckbox', 'categoria', array(
             'label' => 'Categorie prodotti',
             'required' => false,
             'checked_value' => 'good',
@@ -34,7 +33,7 @@ class Application_Form_Public_Ricerca extends Zend_Form
                         )
 		));
         
-        $this->addElement('multiCheckbox', 'aziende', array(
+        $this->addElement('multiCheckbox', 'azienda', array(
             'label' => 'Aziende',
             'required' => false,
             'checked_value' => 'good',
