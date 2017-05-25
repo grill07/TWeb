@@ -5,7 +5,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected $_logger;
     protected $_view;
 
-    /*protected function _initLogging()
+    protected function _initLogging()
     {
         $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/data/log/logFile.log');        
         $logger = new Zend_Log($writer);
@@ -14,7 +14,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $this->_logger = $logger;
     	$this->_logger->info('Bootstrap ' . __METHOD__);
-    }*/
+    }
 
     protected function _initRequest()
 	// Aggiunge un'istanza di Zend_Controller_Request_Http nel Front_Controller

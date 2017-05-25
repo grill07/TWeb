@@ -10,6 +10,11 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
     {
     }
     
+    public function getElement($key)
+    {
+        return $this->fetchRow($this->select()->where('id = ?', $key));
+    }
+    
     public function getTable()
     {
 	$select = $this->select();
@@ -23,7 +28,7 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
     
     public function deleteElement($key)
     {
-        $this->delete();
+        $this->delete('categoria = ' . $key);
     }
 
 }

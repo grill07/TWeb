@@ -23,9 +23,23 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Faq')->addElement($faq);
     }
     
+    public function deleteAzienda($nome)
+    {
+        return $this->getResource('Aziende')->deleteElement($nome);
+    }
+    
+    public function deleteCategoria($cat)
+    {
+        return $this->getResource('Categorie')->deleteElement($cat);
+    }
+    
     public function deleteFaq($id)
     {
         return $this->getResource('Faq')->deleteElement($id);
     }
     
+    public function deleteUtente($user)
+    {
+        return $this->getResource('Utenti')->deleteElement($user);
+    }
 }

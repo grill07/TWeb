@@ -12,4 +12,9 @@ class Application_Model_Staff extends App_Model_Abstract
     {
     	return $this->getResource('Offerte')->addElement($offerta);
     }
+    
+    public function deleteOfferta($id)
+    {
+        return $this->getResource('Offerte')->deleteElement($id);
+    }
 }

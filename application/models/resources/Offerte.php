@@ -25,5 +25,10 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     {
     	$this->insert($el);
     }
+    
+    public function deleteElement($key)
+    {
+        return $this->delete('id = ' . $key);
+    }
 
 }
