@@ -28,23 +28,27 @@ class PublicController extends Zend_Controller_Action {
             		'password' => 'gg2',
                         'tipo' => '2'
             		);
-        $this->_publicModel->saveUtente($utente);
+        $this->_publicModel->saveUtente($utente);*/
         
         
-        $this->_adminModel = new Application_Model_Admin();
+        /*$this->_adminModel = new Application_Model_Admin();
         $faq=array(
             'domanda' => 'Qual è la differenza tra mi piaci e ti amo?',
             'risposta' => 'Quando ti piace un fiore lo prendi, quando ami un fiore lo annaffi ogni giorno'
         );
         $this->_adminModel->saveFaq($faq);*/
+        
+        
+        /*$this->_adminModel = new Application_Model_Admin();
+        $faq='6';
+        $this->_adminModel->deleteFaq($faq);*/
     }
     
     public function offerteAction() {
         /* serve per richiamere il model e passare le variabili alla view
-        $cats=$this->_publicModel->getCats();
+        $cats=$this->_publicModel->getCategorie();
         $this->view->assign(array(
-            		'cats' => $cats,
-            		'products' => $cats
+            		'categorie' => $categorie
             		)
         );*/       
         $offerte=$this->_publicModel->getOfferte();
@@ -52,7 +56,11 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function aziendeAction() {
-        
+        $aziende=$this->_publicModel->getAziende();
+        $this->view->assign(array(
+            		'aziende' => $aziende
+                )
+                );        
     }
     
     public function faqAction() {
@@ -67,8 +75,12 @@ class PublicController extends Zend_Controller_Action {
         
     }
     
-    public function offsingAction() {
-        
+    public function offsingAction(/*$id*/) {
+        /*$off=$this->_publicModel->getOffById($id);
+        $this->view->assign(array(
+                        'offerta' => $off
+                )
+                );*/
     }
     
     public function registratiAction() {

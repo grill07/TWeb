@@ -1,10 +1,10 @@
 <?php
 
-class Application_Resource_TipoProd extends Zend_Db_Table_Abstract
+class Application_Resource_Categorie extends Zend_Db_Table_Abstract
 {
     protected $_name    = 'tipoProd';
-    protected $_primary  = 'tipologia';
-    protected $_rowClass = 'Application_Resource_TipoProd_Item';
+    protected $_primary  = 'categoria';
+    protected $_rowClass = 'Application_Resource_Categorie_Item';
     
     public function init()
     {
@@ -21,12 +21,10 @@ class Application_Resource_TipoProd extends Zend_Db_Table_Abstract
     	return $this->insert($el);
     }
     
-    /* da sistemare
     public function deleteElement($key)
     {
-        $where=(_primary .' = ?', $key);
-        $this->delete($where);
-    }*/
+        $this->delete();
+    }
 
 }
 
