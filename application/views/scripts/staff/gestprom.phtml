@@ -1,0 +1,28 @@
+<h3>Gestisci le promozioni inserite</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            <?php foreach ($this->offerte as $offerta) :?>
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span3">
+					   <img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>"/>
+                                        </td>
+                                        <td class="span6">
+					   <?php echo  '<h5>'.$offerta->nome.'</h5>' ?>
+                                          <hr class="soft"/>
+					   <?php echo '<p>'.$offerta->descrizione.'</p>'?>
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><?php $this->gestioneForm->setId($offerta->id);
+                                                   echo $this->gestioneForm ?>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            <?php endforeach ?>
+</ul>
