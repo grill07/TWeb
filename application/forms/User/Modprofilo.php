@@ -1,14 +1,14 @@
 <?php
 
-class Application_Form_Staff_Modprofilo extends Zend_Form
+class Application_Form_User_Modprofilo extends Zend_Form
 {
-    protected $_staffModel;
+    protected $_userModel;
     
     public function init()
     {
-        $this->_staffModel = new Application_Model_Staff();
+        $this->_userModel = new Application_Model_User();
         $this->setMethod('post');
-        $this->setName('staffprofilo');
+        $this->setName('utenteprofilo');
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
     }
@@ -67,7 +67,7 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
 		));
         
         $this->addElement('hidden', 'username', array(
-            'value' => 'staff1',
+            'value' => 'user1',
             ));
         
         $this->addElement('text', 'password', array(
@@ -83,3 +83,4 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
 		)); 
     }
 }
+

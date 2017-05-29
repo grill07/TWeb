@@ -5,8 +5,6 @@ class StaffController extends Zend_Controller_Action {
     protected $_form1;
     protected $_form2;
     protected $_form3;
-    protected $_form4;
-    protected $_form5;
     protected $_logger;
     protected $_values;
     
@@ -16,8 +14,6 @@ class StaffController extends Zend_Controller_Action {
         $this->view->inserisciForm = $this->getInserisciForm();
         $this->view->modprofiloForm = $this->getModprofiloForm();
         $this->view->modoffertaForm = $this->getModoffertaForm();
-        $this->view->gestioneForm = $this->getGestioneForm();
-        $this->view->profiloForm = $this->getProfiloForm();
     }
     
     public function areapersAction() {
@@ -26,7 +22,10 @@ class StaffController extends Zend_Controller_Action {
     }
     
     public function moddatiAction() {
-        
+        $user = $this->getParam('username');
+        $utente = $this->_staffModel->getUtenteByUser($user);
+        $this->_form2->setValues($utente);
+        $this->view->modprofiloForm = $this->_form2;
     }
     
     public function gestpromAction() {
@@ -39,7 +38,10 @@ class StaffController extends Zend_Controller_Action {
     }
     
     public function modpromAction() {
-        
+        $id = $this->getParam('id');
+        $offerta = $this->_staffModel->getOffertaById($id);
+        $this->_form3->setValues($offerta);
+        $this->view->modoffertaForm = $this->_form3;
     }
 
     public function inserisciAction(){
@@ -53,6 +55,12 @@ class StaffController extends Zend_Controller_Action {
 		$values = $form->getValues();
 		$this->_staffModel->saveOfferta($values);
 		$this->_helper->redirector('insprom','staff');
+    }
+    
+    public function eliminaAction(){
+        $id = $this->getParam('id');
+        $this->_staffModel->deleteOfferta($id);
+        $this->_helper->redirector('gestprom','staff');
     }
     
     public function modprofiloAction(){
@@ -82,42 +90,11 @@ class StaffController extends Zend_Controller_Action {
 		}
                 $values = $form->getValues();
                 $id = $values['id'];
-                $this->_staffModel->deleteOfferta($id);
-		$this->_staffModel->saveOfferta($values);
-		$this->_helper->redirector('gestprom','staff');
+        $this->_staffModel->deleteOfferta($id);
+        $this->_staffModel->saveOfferta($values);
+        $this->_helper->redirector('gestprom','staff');
     }
-      
-    public function gestioneAction(){
-                if (!$this->getRequest()->isPost()) {
-			$this->_helper->redirector('index','public');
-		}
-		$id = $_POST['id'];
-                if(isset($_POST['modoff'])){
-                    $values = $this->_staffModel->getOffertaById($id);
-                    $this->_form3->setValues($values);
-                    $this->view->modoffertaForm = $this->_form3;
-                    $this->render('modprom');
-                }
-                if(isset($_POST['elimoff'])){ 
-                    $this->_staffModel->deleteOfferta($id);
-                    $this->_helper->redirector('gestprom','staff');
-                    
-                }
-    }
-    
-    public function profiloAction(){
-        if (!$this->getRequest()->isPost()) {
-			$this->_helper->redirector('index','public');
-		}
-		$user = $_POST['username'];
-                $values = $this->_staffModel->getUtenteByUser($user);
-                $this->_form2->setValues($values);
-                $this->view->modprofiloForm = $this->_form2;
-                $this->render('moddati');
-                
-               
-    }
-    
+     
     public function getInserisciForm(){
         $urlHelper = $this->_helper->getHelper('url');
 		$this->_form1 = new Application_Form_Staff_Inserisci();
@@ -149,27 +126,5 @@ class StaffController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form3;
-    }
-    
-    public function getGestioneForm(){//è una form speciale che serve a passare l'id del prodotto, che andrebbe perduto altrimenti
-        $urlHelper = $this->_helper->getHelper('url');
-		$this->_form4 = new Application_Form_Staff_Gestione();
-		$this->_form4->setAction($urlHelper->url(array(
-				'controller' => 'staff',
-				'action' => 'gestione'),
-				'default'
-				));
-		return $this->_form4;
-    }
-    
-    public function getProfiloForm(){
-        $urlHelper = $this->_helper->getHelper('url');
-		$this->_form5 = new Application_Form_Staff_Profilo();
-		$this->_form5->setAction($urlHelper->url(array(
-				'controller' => 'staff',
-				'action' => 'profilo'),
-				'default'
-				));
-		return $this->_form5;
     }
 }

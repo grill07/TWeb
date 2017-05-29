@@ -6,6 +6,12 @@
  echo '<p><b>Età: </b>'.$this->utente->eta.'</p>';
  echo '<p><b>Email: </b>'.$this->utente->mail.'</p>';
  echo '<p><b>N.Telefono: </b>'.$this->utente->telefono.'</p>'; 
- echo '<p><b>Username: </b>'.$this->utente->username.'</p>'; 
- $this->profiloForm->setUser($this->utente->username);
- echo $this->profiloForm; 
+ echo '<p><b>Username: </b>'.$this->utente->username.'</p>'; ?>
+ <a class="btn" href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'moddati',
+                        'username'   => $this->utente->username,
+                        ), 
+                        'default',true
+                    ); 
+                 ?>">Modifica profilo</a>

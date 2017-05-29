@@ -17,8 +17,22 @@
                                       </tr>
                                       <tr>
                                           <td>
-                                              <h4><?php $this->gestioneForm->setId($offerta->id);
-                                                   echo $this->gestioneForm ?>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'staff',
+                                                     'action'     => 'modprom',
+                                                     'id'   => $offerta->id,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Modifica</a>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'staff',
+                                                     'action'     => 'elimina',
+                                                     'id'   => $offerta->id,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Elimina</a>
                                               </h4>
                                           </td>
                                       </tr>
