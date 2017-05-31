@@ -18,16 +18,16 @@ class Application_Form_Staff_Modofferta extends Zend_Form
             'label' => 'Nome prodotto',
             'value' => $values['nome'],
             'filters' => array('StringTrim'),
-            'required' => false,
+            'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
 		));
         
         
-        $this->addElement('text', 'descrizione', array(
+        $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione prodotto',
             'value' => $values['descrizione'],
             'filters' => array('StringTrim'),
-            'required' => false,
+            'required' => true,
             'validators' => array(array('StringLength',true, array(1,2000))),
 		));
         
@@ -35,7 +35,7 @@ class Application_Form_Staff_Modofferta extends Zend_Form
             'label' => 'Categoria prodotto',
             'value' => $values['categoria'],
             'filters' => array('StringTrim'),
-            'required' => false,
+            'required' => true,
             'validators' => array(array('StringLength',true, array(1,20))),
 		));
         
@@ -47,39 +47,40 @@ class Application_Form_Staff_Modofferta extends Zend_Form
         $this->addElement('select', 'azienda', array(
             'label' => 'Azienda',
             'value' => $values['azienda'],
-            'required' => false,
+            'required' => true,
         	'multiOptions' => $nomi,
         ));
         
-        $this->addElement('text', 'immagine', array(
-            'label' => 'Immagine prodotto',
-            'value' => $values['immagine'],
-            'filters' => array('StringTrim'),
-            'required' => false,
-            'validators' => array(array('StringLength',true, array(1,20))),
-		));
+        $this->addElement('file', 'immagine', array(
+        	'label' => 'Immagine',
+        	'destination' => APPLICATION_PATH . '/../public/img/prodotti',
+        	'validators' => array( 
+        			array('Count', false, 1),
+        			array('Size', false, 102400),
+        			array('Extension', false, array('jpg', 'gif'))),
+                ));
         
         $this->addElement('text', 'inizio', array(
             'label' => 'Data inizio offerta',
             'value' => $values['inizio'],
             'filters' => array('StringTrim'),
-            'required' => false,
-            'validators' => array (array('date', false, array('MM/dd/yyyy'))),
+            'required' => true,
+            'validators' => array (array('date', false, array('dd/MM/yyyy'))),
 		));
         
         $this->addElement('text', 'fine', array(
             'label' => 'Data fine offerta',
             'value' => $values['fine'],
             'filters' => array('StringTrim'),
-            'required' => false,
-            'validators' => array (array('date', false, array('MM/dd/yyyy'))),
+            'required' => true,
+            'validators' => array (array('date', false, array('dd/MM/yyyy'))),
 		));
         
         $this->addElement('text', 'prezzo', array(
             'label' => 'Prezzo originale',
             'value' => $values['prezzo'],
             'filters' => array('StringTrim'),
-            'required' => false,
+            'required' => true,
             'validators' => array(array('Float')),
 		));
         
@@ -87,7 +88,7 @@ class Application_Form_Staff_Modofferta extends Zend_Form
             'label' => 'Sconto da applicare',
             'value' => $values['tipologia'],
             'filters' => array('StringTrim'),
-            'required' => false,
+            'required' => true,
             'validators' => array(array('Int')),
 		));
         

@@ -6,12 +6,18 @@
 				  <table class="well">
                                       <tr>
                                         <td class="span3">
-					   <img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>"/>
+					    <?php echo '<img src="' . $this->baseUrl('img/prodotti/'. $offerta->immagine). '"/>' ?>
                                         </td>
                                         <td class="span6">
 					   <?php echo  '<h5>'.$offerta->nome.'</h5>' ?>
                                           <hr class="soft"/>
-					   <?php echo '<p>'.$offerta->descrizione.'</p>'?>
+					   <?php echo '<p><b>Descrizione: </b>'.$offerta->descrizione.'</p>'?>
+                                           <?php echo '<p><b>Categoria: </b>'.$offerta->categoria.'</p>'?>
+                                           <?php echo '<p><b>Azienda: </b>'.$offerta->azienda.'</p>'?>
+                                           <?php echo '<p><b>Data inizio: </b>'.$offerta->inizio.'</p>'?>
+                                           <?php echo '<p><b>Data fine: </b>'.$offerta->fine.'</p>'?>
+                                           <?php echo '<p><b>Prezzo: </b>'.$offerta->prezzo.'€</p>'?>
+                                           <?php echo '<p><b>Tipo Sconto: </b>'.$offerta->tipologia.'%</p>'?>
 					  <br class="clr"/>
 				         </td>
                                       </tr>

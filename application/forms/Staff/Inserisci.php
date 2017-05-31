@@ -20,7 +20,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
 		));
         
         
-        $this->addElement('text', 'descrizione', array(
+        $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione prodotto',
             'filters' => array('StringTrim'),
             'required' => true,
@@ -45,25 +45,27 @@ class Application_Form_Staff_Inserisci extends Zend_Form
         	'multiOptions' => $nomi,
         ));
         
-        $this->addElement('text', 'immagine', array(
-            'label' => 'Immagine prodotto',
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
-		));
+        $this->addElement('file', 'immagine', array(
+        	'label' => 'Immagine',
+        	'destination' => APPLICATION_PATH . '/../public/img/prodotti',
+        	'validators' => array( 
+        			array('Count', false, 1),
+        			array('Size', false, 102400),
+        			array('Extension', false, array('jpg', 'gif'))),
+                ));
         
         $this->addElement('text', 'inizio', array(
             'label' => 'Data inizio offerta',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array (array('date', false, array('MM/dd/yyyy'))),
+            'validators' => array (array('date', false, array('dd/MM/yyyy'))),
 		));
         
         $this->addElement('text', 'fine', array(
             'label' => 'Data fine offerta',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array (array('date', false, array('MM/dd/yyyy'))),
+            'validators' => array (array('date', false, array('dd/MM/yyyy'))),
 		));
         
         $this->addElement('text', 'prezzo', array(

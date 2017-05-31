@@ -16,7 +16,7 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
     public function setValues($values){ //bisogna fare così per avere la form precompilata
        $this->addElement('text', 'nome', array(
             'label' => 'Nome',
-           'value' => $values['nome'],
+            'value' => $values['nome'],
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,20))),
@@ -37,8 +37,8 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'multiOptions' => array(
-                        'Maschile' => 'M',
-                        'Femminile' => 'F',
+                        'M' => 'Maschile',
+                        'F' => 'Femminile',
                         ),
 		));
         
@@ -47,7 +47,7 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
             'value' => $values['eta'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array('Int'),
+            'validators' => array('Int',array('StringLength',true, array(1,2))),
 		));
         
         $this->addElement('text', 'mail', array(
@@ -55,7 +55,7 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
             'value' => $values['mail'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
+            'validators' => array('EmailAddress',array('StringLength',true, array(1,30))),
 		));
         
         $this->addElement('text', 'telefono', array(
@@ -63,12 +63,8 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
             'value' => $values['telefono'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array ('int'),
+            'validators' => array ('digits',array('StringLength',true, array(1,12))),
 		));
-        
-        $this->addElement('hidden', 'username', array(
-            'value' => 'staff1',
-            ));
         
         $this->addElement('text', 'password', array(
             'label' => 'Password',
@@ -77,7 +73,15 @@ class Application_Form_Staff_Modprofilo extends Zend_Form
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,15))),
 		));
-                
+               
+        $this->addElement('hidden', 'username', array(
+            'value' => $values['username'],
+            ));
+        
+        $this->addElement('hidden', 'ruolo', array(
+            'value' => $values['ruolo'],
+            ));
+        
         $this->addElement('submit', 'modifica', array(
             'label' => 'Salva Modifiche',
 		)); 

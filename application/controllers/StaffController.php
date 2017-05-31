@@ -1,7 +1,7 @@
 <?php
 
-class StaffController extends Zend_Controller_Action {
-    protected $_staffModel;
+class StaffController extends Zend_Controller_Action { 
+   protected $_staffModel;
     protected $_form1;
     protected $_form2;
     protected $_form3;
@@ -30,6 +30,10 @@ class StaffController extends Zend_Controller_Action {
     
     public function gestpromAction() {
         $offerte=$this->_staffModel->getOfferte();
+        foreach ($offerte as $offerta){
+            $offerta['inizio']= $this->timedb($offerta['inizio'],'yyyy-mm-dd');
+            $offerta['fine']= $this->timedb($offerta['fine'],'yyyy-mm-dd');
+        }
         $this->view->assign(array('offerte' => $offerte));        
     }
     
@@ -40,6 +44,8 @@ class StaffController extends Zend_Controller_Action {
     public function modpromAction() {
         $id = $this->getParam('id');
         $offerta = $this->_staffModel->getOffertaById($id);
+        $offerta['inizio']= $this->timedb($offerta['inizio'],'yyyy-mm-dd');
+        $offerta['fine']= $this->timedb($offerta['fine'],'yyyy-mm-dd');
         $this->_form3->setValues($offerta);
         $this->view->modoffertaForm = $this->_form3;
     }
@@ -53,6 +59,8 @@ class StaffController extends Zend_Controller_Action {
 			return $this->render('insprom');
 		}
 		$values = $form->getValues();
+                $values['inizio']= $this->timedb($values['inizio'],'dd-mm-yyyy');
+                $values['fine']= $this->timedb($values['fine'],'dd-mm-yyyy');
 		$this->_staffModel->saveOfferta($values);
 		$this->_helper->redirector('insprom','staff');
     }
@@ -90,9 +98,14 @@ class StaffController extends Zend_Controller_Action {
 		}
                 $values = $form->getValues();
                 $id = $values['id'];
-        $this->_staffModel->deleteOfferta($id);
-        $this->_staffModel->saveOfferta($values);
-        $this->_helper->redirector('gestprom','staff');
+                $values['inizio']= $this->timedb($values['inizio'],'dd-mm-yyyy');
+                $values['fine']= $this->timedb($values['fine'],'dd-mm-yyyy');
+                if($values['immagine'] === null){
+                            $values['immagine']='';
+                }
+                $this->_staffModel->deleteOfferta($id);
+                $this->_staffModel->saveOfferta($values);
+                $this->_helper->redirector('gestprom','staff');
     }
      
     public function getInserisciForm(){
@@ -126,5 +139,17 @@ class StaffController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form3;
+    }
+    
+    public function timedb($data,$formato){
+        if($formato=='dd-mm-yyyy'){
+            $zend = new Zend_Date($data,$formato,'en');
+            $zend = $zend->get('YYYY-MM-dd');
+        }
+        if($formato=='yyyy-mm-dd'){
+            $zend = new Zend_Date($data,$formato,'en');
+            $zend = $zend->get('dd-MM-YYYY');
+        }
+        return $zend;
     }
 }
