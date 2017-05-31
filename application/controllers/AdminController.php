@@ -1,6 +1,19 @@
 <?php
 
-class PublicController extends Zend_Controller_Action {
+class AdminController extends Zend_Controller_Action {
+    
+    protected $_adminModel;
+    protected $_form;
+    protected $_logger;
+
+    public function init() {
+        $this->_helper->layout->setLayout('layoutadmin');
+        $this->_logger = Zend_Registry::get('log');
+        $this->_publicModel = new Application_Model_Public();
+        //$this->view->loginForm = $this->getLoginForm();
+        //$this->view->registraForm = $this->getRegistraForm();
+        //$this->view->ricercaForm = $this->getRicercaForm();
+    }
 
     public function gestazieAction() {
         
