@@ -53,14 +53,17 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     
     public function getOfferteScaricate()
     {
-        $select = $this->select();
+        $select = $this->select()
+                       ->order('quantita DESC')
+                       ->limit(8);
         return $this->fetchAll($select);
     }
     
     public function getOfferteNew()
     {
         $select = $this->select()
-                       ->order(id);
+                       ->order('id DESC')
+                       ->limit(8);
         return $this->fetchAll($select);
     }
 

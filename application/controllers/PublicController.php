@@ -16,7 +16,13 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
- 
+        $new=$this->_publicModel->getOfferteNew();
+        $scaricate=$this->_publicModel->getOfferteScaricate();        
+        $this->view->assign(array(
+            		'new' => $new,
+                        'scaricate' => $scaricate
+                )
+                );  
     }
     
     public function offerteAction() {
@@ -52,9 +58,8 @@ class PublicController extends Zend_Controller_Action {
     
     public function offsingAction() {
         $id = $this->_getParam('id');
-        $id=1;
+        $id=intval($id); //converte la stringa in intero
         $offerta=$this->_publicModel->getOffById($id);
-        echo $offerta->nome;
         $this->view->assign(array(
                         'offerta' => $offerta
                 )

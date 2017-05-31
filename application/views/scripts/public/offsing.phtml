@@ -1,20 +1,14 @@
 <div class="mainBody container">
     <div id="gallery" style="width:30%; float: left;">
-                        <img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" style="width:100%" alt="Foto prodotto"/>
+                        <img src="<?=$this->baseUrl('img/prodotti/'.$this->offerta->immagine)?>" style="width:100%" alt="Foto prodotto"/>
 		</div>
     <div style="width:100%">
-        			<?php echo  '<h3>'.$offerta->nome.'</h3>' ?>
-				<h3>offerta->nome</h3>
+        			<h3><?= $this->offerta->nome ?></h3>
 				<hr class="soft"/>
-                                <p>sconto</p>
-                                <p style="text-align: right">$222.00</p>
-                                <p style="text-align: right">$222.00</p>
+                                <p>Sconto: <?= $this->offerta->tipologia ?></p>
+                                <p style="text-align: right"><?= $this->offerta->prezzo ?>€</p>
 				<hr class="soft"/>
-				<p>
-				DESCRIZIONE 14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. 
-				Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. 
-				Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).
-				</p>
+				<p><?= $this->offerta->descrizione ?></p>
 				<br class="clr"/>
 			<hr class="soft"/>
 		</div>
@@ -26,10 +20,10 @@
                             <table class="table table-bordered">
 				<tbody>
 				<tr class="techSpecRow"><th colspan="2">Dettagli del prodotto</th></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Azienda:</td><td class="techSpecTD2">Fujifilm</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Tipologia:</td><td class="techSpecTD2">Tipologia prodotto</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Inizio promozione:</td><td class="techSpecTD2"> 2011-01-28</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Fine promozione:</td><td class="techSpecTD2"> 5.50" h x 5.50" w x 2.00" l, .75 pounds</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Azienda:</td><td class="techSpecTD2"><?= $this->offerta->azienda ?></td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Tipologia:</td><td class="techSpecTD2"><?= $this->offerta->categoria ?></td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Inizio promozione:</td><td class="techSpecTD2"><?= $this->offerta->inizio ?></td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Fine promozione:</td><td class="techSpecTD2"><?= $this->offerta->fine ?></td></tr>
 				</tbody>
                             </table>
                         </div>

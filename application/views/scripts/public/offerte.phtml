@@ -10,27 +10,28 @@
 
            <div class="span9">
               <ul class="thumbnails">
-                            <?php foreach ($this->offerte as $offerta) :?>
+				<?php foreach ($this->offerte as $s) :?>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="<?= $this->url(array(
+				  <i class="tag"></i>
+					<a href="
+                                            <?= $this->url(array(
                                             'controller' => 'public',
                                             'action'     => 'offsing',
+                                            'id'         => $s->id
                                             ), 
                                             'default',true
                                             ); 
-                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>"/></a>
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$s->immagine)?>" alt="">
 					<div class="caption">
-					<?php echo  '<h5>'.$offerta->nome.'</h5>' ?>
-					<?php echo '<p>'.$offerta->descrizione.'</p>'?>
-					<?php echo  '<h4 style="text-align:center"><a class="btn" href="">Visualizza</a>'
-                                        . '<a class="btn" href="">'.$offerta->prezzo.'€</a> '
-                                        . '<a class="btn btn-primary" href="">-'.$offerta->tipologia.'%</a></h4>'?>
+					  <h5><?= $s->nome ?></h5>
+					  <h4><a class="btn" href="product_details.html">VEDI</a> <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
 					</div>
+                                        </a>
 				  </div>
 				</li>
-                            <?php endforeach ?>
-	      </ul>
+                                <?php endforeach ?>
+			  </ul>
            </div>
         </div>
     </div>

@@ -45,6 +45,14 @@ class Application_Model_Public extends App_Model_Abstract
         return $this->getResource('Offerte')->getOfferteCercate($cats, $desc, $azie);
     }
     
+    public function getOfferteScaricate(){
+        return $this->getResource('Offerte')->getOfferteScaricate();
+    }
+    
+    public function getOfferteNew(){
+        return $this->getResource('Offerte')->getOfferteNew();
+    }
+    
     public function saveUtente($utente)
     {
     	return $this->getResource('Utenti')->addElement($utente);
