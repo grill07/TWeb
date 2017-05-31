@@ -39,8 +39,17 @@
                  >FAQ</a></li>
          <li class=""><a href="
                          <?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'areapers',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+                 >Area Utente</a></li>        
+         <li class=""><a href="
+                         <?= $this->url(array(
                         'controller' => 'staff',
-                        'action'     => 'insprom',
+                        'action'     => 'areapers',
                         ), 
                         'default',true
                     ); 

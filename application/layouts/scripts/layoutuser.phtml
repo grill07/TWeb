@@ -1,0 +1,60 @@
+<?php echo $this->doctype() ?>
+<html>
+<head>
+    <?= $this->headMeta(); ?>
+    <?= $this->headLink(); ?>
+    <?= $this->headTitle(); ?>
+</head>
+<body>
+<div id="wrapper">
+<div id="header">
+<div class="container" style="padding-top: 10px">
+<!-- Navbar ================================================== -->
+<div id="logoArea" class="navbar">
+<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+</a>
+  <div class="navbar-inner">
+        <?= $this->render('menu.phtml') ?>
+  </div>
+</div>
+</div>
+</div>
+        
+        
+        
+	<div id="page">
+  	  <div id="page-bgtop">
+    	    <div id="page-bgbtm">
+              <div id="mainBody">
+	        <div class="container">
+	          <div class="row">
+                     <div id="sidebar" class="span3">
+                             <?= $this->render('menuuser.phtml') ?>
+                     </div>
+                     <div class="span9">
+	  	             <?php echo $this->layout()->content; ?>
+                     </div>
+                  </div>
+                </div>
+              </div>
+      	       <div style="clear: both;">&nbsp;</div>
+	    </div>
+  	  </div>
+	</div>
+
+	
+        
+        <!-- Footer ================================================================== -->
+	<div  id="footerSection">
+	<div class="container">
+		<p class="pull-right">&copy; COUPONshop</p>
+	</div><!-- Container End -->
+	</div>
+        
+        
+</div>
+</body>
+</html>

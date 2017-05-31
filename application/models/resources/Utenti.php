@@ -28,7 +28,7 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
     
     public function deleteElement($key)
     {
-        return $this->delete('username = ' . $key);
+        return $this->delete('username ="' . $key.'"');
     }
 
 }
