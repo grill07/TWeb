@@ -1,24 +1,37 @@
 <div id="mainBody">
-   <div class="container">
-       <div class="row">
+    <div class="container">
+	<div class="row">
             <div id="sidebar" class="span3">
-                    <div class="well">
-                       <?php echo $this->ricercaForm ?>
-                    </div>
+                <div class="well">
+                     <?php echo $this->ricercaForm ?>
+                </div>
     
             </div>
-<!-- a scopo di test -->
-            <div class="span9"> 
-                 <h3 style="text-align: center"> Test</h3>
-    
-	           <div class="well" style="width: 40%; margin: auto">
-            
-	              <?php $off=$this->offerta['azienda'] ?>
-                      <?php echo '<p>'.$off.'</p>' ?>
-            
-                   </div>
-    
-            </div>
-       </div>
-   </div>
+
+           <div class="span9">
+              <ul class="thumbnails">
+                            <?php foreach ($this->offerte as $offerta) :?>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a  href="<?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>"/></a>
+					<div class="caption">
+					<?php echo  '<h5>'.$offerta->nome.'</h5>' ?>
+					<?php echo '<p>'.$offerta->descrizione.'</p>'?>
+					<?php echo  '<h4 style="text-align:center"><a class="btn" href="">Visualizza</a>'
+                                        . '<a class="btn" href="">'.$offerta->prezzo.'€</a> '
+                                        . '<a class="btn btn-primary" href="">-'.$offerta->tipologia.'%</a></h4>'?>
+					</div>
+				  </div>
+				</li>
+                            <?php endforeach ?>
+	      </ul>
+           </div>
+        </div>
+    </div>
 </div>
