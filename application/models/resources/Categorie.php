@@ -2,7 +2,7 @@
 
 class Application_Resource_Categorie extends Zend_Db_Table_Abstract
 {
-    protected $_name    = 'tipoProd';
+    protected $_name    = 'categorie';
     protected $_primary  = 'categoria';
     protected $_rowClass = 'Application_Resource_Categorie_Item';
     

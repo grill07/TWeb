@@ -16,11 +16,17 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        
+ 
     }
     
-    public function offerteAction() {      
-        $offerte=$this->_publicModel->getOfferte();
+    public function offerteAction() {
+        /*$mode = $this->_getParam('mode');
+        if($mode=='ricerca'){
+            $offerte=$this->_publicModel->getOfferteCercate($values->categoria, $values->nome);
+        }
+        else {*/
+            $offerte=$this->_publicModel->getOfferte();
+        //}
         $this->view->assign(array('offerte' => $offerte));
     }
     
@@ -44,12 +50,15 @@ class PublicController extends Zend_Controller_Action {
         
     }
     
-    public function offsingAction(/*$id*/) {
-        /*$off=$this->_publicModel->getOffById($id);
+    public function offsingAction() {
+        $id = $this->_getParam('id');
+        $id=1;
+        $offerta=$this->_publicModel->getOffById($id);
+        echo $offerta->nome;
         $this->view->assign(array(
-                        'offerta' => $off
+                        'offerta' => $offerta
                 )
-                );*/
+                );
     }
     
     public function registratiAction() {
@@ -57,16 +66,20 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function risultatiAction(){
-        if (!$this->getRequest()->isPost()) {
+                if (!$this->getRequest()->isPost()) {
 			$this->_helper->redirector('index','public');
 		}
 		$form=$this->_form;
 		if (!$form->isValid($_POST)) {
 			return $this->render('offerte');
 		}
-                $nome = $form->getValue('nome');
-		$offerta=$this->_publicModel->getOffertaByNome($nome);
-		$this->view->assign(array('offerta' => $offerta ));        
+                $values = $form->getValues();
+                $cats=$values['categoria'];
+                $azie=$values['azienda'];
+                $desc=$values['nome'];
+                $desc=explode(' ',$desc); //separa le parole della stringa e le mette in un array
+		$offerte=$this->_publicModel->getOfferteCercate($cats, $desc, $azie);
+                $this->view->assign(array('offerte' => $offerte));
     }
     
     private function checkAction() //controllo su db delle credenziali
