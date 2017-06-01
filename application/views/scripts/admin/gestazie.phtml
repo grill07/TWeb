@@ -1,0 +1,46 @@
+<h3>Gestisci le aziende inserite</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            <?php foreach ($this->aziende as $azienda) :?>
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span3">
+					    <?php echo '<img src="' . $this->baseUrl('img/aziende/'. $azienda->logo). '"/>' ?>
+                                        </td>
+                                        <td class="span6">
+					   <?php echo  '<h5>'.$azienda->nome.'</h5>' ?>
+                                          <hr class="soft"/>
+					   <?php echo '<p><b>Tipologia: </b>'.$azienda->tipologia.'</p>'?>
+                                           <?php echo '<p><b>Sede: </b>'.$azienda->localizzazione.'</p>'?>
+                                           <?php echo '<p><b>Ragione: </b>'.$azienda->ragione.'</p>'?>
+                                           <?php echo '<p><b>Descrizione: </b>'.$azienda->descrizione.'</p>'?>                            
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'modazie',
+                                                     'nome'   => $azienda->nome,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Modifica</a>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'elimina',
+                                                     'nome'   => $azienda->nome,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Elimina</a>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            <?php endforeach ?>
+</ul>
+
