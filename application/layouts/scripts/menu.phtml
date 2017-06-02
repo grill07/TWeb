@@ -37,25 +37,29 @@
                     ); 
                  ?>"
                  >FAQ</a></li>
+         <?php if($this->ruolo == 'user'):?>         
          <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'user',
-                        'action'     => 'areapers',
+                        'action'     => 'index',
                         ), 
                         'default',true
                     ); 
                  ?>"
-                 >Area Utente</a></li>        
+                 >Area Utente</a></li>  
+         <?php endif ?>       
+         <?php if($this->ruolo == 'staff'):?>         
          <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'staff',
-                        'action'     => 'areapers',
+                        'action'     => 'index',
                         ), 
                         'default',true
                     ); 
                  ?>"
                  >Area Staff</a></li>
-                 <li class=""><a href="
+         <?php endif ?>
+         <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'gestazie',
@@ -64,6 +68,7 @@
                     ); 
                  ?>"
                  >Area Admin</a></li>
+         <?php if($this->ruolo == false):?>        
 	 <li class=""><a href="
                          <?= $this->url(array(
                         'controller' => 'public',
@@ -73,4 +78,16 @@
                     ); 
                  ?>"
                  style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a></li>
+         <?php endif ?>        
+         <?php if($this->ruolo == 'staff' || $this->ruolo == 'user' || $this->ruolo == 'admin'):?>       
+         <li class=""><a href="
+                         <?= $this->url(array(
+                        'controller' => $this->ruolo,
+                        'action'     => 'logout',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+                 style="padding-right:0"><span class="btn btn-large btn-success">Logout</span></a></li> 
+        <?php endif ?>         
 </ul>

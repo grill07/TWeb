@@ -1,7 +1,9 @@
 <?php
 
 class StaffController extends Zend_Controller_Action { 
-   protected $_staffModel;
+    
+    protected $_authService;
+    protected $_staffModel;
     protected $_form1;
     protected $_form2;
     protected $_form3;
@@ -9,6 +11,9 @@ class StaffController extends Zend_Controller_Action {
     protected $_values;
     
     public function init(){
+        $this->_authService = new Application_Service_Auth();
+        $ruolo = $this->_authService->getIdentity()->ruolo;
+        $this->view->assign(array('ruolo' => $ruolo));
         $this->_helper->layout->setLayout('layoutstaff');
         $this->_staffModel = new Application_Model_Staff();    
         $this->view->inserisciForm = $this->getInserisciForm();
@@ -16,9 +21,15 @@ class StaffController extends Zend_Controller_Action {
         $this->view->modoffertaForm = $this->getModoffertaForm();
     }
     
-    public function areapersAction() {
-        $utente = $this->_staffModel->getUtenteByUser('staff1');
+    public function indexAction() {
+        $user = $this->_authService->getIdentity()->username;
+        $utente = $this->_staffModel->getUtenteByUser($user);
         $this->view->assign(array('utente' => $utente));
+    }
+    
+    public function logoutAction(){
+		$this->_authService->clear();
+		return $this->_helper->redirector('index','public');	
     }
     
     public function moddatiAction() {
@@ -84,7 +95,7 @@ class StaffController extends Zend_Controller_Action {
                 $el = $values['username'];
                 $this->_staffModel->deleteUtente($el);
 		$this->_staffModel->saveUtente($values);
-		$this->_helper->redirector('areapers','staff');
+		$this->_helper->redirector('index','staff');
     }
     
     public function modoffertaAction(){

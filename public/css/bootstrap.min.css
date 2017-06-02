@@ -36,4 +36,19 @@ border: 1px solid transparent;
 -moz-box-shadow: '0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1)';
 box-shadow: '0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1)';
 }
+.formerror {
+    background: none repeat scroll 0 0 #FFECEC;
+    border: 3px solid #f93d00;
+    height: auto;
+    margin: 0 0 1px;
+	text-align: center;
 
+}
+
+.errors {
+	color: #f93d00;
+}
+
+.errors ul {
+	line-height: 100%;
+}
