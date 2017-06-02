@@ -26,13 +26,8 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function offerteAction() {
-        /*$mode = $this->_getParam('mode');
-        if($mode=='ricerca'){
-            $offerte=$this->_publicModel->getOfferteCercate($values->categoria, $values->nome);
-        }
-        else {*/
-            $offerte=$this->_publicModel->getOfferte();
-        //}
+        $paged = $this->_getParam('page', 1);
+        $offerte=$this->_publicModel->getOfferte($paged);
         $this->view->assign(array('offerte' => $offerte));
     }
     
@@ -84,7 +79,8 @@ class PublicController extends Zend_Controller_Action {
                 $azie=$values['azienda'];
                 $desc=$values['nome'];
                 $desc=explode(' ',$desc); //separa le parole della stringa e le mette in un array
-		$offerte=$this->_publicModel->getOfferteCercate($cats, $desc, $azie);
+                $paged = $this->_getParam('page', 1);
+		$offerte=$this->_publicModel->getOfferteCercate($cats, $desc, $azie, $paged);
                 $this->view->assign(array('offerte' => $offerte));
     }
     

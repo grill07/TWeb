@@ -15,9 +15,16 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
         return $this->fetchRow($this->select()->where('id = ?', $key));
     }
     
-    public function getTable()
+    public function getTable($paged=null)
     {
 	$select = $this->select();
+        if (null !== $paged) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+			$paginator = new Zend_Paginator($adapter);
+			$paginator->setItemCountPerPage(9)
+		          	  ->setCurrentPageNumber((int) $paged);
+			return $paginator;
+		}
         return $this->fetchAll($select);
     }
 
@@ -31,7 +38,7 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
         return $this->delete('id = ' . $key);
     }
     
-    public function getOfferteCercate($cats, $desc, $azie)
+    public function getOfferteCercate($cats, $desc, $azie, $paged=null)
     {
         if(count($cats)==0){$string1=("categoria like '%'");} //se l'utente non ha selezionato nessuna categoria vanno bene tutte
         else{
@@ -45,10 +52,17 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
             $string3=("azienda = ''");
             foreach ($azie as $a) {$string3.=" or azienda = '".$a."' ";}
             }
-        $where=$this->select()->where($string1)
+        $select=$this->select()->where($string1)
                               ->where($string2)
                               ->where($string3);
-        return $this->fetchAll($where);
+        if (null !== $paged) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+			$paginator = new Zend_Paginator($adapter);
+                        $paginator->setItemCountPerPage(9)
+		          	  ->setCurrentPageNumber((int) $paged);
+			return $paginator;
+		}
+        return $this->fetchAll($select);
     }
     
     public function getOfferteScaricate()
