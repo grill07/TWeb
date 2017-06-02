@@ -1,33 +1,35 @@
 <?php if ($this->pageCount > 1): ?>
 <div id="pagination">
-<?php echo $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?> di <?= $this->totalItemCount; ?> ---
 
 <!-- Link alla prima pagina -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->first)); ?>">Inizio</a> |
-<?php else: ?>
-  Inizio |
+  <a href="<?= $this->url(array('controller' => 'public', 'page' => $this->first)); ?>">&lt;&lt;</a>
 <?php endif; ?>
 
 <!-- Link alla pagina precedente -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->previous)); ?>">&lt; Precedente</a> |
-<?php else: ?>
-  &lt; Precedente |
+  <a href="<?= $this->url(array('controller' => 'public', 'page' => $this->previous)); ?>">&lt;</a>
 <?php endif; ?>
 
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+        <?php echo $page; ?>
+    </a>
+  <?php else: ?>
+    <a class="active"><?php echo $page; ?></a>
+  <?php endif; ?>
+<?php endforeach; ?>
+ 
 <!-- Link alla pagina successiva -->
 <?php if (isset($this->next)): ?>
-  <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->next)); ?>">Successivo &gt;</a> |
-<?php else: ?>
-  Successivo &gt; |
+  <a href="<?= $this->url(array('controller' => 'public', 'page' => $this->next)); ?>">&gt;</a>
 <?php endif; ?>
 
 <!-- Link all'ultima pagina -->
 <?php if (isset($this->next)): ?>
-  <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->last)); ?>">Fine</a>
-<?php else: ?>
-  Fine
+  <a href="<?= $this->url(array('controller' => 'public', 'page' => $this->last)); ?>">&gt;&gt;</a>
 <?php endif; ?>
 
 </div>

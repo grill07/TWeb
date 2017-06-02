@@ -33,3 +33,39 @@
     width: 20%;
     margin: auto
 }
+
+.clea {
+    clear: both
+}
+
+.padsu {
+    padding-top: 10px
+}
+
+.padde {
+    padding-right:0
+}
+
+.marauto {
+    margin: auto;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd; /* Gray */
+}
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}

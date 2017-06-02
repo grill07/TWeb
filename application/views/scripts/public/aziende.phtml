@@ -18,10 +18,12 @@
     </div>
     <?php endforeach ?>
     
-    <div>
+    <div class="centro">
+    <div class="pagination">
     <?php if($this->aziende instanceof Zend_Paginator) {
 	  		echo $this->paginationControl($this->aziende,'Sliding','public/_paginator.phtml');
 	  } 
           ?>
+    </div>
     </div>
 </div>

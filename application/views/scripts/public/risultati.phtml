@@ -41,6 +41,15 @@
                                 <?php endforeach ?>
 			  </ul>
            </div>
+            
+    <div class="centro">
+    <div class="pagination">
+    <?php if($this->offerte instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->offerte,'Sliding','public/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+    </div>
         </div>
     </div>
 </div>

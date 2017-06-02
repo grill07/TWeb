@@ -37,12 +37,12 @@ class Application_Model_Public extends App_Model_Abstract
         return $this->getResource('Offerte')->getOffertaByNome($nome);    
     }
     
-    public function getOfferte(){
-        return $this->getResource('Offerte')->getTable();
+    public function getOfferte($paged=null){
+        return $this->getResource('Offerte')->getTable($paged);
     }
     
-    public function getOfferteCercate($cats, $desc, $azie){
-        return $this->getResource('Offerte')->getOfferteCercate($cats, $desc, $azie);
+    public function getOfferteCercate($cats, $desc, $azie, $paged=null){
+        return $this->getResource('Offerte')->getOfferteCercate($cats, $desc, $azie, $paged);
     }
     
     public function getOfferteScaricate(){
