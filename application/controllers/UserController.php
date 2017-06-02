@@ -4,6 +4,9 @@ class UserController extends Zend_Controller_Action {
     protected $_userModel;
     protected $_form;
     public function init(){
+        $this->_authService = new Application_Service_Auth();
+        $ruolo = $this->_authService->getIdentity()->ruolo;
+        $this->view->assign(array('ruolo' => $ruolo));
         $this->_helper->layout->setLayout('layoutuser');
         $this->_userModel = new Application_Model_User(); 
         $this->view->modprofiloForm = $this->getModprofiloForm();
@@ -13,9 +16,15 @@ class UserController extends Zend_Controller_Action {
         
     }
     
-    public function areapersAction() {
-        $utente = $this->_userModel->getUtenteByUser('user1');
+    public function indexAction() {
+        $user = $this->_authService->getIdentity()->username;
+        $utente = $this->_userModel->getUtenteByUser($user);
         $this->view->assign(array('utente' => $utente));
+    }
+    
+    public function logoutAction(){
+		$this->_authService->clear();
+		return $this->_helper->redirector('index','public');	
     }
     
     public function moddatiAction() {
@@ -38,7 +47,7 @@ class UserController extends Zend_Controller_Action {
                 $el = $values['username'];
                 $this->_userModel->deleteUtente($el);
 		$this->_userModel->saveUtente($values);
-		$this->_helper->redirector('areapers','user');
+		$this->_helper->redirector('index','user');
     }
     
     public function getModprofiloForm(){

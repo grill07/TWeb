@@ -1,12 +1,14 @@
 <?php
 
 class PublicController extends Zend_Controller_Action {
-    
+    protected $_authService;
     protected $_publicModel;
     protected $_form;
+    protected $_form2;
     protected $_logger;
 
     public function init() {
+        $this->_authService = new Application_Service_Auth();
         $this->_helper->layout->setLayout('layout');
         $this->_logger = Zend_Registry::get('log');
         $this->_publicModel = new Application_Model_Public();
@@ -25,6 +27,27 @@ class PublicController extends Zend_Controller_Action {
                 );  
     }
     
+    public function loginAction() {
+        
+    }
+    
+    public function autenticaAction(){        
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $this->_helper->redirector('login');
+        }
+        $form = $this->_form2;
+        if (!$form->isValid($request->getPost())) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        	    return $this->render('login');
+        }
+        if (false === $this->_authService->authenticate($form->getValues())) {
+            $form->setDescription('Autenticazione fallita. Riprova');
+            return $this->render('login');
+        }
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->ruolo);
+    }
+        
     public function offerteAction() {
         $paged = $this->_getParam('page', 1);
         $offerte=$this->_publicModel->getOfferte($paged);
@@ -47,11 +70,7 @@ class PublicController extends Zend_Controller_Action {
                 )
                 );
     }
-    
-    public function loginAction() {
-        
-    }
-    
+      
     public function offsingAction() {
         $id = $this->_getParam('id');
         $id=intval($id); //converte la stringa in intero
@@ -83,12 +102,7 @@ class PublicController extends Zend_Controller_Action {
 		$offerte=$this->_publicModel->getOfferteCercate($cats, $desc, $azie, $paged);
                 $this->view->assign(array('offerte' => $offerte));
     }
-    
-    private function checkAction() //controllo su db delle credenziali
-    {
-        
-    }
-    
+
     private function nuovoutenteAction() //registrare il nuovo utente sul db
     {
         
@@ -97,13 +111,13 @@ class PublicController extends Zend_Controller_Action {
     private function getLoginForm()
     {
 		$urlHelper = $this->_helper->getHelper('url');
-		$this->_form = new Application_Form_Public_Login();
-		$this->_form->setAction($urlHelper->url(array(
+		$this->_form2 = new Application_Form_Public_Auth_Login();
+		$this->_form2->setAction($urlHelper->url(array(
 				'controller' => 'public',
-				'action' => 'check'),
+				'action' => 'autentica'),
 				'default'
 				));
-		return $this->_form;              
+		return $this->_form2;              
     }
     
     private function getRegistraForm()
