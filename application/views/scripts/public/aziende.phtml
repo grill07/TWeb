@@ -1,16 +1,16 @@
 <div class="mainBody container">
     <?php foreach ($this->aziende as $a) :?>
-    <div class="well well-small" style="margin-top: 20px">
-        <div id="gallery" style=" width: 30%; float: left; margin-right: 50px">
-				<img src="<?=$this->baseUrl('img/prodotti/'.$a->logo)?>" style="width:100%" alt="Logo azienda"/>
+    <div class="well well-small marsu">
+        <div id="gallery" class="logoa">
+            <img src="<?=$this->baseUrl('img/aziende/'.$a->logo)?>" class="larg" alt="Logo azienda"/>
 		</div>
-                <div style="width: 100%;">
+        <div class="larg">
 				<h3><?= $a->nome ?></h3>
 				<hr class="soft"/>
 				<p><?= $a->descrizione ?></p>
-                                <p><?= $a->ragione ?></p>
-                                <p><?= $a->tipologia ?></p>
-                                <p><?= $a->localizzazione ?></p>
+                                <p><b>Ragione sociale: </b><?= $a->ragione ?></p>
+                                <p><b>Tipologia: </b><?= $a->tipologia ?></p>
+                                <p><b>Localizzazione: </b><?= $a->localizzazione ?></p>
 				<br class="clr"/>
 			<a href="#" name="detail"></a>
 			<hr class="soft"/>
