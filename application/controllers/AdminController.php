@@ -50,16 +50,21 @@ class AdminController extends Zend_Controller_Action {
                 $form = $this->_form1;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
 			return $this->render('modazie');
 		}
                 $values = $form->getValues();
                 $nome = $values['nome'];
                 if($values['logo'] === null){
-                            $values['logo']='';
+                    $values['logo']='';
+                    $form->setDescription('Attenzione: immagine non inserita');
+                    return $this->render('modazie');
                 }
+                else{
                 $this->_adminModel->deleteAzienda($nome);
                 $this->_adminModel->saveAzienda($values);
                 $this->_helper->redirector('gestazie','admin');
+                }
     }
 
 
@@ -76,8 +81,15 @@ class AdminController extends Zend_Controller_Action {
 			return $this->render('insazie');
 		}
 		$values = $form->getValues();
+                if($values['logo'] === null){
+                    $values['logo']='';
+                    $form->setDescription('Attenzione: immagine non inserita');
+                    return $this->render('insazie');
+                }
+                else{
 		$this->_adminModel->saveAzienda($values);
 		$this->_helper->redirector('insazie','admin');
+                }
     }
     
     
