@@ -101,8 +101,9 @@ class StaffController extends Zend_Controller_Action {
                 $values['inizio']= $this->timedb($values['inizio'],'dd-mm-yyyy');
                 $values['fine']= $this->timedb($values['fine'],'dd-mm-yyyy');
                 if($values['immagine'] === null){
-                            $values['immagine']='';
+                            $values['immagine']=$values['imm'];
                 }
+                unset($values['imm']);
                 $this->_staffModel->deleteOfferta($id);
                 $this->_staffModel->saveOfferta($values);
                 $this->_helper->redirector('gestprom','staff');

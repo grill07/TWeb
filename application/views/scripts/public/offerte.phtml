@@ -13,7 +13,6 @@
 				<?php foreach ($this->offerte as $s) :?>
 				<li class="span3">
 				  <div class="thumbnail">
-				  <i class="tag"></i>
 					<a href="
                                             <?= $this->url(array(
                                             'controller' => 'public',
@@ -23,11 +22,20 @@
                                             'default',true
                                             ); 
                                             ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$s->immagine)?>" alt="">
-					<div class="caption">
 					  <h5><?= $s->nome ?></h5>
-					  <h4><a class="btn" href="product_details.html">VEDI</a> <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
-					</div>
                                         </a>
+					<div class="caption">
+					  <h4><a class="btn" href="
+                                            <?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            'id'         => $s->id
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>">VEDI</a>
+                                            <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
+					</div>
 				  </div>
 				</li>
                                 <?php endforeach ?>

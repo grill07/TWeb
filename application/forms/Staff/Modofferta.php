@@ -51,6 +51,10 @@ class Application_Form_Staff_Modofferta extends Zend_Form
         	'multiOptions' => $nomi,
         ));
         
+        $this->addElement('hidden', 'imm', array(
+            'value' => $values['immagine'],
+            ));
+        
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/img/prodotti',

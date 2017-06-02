@@ -1,39 +1,27 @@
 <div class="mainBody container">
-    <div class="well well-small" style="margin-top: 20px">
-        <div id="gallery" style=" width: 30%; float: left; margin-right: 50px">
-                <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" style="width:100%" alt="Foto prodotto"/>
-                </a>
+    <?php foreach ($this->aziende as $a) :?>
+    <div class="well well-small marsu">
+        <div id="gallery" class="logoa">
+            <img src="<?=$this->baseUrl('img/aziende/'.$a->logo)?>" class="larg" alt="Logo azienda"/>
 		</div>
-                <div style="width: 100%;">
-				<h3>Nikon</h3>
+        <div class="larg">
+				<h3><?= $a->nome ?></h3>
 				<hr class="soft"/>
-				<p>DESCRIZIONE</p>
-                                <p>ragione</p>
-                                <p>tipologia</p>
-                                <p>localizzazione</p>
+				<p><?= $a->descrizione ?></p>
+                                <p><b>Ragione sociale: </b><?= $a->ragione ?></p>
+                                <p><b>Tipologia: </b><?= $a->tipologia ?></p>
+                                <p><b>Localizzazione: </b><?= $a->localizzazione ?></p>
 				<br class="clr"/>
 			<a href="#" name="detail"></a>
 			<hr class="soft"/>
 		</div>
     </div>
+    <?php endforeach ?>
     
-    <div class="well well-small">
-        <div id="gallery" style=" width: 30%; float: left; margin-right: 50px">
-                <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="<?=$this->baseUrl('img/prodotti/2.jpg')?>" style="width:100%" alt="Foto prodotto"/>
-                </a>
-		</div>
-                <div style="width: 100%;">
-				<h3>Adidas</h3>
-				<hr class="soft"/>
-				<p>DESCRIZIONE</p>
-                                <p>ragione</p>
-                                <p>tipologia</p>
-                                <p>localizzazione</p>
-				<br class="clr"/>
-			<a href="#" name="detail"></a>
-			<hr class="soft"/>
-		</div>
+    <div>
+    <?php if($this->aziende instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->aziende,'Sliding','public/_paginator.phtml');
+	  } 
+          ?>
     </div>
 </div>

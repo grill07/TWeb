@@ -8,9 +8,9 @@ class Application_Model_Public extends App_Model_Abstract
         /*$this->_logger = Zend_Registry::get('log');*/
     }
 
-    public function getAziende()
+    public function getAziende($paged=null)
     {
-        return $this->getResource('Aziende')->getTable();
+        return $this->getResource('Aziende')->getTable($paged);
     }
     
     public function getCategorie()

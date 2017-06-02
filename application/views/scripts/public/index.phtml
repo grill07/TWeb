@@ -1,10 +1,10 @@
 <div class="mainBody container">
-<img style="width:100%; margin-top: 20px" src="<?=$this->baseUrl('img/home.jpg')?>" alt=""/>
+    <img class="larg marsu" src="<?=$this->baseUrl('img/home.jpg')?>" alt=""/>
 
 
 
-<div style="padding: 20px">
-    <h4 style="text-align: center">Benvenuti!</h4>
+    <div class="marsu">
+    <h4 class="centro">Benvenuti!</h4>
     <p>Questo sito ti permette di cercare offerte su varie tipologie di 
                 prodotto. Vi è una sezione offerte, nella quale è possibile 
                 visualizzare tutte le offerte disponibili, ed inoltre 
@@ -29,7 +29,6 @@
                                 <?php for($i=0;$i<4;$i++) :?>
 				<li class="span3">
 				  <div class="thumbnail">
-				  <i class="tag"></i>
 					<a href="
                                             <?= $this->url(array(
                                             'controller' => 'public',
@@ -38,12 +37,21 @@
                                             ), 
                                             'default',true
                                             ); 
-                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$this->new[$i]->immagine)?>" alt="">
-					<div class="caption">
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$this->new[$i]->immagine)?>" alt="Foto Prodotto">
 					  <h5><?= $this->new[$i]->nome ?></h5>
-					  <h4><a class="btn" href="product_details.html">VEDI</a> <span class="pull-right"><?= $this->new[$i]->prezzo ?>€</span></h4>
-					</div>
                                         </a>
+                                        <div class="caption">
+                                            <h4><a class="btn" href="
+                                            <?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            'id'         => $this->new[$i]->id
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>">VEDI</a>
+                                            <span class="pull-right"><?= $this->new[$i]->prezzo ?>€</span></h4>
+                                        </div>
 				  </div>
 				</li>
                                 <?php endfor ?>
@@ -54,21 +62,29 @@
                                 <?php for($i=4;$i<8;$i++) :?>
 				<li class="span3">
 				  <div class="thumbnail">
-				  <i class="tag"></i>
 					<a href="
                                             <?= $this->url(array(
                                             'controller' => 'public',
                                             'action'     => 'offsing',
-                                            'id'         => '2'
+                                            'id'         => $this->new[$i]->id
                                             ), 
                                             'default',true
                                             ); 
-                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/1.jpg')?>" alt="">
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$this->new[$i]->immagine)?>" alt="Foto Prodotto">
+					  <h5><?= $this->new[$i]->nome ?></h5>
                                         </a>
+                                        <div class="caption">
+                                            <h4><a class="btn" href="
+                                            <?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            'id'         => $this->new[$i]->id
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>">VEDI</a>
+                                            <span class="pull-right"><?= $this->new[$i]->prezzo ?>€</span></h4>
+                                        </div>
 				  </div>
 				</li>
                                 <?php endfor ?>
@@ -86,7 +102,6 @@
 				<?php foreach ($this->scaricate as $s) :?>
 				<li class="span3">
 				  <div class="thumbnail">
-				  <i class="tag"></i>
 					<a href="
                                             <?= $this->url(array(
                                             'controller' => 'public',
@@ -95,12 +110,21 @@
                                             ), 
                                             'default',true
                                             ); 
-                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$s->immagine)?>" alt="">
-					<div class="caption">
-					  <h5><?= $s->nome ?></h5>
-					  <h4><a class="btn" href="product_details.html">VEDI</a> <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
-					</div>
+                                            ?>"><img src="<?=$this->baseUrl('img/prodotti/'.$s->immagine)?>" alt="Foto Prodotto">
+                                            <h5><?= $s->nome ?></h5>
                                         </a>
+                                  	<div class="caption">
+					  <h4><a class="btn" href="
+                                            <?= $this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'offsing',
+                                            'id'         => $s->id
+                                            ), 
+                                            'default',true
+                                            ); 
+                                            ?>">VEDI</a>
+                                            <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
+					</div>
 				  </div>
 				</li>
                                 <?php endforeach ?>

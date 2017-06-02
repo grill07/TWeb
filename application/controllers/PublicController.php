@@ -37,7 +37,8 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function aziendeAction() {
-        $aziende=$this->_publicModel->getAziende();
+        $paged = $this->_getParam('page', 1);
+        $aziende=$this->_publicModel->getAziende($paged);
         $this->view->assign(array(
             		'aziende' => $aziende
                 )
