@@ -9,7 +9,9 @@ class AdminController extends Zend_Controller_Action {
     protected $_form4;
     protected $_form5;
     protected $_form6;
-    protected $_form7;    
+    protected $_form7; 
+    protected $_form8;
+    protected $_form9;
     protected $_logger;
     protected $_values;
 
@@ -19,7 +21,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel = new Application_Model_Admin();
         $this->view->modaziendaForm = $this->getModaziendaForm();
         $this->view->inserisciForm = $this->getInserisciForm();
-        
+        $this->view->modificafaqForm = $this->getModificafaqForm();
         
     }
 
@@ -114,9 +116,43 @@ class AdminController extends Zend_Controller_Action {
         
     }
     
-    public function aggfaqAction() {
-        
+    public function gestfaqAction(){
+        $faq=$this->_adminModel->getFaq();
+        $this->view->assign(array('faq' => $faq)); 
     }
+    
+    public function eliminafaqAction(){
+        $id = $this->getParam('id');
+        $this->_adminModel->deleteFaq($id);
+        $this->_helper->redirector('gestfaq','admin');
+    }
+    
+    public function modfaqAction() {
+        $id = $this->getParam('id');
+        $faq = $this->_adminModel->getFaqById($id);
+        $this->_form3->setValues($faq);
+        $this->view->modificafaqForm = $this->_form3;
+    }
+    
+    public function modificafaqAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+                $form = $this->_form3;
+                $form->setValues($_POST); //viene creata la form con gli elementi già compilati
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('modfaq');
+		}
+                $values = $form->getValues();
+                $id = $values['id'];
+                $this->_adminModel->deleteFaq($id);
+                $this->_adminModel->saveFaq($values);
+                $this->_helper->redirector('gestfaq','admin');
+                
+    }
+    
+    
     
     public function statpromAction() {
         
@@ -144,5 +180,15 @@ class AdminController extends Zend_Controller_Action {
 		return $this->_form2;
     }
     
+    public function getModificafaqForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form3 = new Application_Form_Admin_Modificafaq();
+		$this->_form3->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'modificafaq'),
+				'default'
+				));
+		return $this->_form3;
+    }
 
 }

@@ -1,0 +1,39 @@
+<h3>Gestisci le FAQ inserite</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            <?php foreach ($this->faq as $singolafaq) :?>
+				<li class="span9">
+				  <table class="well">
+                                        <td class="span6">
+                                            <?php echo  '<h5> FAQ</h5>' ?>
+                                          <hr class="soft"/>
+					   <?php echo '<p><b>Domanda: </b>'.$singolafaq->domanda.'</p>'?>
+                                           <?php echo '<p><b>Sede: </b>'.$singolafaq->risposta.'</p>'?>                           
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'modfaq',
+                                                     'id'   => $singolafaq->id,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Modifica</a>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'eliminafaq',
+                                                     'id'   => $singolafaq->id,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Elimina</a>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            <?php endforeach ?>
+</ul>

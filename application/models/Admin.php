@@ -46,7 +46,16 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Aziende')->getTable();
     }
-    public function getAziendaByNome($nome){
+    public function getAziendaByNome($nome)
+    {
         return $this->getResource('Aziende')->getElement($nome);
+    }
+    public function getFaq()
+    {
+        return $this->getResource('Faq')->getTable();
+    }
+    public function getFaqById($id)
+    {
+        return $this->getResource('Faq')->getElement($id);
     }
 }
