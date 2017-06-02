@@ -79,7 +79,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'label' => 'Sconto da applicare',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('Int')),
+            'validators' => array(array('StringLength',true, array(1,10))),
 		));
         
         $this->addElement('hidden', 'quantita', array(
