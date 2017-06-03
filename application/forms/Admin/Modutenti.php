@@ -19,82 +19,82 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'cognome', array(
+        $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'value' => $values['cognome'],
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'genere', array(
+        $this->addElement('select', 'genere', array(
             'label' => 'Genere',
             'value' => $values['genere'],
             'filters' => array('StringTrim'),
             'required' => true,
             'multiOptions' => array(
                     'M' => 'Maschile', 'F' => 'Femminile' ),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'eta', array(
+        $this->addElement('text', 'eta', array(
             'label' => 'età',
             'value' => $values['eta'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array('Int',array('StringLength',true, array(1,30))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'mail', array(
-            'label' => 'Mail',
-            'value' => $values['nome'],
+        $this->addElement('text', 'mail', array(
+            'label' => 'Email',
+            'value' => $values['mail'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array('EmailAddress',array('StringLength',true, array(1,30))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'telefono', array(
+        $this->addElement('text', 'telefono', array(
             'label' => 'Numero di telefono',
             'value' => $values['telefono'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array('digits',array('StringLength',true, array(1,30))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'username', array(
+        $this->addElement('text', 'username', array(
             'label' => 'Username',
             'attribs' => array('readonly' => 'true'),
             'value' => $values['username'],
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'password', array(
+        $this->addElement('text', 'password', array(
             'label' => 'Password',
             'value' => $values['password'],
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'ruolo', array(
+        $this->addElement('select', 'ruolo', array(
             'label' => 'Ruolo',
             'value' => $values['ruolo'],
             'filters' => array('StringTrim'),
             'required' => true,
             'multiOptions' => array(
                         'staff' => 'Staff',  'User' => 'User'  ),
-            'decoretors' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('submit', 'moduser', array(

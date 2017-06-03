@@ -11,86 +11,87 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
     
-    
-        $this->addElement('textarea', 'nome', array(
+       $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(1,20))),
+           'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'cognome', array(
+        
+        $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(1,20))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'genere', array(
+        $this->addElement('select', 'genere', array(
             'label' => 'Genere',
             'filters' => array('StringTrim'),
             'required' => true,
             'multiOptions' => array(
-                    'M' => 'Maschile',
-                'F' => 'Femminile' ),
-            'decoretors' => $this->elementDecorators,
+                        'M' => 'Maschile',
+                        'F' => 'Femminile',
+                        ),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'eta', array(
-            'label' => 'età',
+        $this->addElement('text', 'eta', array(
+            'label' => 'Età',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array('Int',array('StringLength',true, array(1,2))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'mail', array(
-            'label' => 'Mail',
+        $this->addElement('text', 'mail', array(
+            'label' => 'Email',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array('EmailAddress',array('StringLength',true, array(1,30))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'telefono', array(
-            'label' => 'Numero di telefono',
+        $this->addElement('text', 'telefono', array(
+            'label' => 'N.telefono',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array ('digits',array('StringLength',true, array(1,12))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'username', array(
+        $this->addElement('text', 'username', array(
             'label' => 'Username',
-            'attribs' => array('readonly' => 'true'),
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
-		));
+            'validators' => array (array('StringLength',true, array(1,12))),
+            'decorators' => $this->elementDecorators,
+            ));
         
-        $this->addElement('textarea', 'password', array(
+        $this->addElement('text', 'password', array(
             'label' => 'Password',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decoretors' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(1,15))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('textarea', 'ruolo', array(
+        $this->addElement('select', 'ruolo', array(
             'label' => 'Ruolo',
             'filters' => array('StringTrim'),
             'required' => true,
-            'option' => 'staff',
-            'decoretors' => $this->elementDecorators,
-		));
+            'multiOptions' => array(
+                        'staff' => 'Staff'),
+            'decorators' => $this->elementDecorators,
+            ));
         
-        $this->addElement('submit', 'inseruser', array(
-            'label' => 'Inserisci',
-            'decorators' => $this->buttonDecorators, 
-		));
+        $this->addElement('submit', 'modifica', array(
+            'label' => 'Salva Modifiche',
+            'decorators' => $this->buttonDecorators,
+		)); 
         
         $this->setDecorators(array(
 			'FormElements',
