@@ -9,6 +9,10 @@ class PublicController extends Zend_Controller_Action {
 
     public function init() {
         $this->_authService = new Application_Service_Auth();
+        if($this->_authService->getIdentity() != false){
+        $ruolo = $this->_authService->getIdentity()->ruolo;
+        $this->view->assign(array('ruolo' => $ruolo));
+        }
         $this->_helper->layout->setLayout('layout');
         $this->_logger = Zend_Registry::get('log');
         $this->_publicModel = new Application_Model_Public();

@@ -7,7 +7,7 @@ class Application_Service_Auth
 
     public function __construct()
     {
-        $this->_adminModel = new Application_Model_Staff(); //da mettere admin quando si aggiunge get utente
+        $this->_adminModel = new Application_Model_Admin();
     }
     
     public function authenticate($credentials)
@@ -19,7 +19,7 @@ class Application_Service_Auth
         if (!$result->isValid()) {
             return false;
         }
-        $user = $this->_adminModel->getUtenteByUser($credentials['username']);
+        $user = $this->_adminModel->getUtenteByUsername($credentials['username']);
         $auth->getStorage()->write($user);
         return true;
     }
