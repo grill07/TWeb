@@ -95,19 +95,33 @@ class AdminController extends Zend_Controller_Action {
                 }
     }
     
-    
-    
-    public function gestuserAction() {
-        $utenti=$this->_adminModel->getUtente();
-        $this->view->assign(array('utenti' => $utenti)); 
-    }
-    
     public function insuserAction() {
         
     }
     
+    
+    public function gestuserAction() {
+        $username=$this->_adminModel->getUtente();
+        $this->view->assign(array('utenti' => $username)); 
+    }
+    
     public function moduserAction() {
-        
+        $username = $this->getParam('username');
+        $utente = $this->_adminModel->getUtenteByUsername($username);
+        $this->_form4->setValues($utente);
+        $this->view->modutentiForm = $this->_form4;
+    }
+    
+    public function modutentiAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('gestuser','admin');
+		}
+                $form = $this->_form4;
+                $form->setValues($_POST); //viene creata la form con gli elementi già compilati
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('moduser');
+		}
     }
     
     public function statuserAction() {
@@ -151,6 +165,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->_adminModel->deleteFaq($id);
                 $this->_adminModel->saveFaq($values);
                 $this->_helper->redirector('gestfaq','admin');
+                
                 
     }
     

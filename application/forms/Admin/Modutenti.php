@@ -13,7 +13,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
     }
     
     public function setValues($values) {
-        $this->addElement('text', 'nome', array(
+        $this->addElement('textarea', 'nome', array(
             'label' => 'Nome',
             'value' => $values['nome'],
             'filters' => array('StringTrim'),
@@ -22,7 +22,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'cognome', array(
+        $this->addElement('textarea', 'cognome', array(
             'label' => 'Cognome',
             'value' => $values['cognome'],
             'filters' => array('StringTrim'),
@@ -31,7 +31,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'genere', array(
+        $this->addElement('textarea', 'genere', array(
             'label' => 'Genere',
             'value' => $values['genere'],
             'filters' => array('StringTrim'),
@@ -41,7 +41,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'eta', array(
+        $this->addElement('textarea', 'eta', array(
             'label' => 'età',
             'value' => $values['eta'],
             'filters' => array('StringTrim'),
@@ -50,7 +50,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'mail', array(
+        $this->addElement('textarea', 'mail', array(
             'label' => 'Mail',
             'value' => $values['nome'],
             'filters' => array('StringTrim'),
@@ -59,7 +59,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'telefono', array(
+        $this->addElement('textarea', 'telefono', array(
             'label' => 'Numero di telefono',
             'value' => $values['telefono'],
             'filters' => array('StringTrim'),
@@ -68,7 +68,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'username', array(
+        $this->addElement('textarea', 'username', array(
             'label' => 'Username',
             'attribs' => array('readonly' => 'true'),
             'value' => $values['username'],
@@ -78,7 +78,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'password', array(
+        $this->addElement('textarea', 'password', array(
             'label' => 'Password',
             'value' => $values['password'],
             'filters' => array('StringTrim'),
@@ -87,7 +87,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'ruolo', array(
+        $this->addElement('textarea', 'ruolo', array(
             'label' => 'Ruolo',
             'value' => $values['ruolo'],
             'filters' => array('StringTrim'),
@@ -97,7 +97,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'decoretors' => $this->elementDecorators,
 		));
         
-        $this->addElement('submit', 'modaz', array(
+        $this->addElement('submit', 'moduser', array(
             'label' => 'Modifica',
             'decorators' => $this->buttonDecorators, 
 		));
