@@ -42,6 +42,17 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Utenti')->deleteElement($user);
     }
+    
+    public function getUtente() 
+    {
+        return $this->getResource('Utenti')->getTable();
+    }
+    
+    public function getUtenteByUsername($username) 
+    {
+        return $this->getResource('Utenti')->getElement($username);
+    }
+    
     public function getAziende()
     {
         return $this->getResource('Aziende')->getTable();

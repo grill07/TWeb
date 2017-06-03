@@ -1,0 +1,47 @@
+<h3>Gestisci gli utenti</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            <?php foreach ($this->utenti as $utente) :?>
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span6">
+					   <?php echo  '<h5>'.$utente->nome.'</h5>' ?>
+                                          <hr class="soft"/>
+					    <?php echo '<p><b>Cognome: </b>'.$utente->cognome.'</p>'?>
+                                            <?php echo '<p><b>Genere: </b>'.$utente->genere.'</p>'?>
+                                            <?php echo '<p><b>Età: </b>'.$utente->eta.'</p>'?>
+                                            <?php echo '<p><b>Mail: </b>'.$utente->mail.'</p>'?>     
+                                            <?php echo '<p><b>Telefono: </b>'.$utente->telefono.'</p>'?>
+                                            <?php echo '<p><b>Mail: </b>'.$utente->mail.'</p>'?>
+                                            <?php echo '<p><b>Username: </b>'.$utente->username.'</p>'?>    
+                                            <?php echo '<p><b>Password: </b>'.$utente->password.'</p>'?>    
+                                            <?php echo '<p><b>Ruolo: </b>'.$utente->ruolo.'</p>'?>    
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'moduser',
+                                                     'nome'   => $utente->username,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Modifica</a>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'elimina',
+                                                     'nome'   => $utente->username,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Elimina</a>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            <?php endforeach ?>
+</ul>

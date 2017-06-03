@@ -15,9 +15,16 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         return $this->fetchRow($this->select()->where('username = ?', $key));
     }
     
-    public function getTable()
+    public function getTable($paged=null)
     {
 	$select = $this->select();
+        if (null !==$paged) {
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+                $paginator = new Zend_Paginator($adapter);
+                $paginator->setItemCountPerPage(15)
+                        ->setCurrentPageNumber((int) $paged);
+                return $paginator;
+        }
         return $this->fetchAll($select);
     }
 

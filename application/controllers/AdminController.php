@@ -22,6 +22,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->modaziendaForm = $this->getModaziendaForm();
         $this->view->inserisciForm = $this->getInserisciForm();
         $this->view->modificafaqForm = $this->getModificafaqForm();
+        $this->view->modutentiForm = $this->getModutentiForm();
         
     }
 
@@ -97,7 +98,8 @@ class AdminController extends Zend_Controller_Action {
     
     
     public function gestuserAction() {
-        
+        $utenti=$this->_adminModel->getUtente();
+        $this->view->assign(array('utenti' => $utenti)); 
     }
     
     public function insuserAction() {
@@ -189,6 +191,17 @@ class AdminController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form3;
+    }
+    
+        public function getModutentiForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form4 = new Application_Form_Admin_Modutenti();
+		$this->_form4->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'modutenti'),
+				'default'
+				));
+		return $this->_form4;
     }
 
 }
