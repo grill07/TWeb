@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Staff_Inserisci extends Zend_Form
+class Application_Form_Staff_Inserisci extends App_Form_Abstract
 {
     protected $_staffModel;
     
@@ -17,21 +17,29 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,30))),
+            'decorators' => $this->elementDecorators,
 		));
         
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione prodotto',
+               'cols' => '60', 'rows' => '8',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,2000))),
+            'decorators' => $this->elementDecorators,
 		));
         
-        $this->addElement('text', 'categoria', array(
+        $cat = array();
+        $categorie = $this->_staffModel->getCategorie();
+        foreach ($categorie as $categoria){
+           $cat[$categoria->categoria] = $categoria->categoria; 
+        }
+        $this->addElement('select', 'categoria', array(
             'label' => 'Categoria prodotto',
-            'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+                'multiOptions' => $cat,
+            'decorators' => $this->elementDecorators,
 		));
         
         $nomi = array();
@@ -43,6 +51,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'label' => 'Azienda',
             'required' => true,
         	'multiOptions' => $nomi,
+            'decorators' => $this->elementDecorators,
         ));
         
         $this->addElement('file', 'immagine', array(
@@ -51,7 +60,8 @@ class Application_Form_Staff_Inserisci extends Zend_Form
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 102400),
-        			array('Extension', false, array('jpg', 'gif'))),
+        			array('Extension', false, array('jpg', 'png'))),
+                'decorators' => $this->elementDecorators,
                 ));
         
         $this->addElement('text', 'inizio', array(
@@ -59,6 +69,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'fine', array(
@@ -66,6 +77,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'prezzo', array(
@@ -73,6 +85,7 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('Float')),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'tipologia', array(
@@ -80,14 +93,24 @@ class Application_Form_Staff_Inserisci extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,10))),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('hidden', 'quantita', array(
             'value' => 0,
+            'decorators' => $this->elementDecorators,
             ));
         
         $this->addElement('submit', 'inserofferta', array(
             'label' => 'Inserisci',
+            'decorators' => $this->buttonDecorators,
+		));
+        
+        $this->setDecorators(array(
+			'FormElements',
+			array('HtmlTag', array('tag' => 'table')),
+			array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+			'Form'
 		));
     }
 }

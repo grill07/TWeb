@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Public_Auth_Login extends Zend_Form
+class Application_Form_Public_Auth_Login extends App_Form_Abstract
 {
     public function init()
     {
@@ -13,20 +13,28 @@ class Application_Form_Public_Auth_Login extends Zend_Form
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'description' => 'Il tuo nome utente',
             'validators' => array(array('StringLength',true, array(4,15))),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('password', 'password', array(
             'label' => 'Password',
             'filters' => array('StringTrim'),
             'required' => true,
-            'description' => 'La tua password',
             'validators' => array(array('StringLength',true, array(4,15))),
+            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('submit', 'entra', array(
             'label' => 'Entra',
+            'decorators' => $this->buttonDecorators,
+		));
+        
+        $this->setDecorators(array(
+			'FormElements',
+			array('HtmlTag', array('tag' => 'table')),
+			array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+			'Form'
 		));
     }
 }

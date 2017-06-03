@@ -40,7 +40,8 @@ class StaffController extends Zend_Controller_Action {
     }
     
     public function gestpromAction() {
-        $offerte=$this->_staffModel->getOfferte();
+        $paged = $this->_getParam('page', 1);
+        $offerte=$this->_staffModel->getOfferte($paged);
         foreach ($offerte as $offerta){
             $offerta['inizio']= $this->timedb($offerta['inizio'],'yyyy-mm-dd');
             $offerta['fine']= $this->timedb($offerta['fine'],'yyyy-mm-dd');

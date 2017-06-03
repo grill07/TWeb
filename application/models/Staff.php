@@ -12,8 +12,8 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('Offerte')->getElement($id);
     }
     
-    public function getOfferte(){
-        return $this->getResource('Offerte')->getTable();
+    public function getOfferte($paged=null){
+        return $this->getResource('Offerte')->getTable($paged);
     }
     
     public function saveOfferta($offerta)
@@ -44,5 +44,10 @@ class Application_Model_Staff extends App_Model_Abstract
     public function getAziende()
     {
         return $this->getResource('Aziende')->getTable();
+    }
+    
+    public function getCategorie()
+    {
+        return $this->getResource('Categorie')->getTable();
     }
 }

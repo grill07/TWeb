@@ -5,6 +5,7 @@ class PublicController extends Zend_Controller_Action {
     protected $_publicModel;
     protected $_form;
     protected $_form2;
+    protected $_form3;
     protected $_logger;
 
     public function init() {
@@ -107,9 +108,17 @@ class PublicController extends Zend_Controller_Action {
                 $this->view->assign(array('offerte' => $offerte));
     }
 
-    private function nuovoutenteAction() //registrare il nuovo utente sul db
-    {
-        
+    public function nuovoutenteAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+	}
+	$form = $this->_form3;
+	if (!$form->isValid($_POST)) {
+			return $this->render('registrati');
+	}
+	$values = $form->getValues();
+        $this->_publicModel->saveUtente($values);
+	$this->_helper->redirector('login','public');
     }
     
     private function getLoginForm()
@@ -127,13 +136,13 @@ class PublicController extends Zend_Controller_Action {
     private function getRegistraForm()
     {
 		$urlHelper = $this->_helper->getHelper('url');
-		$this->_form = new Application_Form_Public_Registrati();
-		$this->_form->setAction($urlHelper->url(array(
+		$this->_form3 = new Application_Form_Public_Registrati();
+		$this->_form3->setAction($urlHelper->url(array(
 				'controller' => 'public',
 				'action' => 'nuovoutente'),
 				'default'
 				));
-		return $this->_form;              
+		return $this->_form3;              
     }
     
     private function getRicercaForm()

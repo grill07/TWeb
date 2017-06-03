@@ -17,7 +17,7 @@
                                            <?php echo '<p><b>Data inizio: </b>'.$offerta->inizio.'</p>'?>
                                            <?php echo '<p><b>Data fine: </b>'.$offerta->fine.'</p>'?>
                                            <?php echo '<p><b>Prezzo: </b>'.$offerta->prezzo.'€</p>'?>
-                                           <?php echo '<p><b>Tipo Sconto: </b>'.$offerta->tipologia.'%</p>'?>
+                                           <?php echo '<p><b>Tipo Sconto: </b>'.$offerta->tipologia.'</p>'?>
 					  <br class="clr"/>
 				         </td>
                                       </tr>
@@ -46,3 +46,12 @@
 				</li>
                             <?php endforeach ?>
 </ul>
+
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->offerte instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->offerte,'Sliding','staff/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>
