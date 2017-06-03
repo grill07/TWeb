@@ -18,6 +18,10 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Categorie')->addElement($categoria);
     }
     
+    public function saveUtente($username) {
+        return $this->getResource('Utenti')->addElement($username);
+    }
+    
     public function saveFaq($faq)
     {
     	return $this->getResource('Faq')->addElement($faq);
@@ -38,9 +42,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Faq')->deleteElement($id);
     }
     
-    public function deleteUtente($user)
+    public function deleteUtente($username)
     {
-        return $this->getResource('Utenti')->deleteElement($user);
+        return $this->getResource('Utenti')->deleteElement($username);
     }
     
     public function getUtente() 

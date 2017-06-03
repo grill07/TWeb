@@ -23,7 +23,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->inserisciForm = $this->getInserisciForm();
         $this->view->modificafaqForm = $this->getModificafaqForm();
         $this->view->modutentiForm = $this->getModutentiForm();
-        
+        $this->view->inseruserForm = $this->getInseruserForm();
     }
 
     public function gestazieAction() {
@@ -96,7 +96,17 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function insuserAction() {
-        
+        if (!$this->getRequest()->isPost()) {
+			//$this->_helper->redirector('index','public');
+		}
+		$form = $this->_form5;
+		if (!$form->isValid($_POST)) {
+			return $this->render('insuser');
+		}
+                else{
+		$this->_adminModel->saveUtente($values);
+		$this->_helper->redirector('insuser','admin');
+                }
     }
     
     
@@ -213,10 +223,19 @@ class AdminController extends Zend_Controller_Action {
 		$this->_form4 = new Application_Form_Admin_Modutenti();
 		$this->_form4->setAction($urlHelper->url(array(
 				'controller' => 'admin',
-				'action' => 'modutenti'),
+				'action' => 'moduser'),
 				'default'
 				));
 		return $this->_form4;
     }
-
+    public function getInseruserForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form5 = new Application_Form_Admin_Inseruser();
+		$this->_form5->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'insuser'),
+				'default'
+				));
+		return $this->_form5;
+    }
 }
