@@ -16,11 +16,11 @@ class Application_Form_User_Modprofilo extends App_Form_Abstract
     public function setValues($values){ //bisogna fare così per avere la form precompilata
        $this->addElement('text', 'nome', array(
             'label' => 'Nome',
-           'value' => $values['nome'],
+            'value' => $values['nome'],
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,20))),
-           'decorators' => $this->elementDecorators,
+            'decorators' => $this->elementDecorators,
 		));
         
         

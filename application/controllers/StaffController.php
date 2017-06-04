@@ -24,7 +24,12 @@ class StaffController extends Zend_Controller_Action {
     public function indexAction() {
         $user = $this->_authService->getIdentity()->username;
         $utente = $this->_staffModel->getUtenteByUser($user);
+        $modifica = $this->getParam('modifica');
+        if($modifica){
+            $this->view->assign(array('utente' => $utente,'modifica' => $modifica));
+        }else{
         $this->view->assign(array('utente' => $utente));
+        }
     }
     
     public function logoutAction(){
@@ -43,21 +48,35 @@ class StaffController extends Zend_Controller_Action {
         $paged = $this->_getParam('page', 1);
         $offerte=$this->_staffModel->getOfferte($paged);
         foreach ($offerte as $offerta){
-            $offerta['inizio']= $this->timedb($offerta['inizio'],'yyyy-mm-dd');
-            $offerta['fine']= $this->timedb($offerta['fine'],'yyyy-mm-dd');
+            $offerta['inizio']= $this->_helper->Dbhelp->timedb($offerta['inizio'],'yyyy-mm-dd');
+            $offerta['fine']= $this->_helper->Dbhelp->timedb($offerta['fine'],'yyyy-mm-dd');
         }
-        $this->view->assign(array('offerte' => $offerte));        
+        $elimina = $this->getParam('elimina');
+        $modifica = $this->getParam('modifica');
+        if($elimina){
+            $off = $this->getParam('off');
+            $this->view->assign(array('offerte' => $offerte,'off' => $off,'elimina' => $elimina));
+        }else if($modifica){
+            $off = $this->getParam('off');
+            $this->view->assign(array('offerte' => $offerte,'off' => $off,'modifica' => $modifica)); 
+        }else{
+           $this->view->assign(array('offerte' => $offerte)); 
+        }
     }
     
     public function inspromAction() {
-        
+        $inserita = $this->getParam('inserita');
+        if($inserita){
+            $off = $this->getParam('off');
+            $this->view->assign(array('offerte' => $offerte,'off' => $off,'inserita' => $inserita)); 
+        }
     }
     
     public function modpromAction() {
         $id = $this->getParam('id');
         $offerta = $this->_staffModel->getOffertaById($id);
-        $offerta['inizio']= $this->timedb($offerta['inizio'],'yyyy-mm-dd');
-        $offerta['fine']= $this->timedb($offerta['fine'],'yyyy-mm-dd');
+        $offerta['inizio']= $this->_helper->Dbhelp->timedb($offerta['inizio'],'yyyy-mm-dd');
+        $offerta['fine']= $this->_helper->Dbhelp->timedb($offerta['fine'],'yyyy-mm-dd');
         $this->_form3->setValues($offerta);
         $this->view->modoffertaForm = $this->_form3;
     }
@@ -71,16 +90,20 @@ class StaffController extends Zend_Controller_Action {
 			return $this->render('insprom');
 		}
 		$values = $form->getValues();
-                $values['inizio']= $this->timedb($values['inizio'],'dd-mm-yyyy');
-                $values['fine']= $this->timedb($values['fine'],'dd-mm-yyyy');
+                $values['inizio']= $this->_helper->Dbhelp->timedb($values['inizio'],'dd-mm-yyyy');
+                $values['fine']= $this->_helper->Dbhelp->timedb($values['fine'],'dd-mm-yyyy');
 		$this->_staffModel->saveOfferta($values);
-		$this->_helper->redirector('insprom','staff');
+                $off = $values['nome'];
+                $inserita = true;
+		$this->_helper->redirector('insprom','staff','default',array('off' => $off,'inserita' => $inserita));
     }
     
     public function eliminaAction(){
         $id = $this->getParam('id');
+        $off = $this->getParam('nome');
+        $elimina = true;
         $this->_staffModel->deleteOfferta($id);
-        $this->_helper->redirector('gestprom','staff');
+        $this->_helper->redirector('gestprom','staff','default',array('off' => $off,'elimina' => $elimina));
     }
     
     public function modprofiloAction(){
@@ -96,7 +119,8 @@ class StaffController extends Zend_Controller_Action {
                 $el = $values['username'];
                 $this->_staffModel->deleteUtente($el);
 		$this->_staffModel->saveUtente($values);
-		$this->_helper->redirector('index','staff');
+                $modifica = true;
+		$this->_helper->redirector('index','staff','default',array('modifica' => $modifica));
     }
     
     public function modoffertaAction(){
@@ -110,15 +134,17 @@ class StaffController extends Zend_Controller_Action {
 		}
                 $values = $form->getValues();
                 $id = $values['id'];
-                $values['inizio']= $this->timedb($values['inizio'],'dd-mm-yyyy');
-                $values['fine']= $this->timedb($values['fine'],'dd-mm-yyyy');
+                $values['inizio']= $this->_helper->Dbhelp->timedb($values['inizio'],'dd-mm-yyyy');
+                $values['fine']= $this->_helper->Dbhelp->timedb($values['fine'],'dd-mm-yyyy');
                 if($values['immagine'] === null){
                             $values['immagine']=$values['imm'];
                 }
                 unset($values['imm']);
                 $this->_staffModel->deleteOfferta($id);
                 $this->_staffModel->saveOfferta($values);
-                $this->_helper->redirector('gestprom','staff');
+                $off = $values['nome'];
+                $modifica = true;
+                $this->_helper->redirector('gestprom','staff','default',array('off' => $off,'modifica' => $modifica));
     }
      
     public function getInserisciForm(){
@@ -152,17 +178,5 @@ class StaffController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form3;
-    }
-    
-    public function timedb($data,$formato){
-        if($formato=='dd-mm-yyyy'){
-            $zend = new Zend_Date($data,$formato,'en');
-            $zend = $zend->get('YYYY-MM-dd');
-        }
-        if($formato=='yyyy-mm-dd'){
-            $zend = new Zend_Date($data,$formato,'en');
-            $zend = $zend->get('dd-MM-YYYY');
-        }
-        return $zend;
-    }
+    }   
 }

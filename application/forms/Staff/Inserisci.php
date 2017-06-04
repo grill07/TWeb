@@ -84,7 +84,7 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'label' => 'Prezzo originale',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('Float')),
+            'validators' => array(array('Float',true,array('locale' => 'en')),array('StringLength',true, array(1,10))),
             'decorators' => $this->elementDecorators,
 		));
         

@@ -46,6 +46,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$loader->registerNamespace('App_');
         $this->getResourceLoader()
              ->addResourceType('modelResource','models/resources','Resource');
+        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Helper');
     }
 
     protected function _initFrontControllerPlugin()

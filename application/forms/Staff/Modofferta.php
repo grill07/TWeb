@@ -98,7 +98,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'value' => $values['prezzo'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('Float')),
+            'validators' => array(array('Float',true,array('locale' => 'en')),array('StringLength',true, array(1,10))),
             'decorators' => $this->elementDecorators,
 		));
         

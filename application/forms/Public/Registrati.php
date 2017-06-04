@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Public_Registrati extends App_Form_Abstract
+class Application_Form_Public_Registrati extends Zend_Form
 {
     protected $_publicModel;
     
@@ -16,16 +16,14 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
             'label' => 'Nome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,25))),
-            'decorators' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(1,20))),
 		));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,25))),
-            'decorators' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(1,20))),
 		));
         
         $this->addElement('select', 'genere', array(
@@ -35,7 +33,6 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
                         'M' => 'Maschile',
                         'F' => 'Femminile',
                         ),
-            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'eta', array(
@@ -43,7 +40,6 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
 	    'validators' => array('Int',array('StringLength',true, array(1,2))),
-            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'mail', array(
@@ -51,7 +47,6 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array('EmailAddress',array('StringLength',true, array(1,30))),
-            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'telefono', array(
@@ -59,15 +54,16 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array ('digits',array('StringLength',true, array(1,12))),
-            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('text', 'username', array(
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(4,15))),
-            'decorators' => $this->elementDecorators,
+            'validators' => array(array('StringLength',true, array(4,15)),
+                array('Db_NoRecordExists',true, 
+                array('table'   => 'utenti',
+                      'field'   => 'username'))),
 		));
         
         $this->addElement('password', 'password', array(
@@ -75,24 +71,14 @@ class Application_Form_Public_Registrati extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(4,15))),
-            'decorators' => $this->elementDecorators,
 		));
         
         $this->addElement('hidden', 'ruolo', array(
             'value' => 'user',
-            'decorators' => $this->elementDecorators,
             ));
         
         $this->addElement('submit', 'add', array(
             'label' => 'Registrati',
-            'decorators' => $this->buttonDecorators,
-		));
-        
-        $this->setDecorators(array(
-			'FormElements',
-			array('HtmlTag', array('tag' => 'table')),
-			array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
-			'Form'
 		));
     }
 }

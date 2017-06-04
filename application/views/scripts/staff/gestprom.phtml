@@ -1,4 +1,10 @@
 <h3>Gestisci le promozioni inserite</h3>
+<?php if($this->elimina):?>
+<?php echo '<h4 style="color:red">Il prodotto/servizio '.$this->off.' è stato eliminato</h4>'?>
+<?php endif ?>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">Il prodotto/servizio '.$this->off.' è stato modificato</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->offerte as $offerta) :?>
@@ -35,6 +41,7 @@
                                                      'controller' => 'staff',
                                                      'action'     => 'elimina',
                                                      'id'   => $offerta->id,
+                                                     'nome' => $offerta->nome,
                                                         ), 
                                                                   'default',true
                                                        ); 

@@ -1,4 +1,7 @@
 <h3>Benvenuto nella tua area personale!</h3>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">Il tuo profilo è stato modificato</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <?php echo '<p><b>Nome: </b>'.$this->utente->nome.'</p>'; 
  echo '<p><b>Cognome: </b>'.$this->utente->cognome.'</p>'; 
