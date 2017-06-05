@@ -13,14 +13,20 @@ class Application_Form_Public_Auth_Login extends Zend_Form
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(4,15))),
+            'validators' => array(array('StringLength',true, array(1,15)),
+                array('Db_RecordExists',true, 
+                array('table'   => 'utenti',
+                      'field'   => 'username'))),
 		));
         
         $this->addElement('password', 'password', array(
             'label' => 'Password',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(4,15))),
+            'validators' => array(array('StringLength',true, array(1,15)),
+                array('Db_RecordExists',true, 
+                array('table'   => 'utenti',
+                      'field'   => 'password'))),
 		));
         
         $this->addElement('submit', 'entra', array(

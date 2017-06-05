@@ -2,6 +2,7 @@
 
 class AdminController extends Zend_Controller_Action {
     
+    protected $_authService;
     protected $_adminModel;
     protected $_form1;
     protected $_form2;
@@ -16,6 +17,9 @@ class AdminController extends Zend_Controller_Action {
     protected $_values;
 
     public function init() {
+        $this->_authService = new Application_Service_Auth();
+        $ruolo = $this->_authService->getIdentity()->ruolo;
+        $this->view->assign(array('ruolo' => $ruolo));
         $this->_helper->layout->setLayout('layoutadmin');
         $this->_logger = Zend_Registry::get('log');
         $this->_adminModel = new Application_Model_Admin();
@@ -29,8 +33,14 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
+        
     }
 
+    public function logoutAction(){
+		$this->_authService->clear();
+		return $this->_helper->redirector('index','public');	
+    }
+    
     public function gestazieAction() {
         $aziende=$this->_adminModel->getAziende();
         $this->view->assign(array('aziende' => $aziende)); 
