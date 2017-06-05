@@ -54,6 +54,7 @@ class Application_Form_Admin_Inserisci extends App_Form_Abstract
         
         $this->addElement('file', 'logo', array(
         	'label' => 'Immagine',
+                'required' => true,
         	'destination' => APPLICATION_PATH . '/../public/img/aziende',
         	'validators' => array( 
         			array('Count', false, 1),

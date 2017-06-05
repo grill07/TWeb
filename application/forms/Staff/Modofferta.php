@@ -62,7 +62,6 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         
         $this->addElement('hidden', 'imm', array(
             'value' => $values['immagine'],
-            'decorators' => $this->elementDecorators,
             ));
         
         $this->addElement('file', 'immagine', array(
@@ -113,12 +112,10 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         
         $this->addElement('hidden', 'quantita', array(
             'value' => $values['quantita'],
-            'decorators' => $this->elementDecorators,
             ));
         
         $this->addElement('hidden', 'id', array(
             'value' => $values['id'],
-            'decorators' => $this->elementDecorators,
             ));
         
         $this->addElement('submit', 'modoff', array(

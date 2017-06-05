@@ -59,15 +59,13 @@ class AdminController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $nome = $values['nome'];
                 if($values['logo'] === null){
-                    $values['logo']='';
-                    $form->setDescription('Attenzione: immagine non inserita');
-                    return $this->render('modazie');
+                            $values['logo']=$values['log'];
                 }
-                else{
+                unset($values['log']);
                 $this->_adminModel->deleteAzienda($nome);
                 $this->_adminModel->saveAzienda($values);
                 $this->_helper->redirector('gestazie','admin');
-                }
+                
     }
 
 
@@ -84,35 +82,20 @@ class AdminController extends Zend_Controller_Action {
 			return $this->render('insazie');
 		}
 		$values = $form->getValues();
-                if($values['logo'] === null){
-                    $values['logo']='';
-                    $form->setDescription('Attenzione: immagine non inserita');
-                    return $this->render('insazie');
-                }
-                else{
 		$this->_adminModel->saveAzienda($values);
 		$this->_helper->redirector('insazie','admin');
-                }
+                
     }
-    
-    public function insuserAction() {
-        if (!$this->getRequest()->isPost()) {
-			//$this->_helper->redirector('index','public');
-		}
-		$form = $this->_form5;
-		if (!$form->isValid($_POST)) {
-			return $this->render('insuser');
-		}
-                else{
-		$this->_adminModel->saveUtente($values);
-		$this->_helper->redirector('insuser','admin');
-                }
-    }
-    
     
     public function gestuserAction() {
         $username=$this->_adminModel->getUtente();
         $this->view->assign(array('utenti' => $username)); 
+    }
+    
+    public function eliminauserAction(){
+        $username = $this->getParam('username');
+        $this->_adminModel->deleteUtente($username);
+        $this->_helper->redirector('gestuser','admin');
     }
     
     public function moduserAction() {
@@ -124,15 +107,45 @@ class AdminController extends Zend_Controller_Action {
     
     public function modutentiAction(){
         if (!$this->getRequest()->isPost()) {
-			$this->_helper->redirector('gestuser','admin');
-		}
+		$this->_helper->redirector('gestuser','admin');
+	}
                 $form = $this->_form4;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
                     $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
 			return $this->render('moduser');
-		}
+		}   
+                $values = $form->getValues();
+                $username = $values['username'];
+                $this->_adminModel->deleteUtente($username);
+                $this->_adminModel->saveUtente($values);
+                $this->_helper->redirector('gestuser','admin');
     }
+    
+    public function insuserAction() {
+        
+    }
+    
+    public function inseruserAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+		$form = $this->_form5;
+		if (!$form->isValid($_POST)) {
+			return $this->render('insuser');
+		}
+		$values = $form->getValues();
+		$this->_adminModel->saveUtente($values);
+		$this->_helper->redirector('insuser','admin');
+                
+    }
+    
+    
+    
+    
+    
+    
+    
     
     public function statuserAction() {
         
@@ -223,7 +236,7 @@ class AdminController extends Zend_Controller_Action {
 		$this->_form4 = new Application_Form_Admin_Modutenti();
 		$this->_form4->setAction($urlHelper->url(array(
 				'controller' => 'admin',
-				'action' => 'moduser'),
+				'action' => 'modutenti'),
 				'default'
 				));
 		return $this->_form4;
@@ -233,7 +246,7 @@ class AdminController extends Zend_Controller_Action {
 		$this->_form5 = new Application_Form_Admin_Inseruser();
 		$this->_form5->setAction($urlHelper->url(array(
 				'controller' => 'admin',
-				'action' => 'insuser'),
+				'action' => 'inseruser'),
 				'default'
 				));
 		return $this->_form5;

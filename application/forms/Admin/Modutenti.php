@@ -13,12 +13,41 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
     }
     
     public function setValues($values) {
+        $this->addElement('select', 'ruolo', array(
+            'label' => 'Ruolo',
+            'value' => $values['ruolo'],
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'multiOptions' => array(
+                        'staff' => 'Staff',  'User' => 'User'  ),
+            'decorators' => $this->elementDecorators,
+		));
+        
+        $this->addElement('text', 'username', array(
+            'label' => 'Username',
+            'attribs' => array('readonly' => 'true'),
+            'value' => $values['username'],
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength',true, array(1,15))),
+            'decorators' => $this->elementDecorators,
+		));
+        
+        $this->addElement('text', 'password', array(
+            'label' => 'Password',
+            'value' => $values['password'],
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength',true, array(1,15))),
+            'decorators' => $this->elementDecorators,
+		));
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'value' => $values['nome'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
+            'validators' => array(array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -27,7 +56,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'value' => $values['cognome'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
+            'validators' => array(array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -42,11 +71,11 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
 		));
         
         $this->addElement('text', 'eta', array(
-            'label' => 'età',
+            'label' => 'Età',
             'value' => $values['eta'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array('Int',array('StringLength',true, array(1,30))),
+            'validators' => array('Int',array('StringLength',true, array(1,11))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -64,39 +93,10 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'value' => $values['telefono'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array('digits',array('StringLength',true, array(1,30))),
+            'validators' => array('digits',array('StringLength',true, array(1,12))),
             'decorators' => $this->elementDecorators,
-		));
-        
-        $this->addElement('text', 'username', array(
-            'label' => 'Username',
-            'attribs' => array('readonly' => 'true'),
-            'value' => $values['username'],
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decorators' => $this->elementDecorators,
-		));
-        
-        $this->addElement('text', 'password', array(
-            'label' => 'Password',
-            'value' => $values['password'],
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
-            'decorators' => $this->elementDecorators,
-		));
-        
-        $this->addElement('select', 'ruolo', array(
-            'label' => 'Ruolo',
-            'value' => $values['ruolo'],
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'multiOptions' => array(
-                        'staff' => 'Staff',  'User' => 'User'  ),
-            'decorators' => $this->elementDecorators,
-		));
-        
+		));        
+         
         $this->addElement('submit', 'moduser', array(
             'label' => 'Modifica',
             'decorators' => $this->buttonDecorators, 

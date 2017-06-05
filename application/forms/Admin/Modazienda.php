@@ -20,9 +20,6 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
             'label' => 'Nome azienda',
             'attribs' => array('readonly' => 'true'),
             'value' => $values['nome'],
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -53,6 +50,7 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(1,1000))),
             'decorators' => $this->elementDecorators,
 		));
+        
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
                 'cols' => '60', 'rows' => '8',
@@ -72,6 +70,11 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
         			array('Extension', false, array('jpg', 'gif', 'png'))),
             'decorators' => $this->fileDecorators,
                 ));
+        
+        $this->addElement('hidden', 'log', array(
+            'value' => $values['logo'],
+            ));
+        
         $this->addElement('submit', 'modaz', array(
             'label' => 'Modifica',
             'decorators' => $this->buttonDecorators, 

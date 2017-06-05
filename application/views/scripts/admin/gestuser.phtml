@@ -1,4 +1,4 @@
-<h3>Gestisci gli utenti</h3>
+<h3>Gestisci gli utenti inseriti</h3>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->utenti as $utente) :?>
@@ -6,18 +6,7 @@
 				  <table class="well">
                                       <tr>
                                         <td class="span6">
-                                           <?php echo '<h5>'.$utente->username.'</h5>'?>
-                                          <hr class="soft"/>
-                                            <?php echo '<p><b>Nome: </b>'.$utente->nome.'</p>'?>
-					    <?php echo '<p><b>Cognome: </b>'.$utente->cognome.'</p>'?>
-                                            <?php echo '<p><b>Genere: </b>'.$utente->genere.'</p>'?>
-                                            <?php echo '<p><b>Età: </b>'.$utente->eta.'</p>'?>
-                                            <?php echo '<p><b>Mail: </b>'.$utente->mail.'</p>'?>     
-                                            <?php echo '<p><b>Telefono: </b>'.$utente->telefono.'</p>'?>
-                                            <?php echo '<p><b>Mail: </b>'.$utente->mail.'</p>'?>
-                                                
-                                            <?php echo '<p><b>Password: </b>'.$utente->password.'</p>'?>    
-                                            <?php echo '<p><b>Ruolo: </b>'.$utente->ruolo.'</p>'?>    
+                                           <?php echo '<p><b>'.$utente->username.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome: </b>'.$utente->nome.'&nbsp;&nbsp;<b>Cognome: </b>'.$utente->cognome.'</p>'?>
 					  <br class="clr"/>
 				         </td>
                                       </tr>
@@ -33,8 +22,8 @@
                                                      ?>">Modifica</a>
                                                   <a class="btn" href="<?= $this->url(array(
                                                      'controller' => 'admin',
-                                                     'action'     => 'elimina',
-                                                     'nome'   => $utente->username,
+                                                     'action'     => 'eliminauser',
+                                                     'username'   => $utente->username,
                                                         ), 
                                                                   'default',true
                                                        ); 
