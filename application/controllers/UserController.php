@@ -3,6 +3,7 @@
 class UserController extends Zend_Controller_Action {
     protected $_userModel;
     protected $_form;
+    
     public function init(){
         $this->_authService = new Application_Service_Auth();
         $ruolo = $this->_authService->getIdentity()->ruolo;
@@ -13,7 +14,36 @@ class UserController extends Zend_Controller_Action {
     }
     
     public function couponAction() {
-        
+        $this->_helper->layout->disableLayout();
+        $offid=$this->getParam('offerta');
+        $offerta=$this->_userModel->getOffById($offid);        
+        $user = $this->_authService->getIdentity()->username;
+        $utente = $this->_userModel->getUtenteByUser($user);
+        $coupon = array ();
+        $coupon['utente']=$user;
+        $coupon['offerta']=$offerta->id;
+        $q=$offerta->quantita+1;
+        $off = array ();
+        //costruisco l'array per inserire l'offerta modificata
+        $off['id']=$offerta->id;
+        $off['azienda']=$offerta->azienda;
+        $off['tipologia']=$offerta->tipologia;
+        $off['inizio']=$offerta->inizio;
+        $off['fine']=$offerta->fine;
+        $off['prezzo']=$offerta->prezzo;
+        $off['nome']=$offerta->nome;
+        $off['descrizione']=$offerta->descrizione;
+        $off['categoria']=$offerta->categoria;
+        $off['immagine']=$offerta->immagine;
+        $off['quantita']=$q;
+        $this->_userModel->saveCoupon($coupon);
+        $this->_userModel->deleteOfferta($offerta->id);
+        $this->_userModel->saveOfferta($off);
+        $coupon = $this->_userModel->getCoupon($user, $offerta->id);
+        $this->view->assign(array('utente' => $utente,
+                                  'offerta' => $offerta,
+                                  'coupon' => $coupon
+            ));
     }
     
     public function indexAction() {

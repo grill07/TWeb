@@ -29,4 +29,14 @@
                         </div>
                     </div>
                 </div>
+    
+    <a class="btn" target="_blank" href="<?= $this->url(array(
+                                                     'controller' => 'user',
+                                                     'action'     => 'coupon',
+                                                     'offerta' => $this->offerta->id
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Genera Coupon</a>
+    
 </div>
