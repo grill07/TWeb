@@ -73,4 +73,12 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Faq')->getElement($id);
     }
+    public function getCategorie()
+    {
+        return $this->getResource('Categorie')->getTable();
+    }
+    public function getCategorieByCat($categoria)
+    {
+        return $this->getResource('Categorie')->getElement($categoria);
+    }
 }

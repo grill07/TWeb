@@ -1,0 +1,37 @@
+<h3>Gestisci le categorie inserite</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            <?php foreach ($this->categorie as $singolacategoria) :?>
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span6">
+                                           <?php echo '<p><h5><b>'.$singolacategoria->categoria.'</b></h5></p>'?>
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'modtip',
+                                                     'categoria'   => $singolacategoria->categoria,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Modifica</a>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'eliminatip',
+                                                     'categoria'   => $singolacategoria->categoria,
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Elimina</a>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            <?php endforeach ?>
+</ul>

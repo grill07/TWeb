@@ -24,6 +24,11 @@ class AdminController extends Zend_Controller_Action {
         $this->view->modificafaqForm = $this->getModificafaqForm();
         $this->view->modutentiForm = $this->getModutentiForm();
         $this->view->inseruserForm = $this->getInseruserForm();
+        $this->view->modtipologiaForm = $this->getModtipologiaForm();
+        $this->view->inseriscitipForm = $this->getInseriscitipForm();
+    }
+    
+    public function indexAction() {
     }
 
     public function gestazieAction() {
@@ -141,8 +146,59 @@ class AdminController extends Zend_Controller_Action {
     }
     
     
+    public function gesttipAction() {
+        $categorie=$this->_adminModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie));  
+    }
     
+    public function eliminatipAction(){
+        $categoria = $this->getParam('categoria');
+        $this->_adminModel->deleteCategoria($categoria);
+        $this->_helper->redirector('gesttip','admin');
+    }
     
+    public function modtipAction() {
+        $cat = $this->getParam('categoria');
+        $categoria = $this->_adminModel->getCategorieByCat($cat);
+        $this->_form6->setValues($categoria);
+        $this->view->modtipologiaForm = $this->_form6;
+    }
+    
+    public function modtipologiaAction(){
+        if (!$this->getRequest()->isPost()) {
+		$this->_helper->redirector('gesttip','admin');
+	}
+                $form = $this->_form6;
+                $form->setValues($_POST); //viene creata la form con gli elementi già compilati
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('modtip');
+		}   
+                $values = $form->getValues();
+                $vecchiacategoria = $values['tipologia'];
+                unset($values['tipologia']);
+                $this->_adminModel->deleteCategoria($vecchiacategoria);
+                $this->_adminModel->saveCategoria($values);
+                $this->_helper->redirector('gesttip','admin');          
+    }
+    
+    public function instipAction() {
+        
+    }
+    
+    public function inseriscitipAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+		$form = $this->_form7;
+		if (!$form->isValid($_POST)) {
+			return $this->render('instip');
+		}
+		$values = $form->getValues();
+		$this->_adminModel->saveCategoria($values);
+		$this->_helper->redirector('instip','admin');
+                
+    }
     
     
     
@@ -151,9 +207,7 @@ class AdminController extends Zend_Controller_Action {
         
     }
     
-    public function gesttipAction() {
-        
-    }
+    
     
     public function gestfaqAction(){
         $faq=$this->_adminModel->getFaq();
@@ -231,7 +285,7 @@ class AdminController extends Zend_Controller_Action {
 		return $this->_form3;
     }
     
-        public function getModutentiForm(){
+    public function getModutentiForm(){
         $urlHelper = $this->_helper->getHelper('url');
 		$this->_form4 = new Application_Form_Admin_Modutenti();
 		$this->_form4->setAction($urlHelper->url(array(
@@ -250,5 +304,27 @@ class AdminController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form5;
+    }
+    
+    public function getModtipologiaForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form6 = new Application_Form_Admin_Modtipologia();
+		$this->_form6->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'modtipologia'),
+				'default'
+				));
+		return $this->_form6;
+    }
+    
+    public function getInseriscitipForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form7 = new Application_Form_Admin_Inseriscitip();
+		$this->_form7->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'inseriscitip'),
+				'default'
+				));
+		return $this->_form7;
     }
 }

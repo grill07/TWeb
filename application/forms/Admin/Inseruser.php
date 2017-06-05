@@ -83,7 +83,7 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'value' => 'staff',
             ));
         
-        $this->addElement('submit', 'modifica', array(
+        $this->addElement('submit', 'inserisci', array(
             'label' => 'Inserisci',
             'decorators' => $this->buttonDecorators,
 		)); 
