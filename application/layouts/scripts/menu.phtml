@@ -13,6 +13,15 @@
         <li class=""><a href="
                         <?= $this->url(array(
                         'controller' => 'public',
+                        'action'     => 'index',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+                 >Home</a></li>
+        <li class=""><a href="
+                        <?= $this->url(array(
+                        'controller' => 'public',
                         'action'     => 'offerte',
                         ), 
                         'default',true

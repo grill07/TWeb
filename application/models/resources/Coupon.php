@@ -15,6 +15,11 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
         return $this->fetchRow($this->select()->where('id = ?', $key));
     }
     
+    public function getElementByUaO($user, $off)
+    {
+        return $this->fetchRow($this->select()->where('utente = ?', $user)->where('offerta = ?', $off));
+    }
+    
     public function getTable()
     {
 	$select = $this->select();

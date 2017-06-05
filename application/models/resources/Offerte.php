@@ -27,6 +27,21 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
 		}
         return $this->fetchAll($select);
     }
+    
+    public function getOfferteAttive($paged=null)
+    {
+        $date = new Zend_Date();
+	$select = $this->select()
+                       ->where("'".$date->get('YYYY-MM-dd')."' <= fine");
+        if (null !== $paged) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+			$paginator = new Zend_Paginator($adapter);
+			$paginator->setItemCountPerPage(9)
+		          	  ->setCurrentPageNumber((int) $paged);
+			return $paginator;
+		}
+        return $this->fetchAll($select);
+    }
 
     public function addElement($el)
     {
@@ -40,6 +55,7 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     
     public function getOfferteCercate($cats, $desc, $azie, $paged=null)
     {
+        $date = new Zend_Date();
         if(count($cats)==0){$string1=("categoria like '%'");} //se l'utente non ha selezionato nessuna categoria vanno bene tutte
         else{
             $string1=("categoria = ''");
@@ -53,8 +69,9 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
             foreach ($azie as $a) {$string3.=" or azienda = '".$a."' ";}
             }
         $select=$this->select()->where($string1)
-                              ->where($string2)
-                              ->where($string3);
+                               ->where($string2)
+                               ->where($string3)
+                               ->where("'".$date->get('YYYY-MM-dd')."' <= fine");
         if (null !== $paged) {
 			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
 			$paginator = new Zend_Paginator($adapter);
@@ -67,7 +84,9 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     
     public function getOfferteScaricate()
     {
+        $date = new Zend_Date();
         $select = $this->select()
+                       ->where("'".$date->get('YYYY-MM-dd')."' <= fine")
                        ->order('quantita DESC')
                        ->limit(8);
         return $this->fetchAll($select);
@@ -75,7 +94,9 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     
     public function getOfferteNew()
     {
+        $date = new Zend_Date();
         $select = $this->select()
+                       ->where("'".$date->get('YYYY-MM-dd')."' <= fine")
                        ->order('id DESC')
                        ->limit(8);
         return $this->fetchAll($select);

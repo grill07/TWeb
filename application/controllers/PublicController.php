@@ -55,7 +55,7 @@ class PublicController extends Zend_Controller_Action {
         
     public function offerteAction() {
         $paged = $this->_getParam('page', 1);
-        $offerte=$this->_publicModel->getOfferte($paged);
+        $offerte=$this->_publicModel->getOfferteAttive($paged);
         $this->view->assign(array('offerte' => $offerte));
     }
     
@@ -80,8 +80,14 @@ class PublicController extends Zend_Controller_Action {
         $id = $this->_getParam('id');
         $id=intval($id); //converte la stringa in intero
         $offerta=$this->_publicModel->getOffById($id);
+        $user = $this->_authService->getIdentity()->username;
+        if($this->ruolo == 'user') {
+        $coupon=$this->_publicModel->acquistato($user, $offerta->id);
+        }
+        else {$coupon=0;}
         $this->view->assign(array(
-                        'offerta' => $offerta
+                        'offerta' => $offerta,
+                        'coupon' => $coupon
                 )
                 );
     }
