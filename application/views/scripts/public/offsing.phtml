@@ -30,6 +30,8 @@
                     </div>
                 </div>
     
+    <?php if($this->ruolo == 'user'):?>   
+    <?php if($this->coupon == null):?>
     <a class="btn" target="_blank" href="<?= $this->url(array(
                                                      'controller' => 'user',
                                                      'action'     => 'coupon',
@@ -38,5 +40,19 @@
                                                                   'default',true
                                                        ); 
                                                      ?>">Genera Coupon</a>
+    <?php else: ?>
+    <p>Hai già usufruito di questa offerta!</p>
+    <?php endif ?>  
+    <?php endif ?> 
     
+    <?php if($this->ruolo == null):?>   
+    <a href="<?= $this->url(array(
+                                                     'controller' => 'public',
+                                                     'action'     => 'login',
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">ATTENZIONE! I coupon possono essere acquistati solo da utenti registrati</a>
+    <?php endif ?> 
+
 </div>

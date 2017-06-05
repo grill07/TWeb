@@ -24,6 +24,7 @@
 			<div class="row-fluid">
 			<div id="featured" class="carousel slide">
 			<div class="carousel-inner">
+                          <?php if(count($this->new)>3) :?>
 			  <div class="item active">
 			  <ul class="thumbnails">
                                 <?php for($i=0;$i<4;$i++) :?>
@@ -57,7 +58,9 @@
                                 <?php endfor ?>
                           </ul>
 			  </div>
-			   <div class="item">
+                          <?php endif ?>
+                          <?php if(count($this->new)>7) :?>
+			  <div class="item">
 			  <ul class="thumbnails">
                                 <?php for($i=4;$i<8;$i++) :?>
 				<li class="span3">
@@ -90,6 +93,7 @@
                                 <?php endfor ?>
                           </ul>
 			  </div>
+                          <?php endif ?>
 			  </div>
 			  <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
 			  <a class="right carousel-control" href="#featured" data-slide="next">›</a>

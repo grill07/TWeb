@@ -18,6 +18,11 @@ class Application_Model_Public extends App_Model_Abstract
         return $this->getResource('Categorie')->getTable();
     }
     
+    public function acquistato($user, $off)
+    {
+    	return $this->getResource('Coupon')->getElementByUaO($user, $off);
+    }
+    
     public function getFaq()
     {
         return $this->getResource('Faq')->getTable();
@@ -39,6 +44,10 @@ class Application_Model_Public extends App_Model_Abstract
     
     public function getOfferte($paged=null){
         return $this->getResource('Offerte')->getTable($paged);
+    }
+    
+    public function getOfferteAttive($paged=null){
+        return $this->getResource('Offerte')->getOfferteAttive($paged);
     }
     
     public function getOfferteCercate($cats, $desc, $azie, $paged=null){
