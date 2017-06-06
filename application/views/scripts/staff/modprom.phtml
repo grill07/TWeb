@@ -1,3 +1,13 @@
+<?php $this->headScript()
+	->appendFile('https://code.jquery.com/jquery-1.10.2.js')
+	->appendFile('https://code.jquery.com/ui/1.10.4/jquery-ui.js')
+	->captureStart() ?>
+
+         $(function() {
+            $( ".date" ).datepicker({dateFormat: "dd-mm-yy"});
+         });
+<?php $this->headScript()->captureEnd() ?>
+         
 <h3>Modifica l'offerta selezionata</h3>
 <br class="clr"/>
 <?php echo $this->modoffertaForm ?>

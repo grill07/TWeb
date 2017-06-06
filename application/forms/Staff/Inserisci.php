@@ -68,6 +68,7 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'label' => 'Data inizio offerta',
             'filters' => array('StringTrim'),
             'required' => true,
+            'class' => 'date',
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
             'decorators' => $this->elementDecorators,
 		));
@@ -76,6 +77,7 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'label' => 'Data fine offerta',
             'filters' => array('StringTrim'),
             'required' => true,
+            'class' => 'date',
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
             'decorators' => $this->elementDecorators,
 		));

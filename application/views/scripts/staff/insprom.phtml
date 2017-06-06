@@ -1,6 +1,16 @@
+<?php $this->headScript()
+	->appendFile('https://code.jquery.com/jquery-1.10.2.js')
+	->appendFile('https://code.jquery.com/ui/1.10.4/jquery-ui.js')
+	->captureStart() ?>
+
+         $(function() {
+            $( ".date" ).datepicker({dateFormat: "dd-mm-yy"});
+         });
+<?php $this->headScript()->captureEnd() ?>
+
 <h3>Inserisci una nuova promozione</h3>
 <?php if($this->inserita):?>
-<?php echo '<h4 style="color:red">Il prodotto/servizio '.$this->off.' è stato inserito corretamente</h4>'?>
+<?php echo '<h4 style="color:red">La promozione '.$this->off.' è stata inserita corretamente</h4>'?>
 <?php endif ?>
 <br class="clr"/>
 <?php echo $this->inserisciForm ?>

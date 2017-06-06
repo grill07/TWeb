@@ -92,6 +92,9 @@ class StaffController extends Zend_Controller_Action {
 		$values = $form->getValues();
                 $values['inizio']= $this->_helper->Dbhelp->timedb($values['inizio'],'dd-mm-yyyy');
                 $values['fine']= $this->_helper->Dbhelp->timedb($values['fine'],'dd-mm-yyyy');
+                if($values['immagine'] === null){
+                            $values['immagine']='immagineBase.png';
+                }
 		$this->_staffModel->saveOfferta($values);
                 $off = $values['nome'];
                 $inserita = true;

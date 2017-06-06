@@ -79,6 +79,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'value' => $values['inizio'],
             'filters' => array('StringTrim'),
             'required' => true,
+            'class' => 'date',
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
             'decorators' => $this->elementDecorators,
 		));
@@ -88,6 +89,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'value' => $values['fine'],
             'filters' => array('StringTrim'),
             'required' => true,
+            'class' => 'date',
             'validators' => array (array('date', false, array('dd/MM/yyyy'))),
             'decorators' => $this->elementDecorators,
 		));
