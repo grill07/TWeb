@@ -35,3 +35,12 @@
 				</li>
                             <?php endforeach ?>
 </ul>
+
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->utenti instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->utenti,'Sliding','admin/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>

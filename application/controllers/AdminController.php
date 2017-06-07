@@ -33,7 +33,9 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
-        
+        $username = $this->_authService->getIdentity()->username;
+        $utente = $this->_adminModel->getUtenteByUsername($username);
+        $this->view->assign(array('utente' => $utente));
     }
 
     public function logoutAction(){
@@ -42,7 +44,8 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function gestazieAction() {
-        $aziende=$this->_adminModel->getAziende();
+        $paged = $this->_getParam('page', 1);
+        $aziende=$this->_adminModel->getAziende($paged);
         $this->view->assign(array('aziende' => $aziende)); 
         
     }
@@ -103,7 +106,8 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function gestuserAction() {
-        $username=$this->_adminModel->getUtente();
+        $paged = $this->_getParam('page', 1);
+        $username=$this->_adminModel->getUtente($paged);
         $this->view->assign(array('utenti' => $username)); 
     }
     

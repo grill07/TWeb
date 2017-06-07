@@ -47,9 +47,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Utenti')->deleteElement($username);
     }
     
-    public function getUtente() 
+    public function getUtente($paged=null) 
     {
-        return $this->getResource('Utenti')->getTable();
+        return $this->getResource('Utenti')->getTable($paged);
     }
     
     public function getUtenteByUsername($username) 
@@ -57,9 +57,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Utenti')->getElement($username);
     }
     
-    public function getAziende()
+    public function getAziende($paged=null)
     {
-        return $this->getResource('Aziende')->getTable();
+        return $this->getResource('Aziende')->getTable($paged);
     }
     public function getAziendaByNome($nome)
     {

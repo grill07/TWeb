@@ -44,3 +44,11 @@
                             <?php endforeach ?>
 </ul>
 
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->aziende instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->aziende,'Sliding','admin/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>
