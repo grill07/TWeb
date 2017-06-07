@@ -12,8 +12,9 @@ class PublicController extends Zend_Controller_Action {
         $this->_authService = new Application_Service_Auth();
         if($this->_authService->getIdentity() != false){
         $ruolo = $this->_authService->getIdentity()->ruolo;
-        $this->view->assign(array('ruolo' => $ruolo));
         }
+        else {$ruolo=false;}        
+        $this->view->assign(array('ruolo' => $ruolo));
         $this->_helper->layout->setLayout('layout');
         $this->_logger = Zend_Registry::get('log');
         $this->_publicModel = new Application_Model_Public();
@@ -80,8 +81,12 @@ class PublicController extends Zend_Controller_Action {
         $id = $this->_getParam('id');
         $id=intval($id); //converte la stringa in intero
         $offerta=$this->_publicModel->getOffById($id);
+        if($this->_authService->getIdentity() != false){
         $user = $this->_authService->getIdentity()->username;
-        if($this->ruolo == 'user') {
+        $ruolo = $this->_authService->getIdentity()->ruolo;
+        }
+        else {$ruolo=false;}        
+        if($ruolo == 'user') {
         $coupon=$this->_publicModel->acquistato($user, $offerta->id);
         }
         else {$coupon=0;}

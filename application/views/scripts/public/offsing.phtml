@@ -32,7 +32,7 @@
     
     <?php if($this->ruolo == 'user'):?>   
     <?php if($this->coupon == null):?>
-    <a class="btn" target="_blank" href="<?= $this->url(array(
+        <a class="btn" target="_blank" href="<?= $this->url(array(
                                                      'controller' => 'user',
                                                      'action'     => 'coupon',
                                                      'offerta' => $this->offerta->id
@@ -45,7 +45,7 @@
     <?php endif ?>  
     <?php endif ?> 
     
-    <?php if($this->ruolo == null):?>   
+    <?php if($this->ruolo == false):?>   
     <a href="<?= $this->url(array(
                                                      'controller' => 'public',
                                                      'action'     => 'login',
