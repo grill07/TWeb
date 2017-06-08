@@ -47,10 +47,6 @@ class StaffController extends Zend_Controller_Action {
     public function gestpromAction() {
         $paged = $this->_getParam('page', 1);
         $offerte=$this->_staffModel->getOfferte($paged);
-        foreach ($offerte as $offerta){
-            $offerta['inizio']= $this->_helper->Dbhelp->timedb($offerta['inizio'],'yyyy-mm-dd');
-            $offerta['fine']= $this->_helper->Dbhelp->timedb($offerta['fine'],'yyyy-mm-dd');
-        }
         $elimina = $this->getParam('elimina');
         $modifica = $this->getParam('modifica');
         if($elimina){
@@ -68,16 +64,13 @@ class StaffController extends Zend_Controller_Action {
         $inserita = $this->getParam('inserita');
         if($inserita){
             $off = $this->getParam('off');
-            $this->view->assign(array('offerte' => $offerte,'off' => $off,'inserita' => $inserita)); 
+            $this->view->assign(array('off' => $off,'inserita' => $inserita)); 
         }
     }
     
     public function modpromAction() {
         $id = $this->getParam('id');
         $offerta = $this->_staffModel->getOffertaById($id);
-        $offerta['inizio']= $this->_helper->Dbhelp->timedb($offerta['inizio'],'yyyy-mm-dd');
-        $offerta['fine']= $this->_helper->Dbhelp->timedb($offerta['fine'],'yyyy-mm-dd');
-        $this->_form3->setValues($offerta);
         $this->view->modoffertaForm = $this->_form3;
     }
 
@@ -90,8 +83,6 @@ class StaffController extends Zend_Controller_Action {
 			return $this->render('insprom');
 		}
 		$values = $form->getValues();
-                $values['inizio']= $this->_helper->Dbhelp->timedb($values['inizio'],'dd-mm-yyyy');
-                $values['fine']= $this->_helper->Dbhelp->timedb($values['fine'],'dd-mm-yyyy');
                 if($values['immagine'] === null){
                             $values['immagine']='immagineBase.png';
                 }
@@ -137,8 +128,6 @@ class StaffController extends Zend_Controller_Action {
 		}
                 $values = $form->getValues();
                 $id = $values['id'];
-                $values['inizio']= $this->_helper->Dbhelp->timedb($values['inizio'],'dd-mm-yyyy');
-                $values['fine']= $this->_helper->Dbhelp->timedb($values['fine'],'dd-mm-yyyy');
                 if($values['immagine'] === null){
                             $values['immagine']=$values['imm'];
                 }
@@ -181,5 +170,5 @@ class StaffController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form3;
-    }   
+    }
 }
