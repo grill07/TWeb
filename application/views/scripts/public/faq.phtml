@@ -1,23 +1,18 @@
-<div id="mainBody">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
+  
 <div class="container">
-<h1>FAQ</h1>
-<hr class="soften"/>	
-<div class="accordion"> <!--id="accordion2"-->
-    <?php foreach ($this->faq as $faq) :?>
-        <div class="accordion-group">
-            <div class="accordion-heading">    
-                <?php echo '<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse'. $faq->id . '">' . $faq->domanda . '</a></h4>' ?>
-            </div>
-            <?php echo '<div id="collapse' . $faq->id . '" class="accordion-body collapse"  >' ?>
-            <div class="accordion-inner">
-                <?php echo '<p>' . $faq->risposta . '</p>' ?>
-            </div>
-	</div>
-    <?php endforeach ?>
+    <h1>FAQ</h1>
+    <hr class="soften"/>
+    <div id="accordion">
+        <?php foreach ($this->faq as $faq) :?>
+            <h3><?=$faq->domanda?></h3>
+            <div><p><?=$faq->risposta?></p></div>
+        <?php endforeach ?>
+    </div>
 </div>
-
-</div>
-</div>
-
-<script src="<?=$this->baseUrl('js/jquery.js')?>" type="text/javascript"></script>
-<script src="<?=$this->baseUrl('js/bootstrap.min.js')?>" type="text/javascript"></script>
