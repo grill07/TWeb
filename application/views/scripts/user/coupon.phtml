@@ -2,12 +2,12 @@
         <?= $this->headTitle(); ?>
 </head>
 <body>
-<p><?= $this->offerta->nome ?></p>
-<p><?= $this->offerta->descrizione ?></p>
-<p><?= $this->utente->username ?></p>
-<p><?= $this->utente->nome ?></p>
-<p><?= $this->utente->cognome ?></p>
-<p><?= $this->coupon->id ?></p>
-<p><?= $this->offerta->inizio ?></p>
-<p><?= $this->offerta->fine ?></p>
+    <p><b>Prodotto:</b> <?= $this->offerta->nome ?></p>
+    <p><b>Descrizione:</b> <?= $this->offerta->descrizione ?></p>
+    <p><b>Username:</b> <?= $this->utente->username ?></p>
+    <p><b>Nome:</b> <?= $this->utente->nome ?></p>
+    <p><b>Cognome:</b> <?= $this->utente->cognome ?></p>
+    <p><b>Id coupon:</b> <?= $this->coupon->id ?></p>
+    <p><b>Dal:</b> <?= $this->offerta->inizio ?></p>
+    <p><b>Al:</b> <?= $this->offerta->fine ?></p>
 </body>
