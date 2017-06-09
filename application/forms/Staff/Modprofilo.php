@@ -19,7 +19,7 @@ class Application_Form_Staff_Modprofilo extends App_Form_Abstract
             'value' => $values['nome'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -29,7 +29,7 @@ class Application_Form_Staff_Modprofilo extends App_Form_Abstract
             'value' => $values['cognome'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -77,7 +77,7 @@ class Application_Form_Staff_Modprofilo extends App_Form_Abstract
             'value' => $values['password'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,15))),
+            'validators' => array('Alnum',array('StringLength',true, array(1,15))),
             'decorators' => $this->elementDecorators,
 		));
                

@@ -130,11 +130,12 @@ class StaffController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $id = $values['id'];
                 if($values['immagine'] === null){
-                            $values['immagine']=$values['imm'];
-                }
-                unset($values['imm']);
+                            unset($values['immagine']);
+                            $this->_staffModel->updateOfferta($values);
+                }else{
                 $this->_staffModel->deleteOfferta($id);
                 $this->_staffModel->saveOfferta($values);
+                }
                 $off = $values['nome'];
                 $modifica = true;
                 $this->_helper->redirector('gestprom','staff','default',array('off' => $off,'modifica' => $modifica));

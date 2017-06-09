@@ -10,6 +10,12 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     {
     }
     
+    public function updateElement($data){
+        $data['inizio']= date('Y-m-d', strtotime($data['inizio']));
+        $data['fine']= date('Y-m-d', strtotime($data['fine']));
+        $this->update($data, 'id='.$data['id']);
+    }
+    
     public function getElement($key)
     {
         $offerta = $this->fetchRow($this->select()->where('id = ?', $key));

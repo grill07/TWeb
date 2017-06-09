@@ -8,6 +8,10 @@ class Application_Model_Staff extends App_Model_Abstract
         /*$this->_logger = Zend_Registry::get('log');*/
     }
     
+    public function updateOfferta($data){
+        return $this->getResource('Offerte')->updateElement($data);
+    }
+    
     public function getOffertaById($id){
         return $this->getResource('Offerte')->getElement($id);
     }

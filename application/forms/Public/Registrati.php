@@ -16,14 +16,14 @@ class Application_Form_Public_Registrati extends Zend_Form
             'label' => 'Nome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
 		));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
 		));
         
         $this->addElement('select', 'genere', array(
@@ -60,7 +60,7 @@ class Application_Form_Public_Registrati extends Zend_Form
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(4,15)),
+            'validators' => array('Alnum',array('StringLength',true, array(4,15)),
                 array('Db_NoRecordExists',true, 
                 array('table'   => 'utenti',
                       'field'   => 'username'))),
@@ -70,7 +70,7 @@ class Application_Form_Public_Registrati extends Zend_Form
             'label' => 'Password',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(4,15))),
+            'validators' => array('Alnum',array('StringLength',true, array(4,15))),
 		));
         
         $this->addElement('hidden', 'ruolo', array(

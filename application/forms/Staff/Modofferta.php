@@ -60,10 +60,6 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
         ));
         
-        $this->addElement('hidden', 'imm', array(
-            'value' => $values['immagine'],
-            ));
-        
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/img/prodotti',
@@ -108,7 +104,8 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'value' => $values['tipologia'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,10))),
+            'validators' => array(array('StringLength',true, array(3,3)),
+                                  array('Regex',true, array('pattern' => '/[0-9](x|[0-9])(%|[0-9])/'))),
             'decorators' => $this->elementDecorators,
 		));
         

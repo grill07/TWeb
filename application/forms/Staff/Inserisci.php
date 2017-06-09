@@ -95,7 +95,7 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(3,3)),
-                                  array('Regex',true, array('pattern' => '/[0-9x%]/'))),
+                                  array('Regex',true, array('pattern' => '/[0-9](x|[0-9])(%|[0-9])/'))),
             'decorators' => $this->elementDecorators,
 		));
         
