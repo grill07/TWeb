@@ -71,7 +71,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         			array('Count', false, 1),
         			array('Size', false, 102400),
         			array('Extension', false, array('jpg', 'png'))),
-                'decorators' => $this->elementDecorators,
+                'decorators' => $this->fileDecorators,
                 ));
         
         $this->addElement('text', 'inizio', array(

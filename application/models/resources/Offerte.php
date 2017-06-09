@@ -13,8 +13,8 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
     public function getElement($key)
     {
         $offerta = $this->fetchRow($this->select()->where('id = ?', $key));
-        $offerta['inizio']= date('d-m-y', strtotime($offerta['inizio']));
-        $offerta['fine']= date('d-m-y', strtotime($offerta['fine']));
+        $offerta['inizio']= date('d-m-Y', strtotime($offerta['inizio']));
+        $offerta['fine']= date('d-m-Y', strtotime($offerta['fine']));
         return $offerta;
     }
     
@@ -27,15 +27,15 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
 			$paginator->setItemCountPerPage(9)
 		          	  ->setCurrentPageNumber((int) $paged);
                         foreach ($paginator as $offerta){
-                                   $offerta['inizio']= date('d-m-y', strtotime($offerta['inizio']));
-                                   $offerta['fine']= date('d-m-y', strtotime($offerta['fine']));
+                                   $offerta['inizio']= date('d-m-Y', strtotime($offerta['inizio']));
+                                   $offerta['fine']= date('d-m-Y', strtotime($offerta['fine']));
                         }
 			return $paginator;
 		}
         $offerte = $this->fetchAll($select);
         foreach ($offerte as $offerta){
-            $offerta['inizio']= date('d-m-y', strtotime($offerta['inizio']));
-            $offerta['fine']= date('d-m-y', strtotime($offerta['fine']));
+            $offerta['inizio']= date('d-m-Y', strtotime($offerta['inizio']));
+            $offerta['fine']= date('d-m-Y', strtotime($offerta['fine']));
         }
         return $offerte;
     }

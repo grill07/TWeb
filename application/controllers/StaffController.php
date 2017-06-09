@@ -71,6 +71,7 @@ class StaffController extends Zend_Controller_Action {
     public function modpromAction() {
         $id = $this->getParam('id');
         $offerta = $this->_staffModel->getOffertaById($id);
+        $this->_form3->setValues($offerta);
         $this->view->modoffertaForm = $this->_form3;
     }
 
@@ -101,7 +102,7 @@ class StaffController extends Zend_Controller_Action {
     }
     
     public function modprofiloAction(){
-        if (!$this->getRequest()->isPost()) {
+                if (!$this->getRequest()->isPost()) {
 			$this->_helper->redirector('index','public');
 		}
 		$form = $this->_form2;

@@ -94,7 +94,8 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'label' => 'Sconto da applicare',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,10))),
+            'validators' => array(array('StringLength',true, array(3,3)),
+                                  array('Regex',true, array('pattern' => '/[0-9x%]/'))),
             'decorators' => $this->elementDecorators,
 		));
         
