@@ -61,7 +61,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         ));
         
         $this->addElement('file', 'immagine', array(
-        	'label' => 'Immagine',
+        	'label' => 'Immgine',
         	'destination' => APPLICATION_PATH . '/../public/img/prodotti',
         	'validators' => array( 
         			array('Count', false, 1),
@@ -69,6 +69,8 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         			array('Extension', false, array('jpg', 'png'))),
                 'decorators' => $this->fileDecorators,
                 ));
+        
+        echo '<center>ATTENZIONE! Se non verrà selezionata nessuna immagine sarà precaricata la precedente</center>';
         
         $this->addElement('text', 'inizio', array(
             'label' => 'Data inizio offerta',
