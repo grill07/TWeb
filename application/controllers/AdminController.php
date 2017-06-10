@@ -15,6 +15,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_form9;
     protected $_logger;
     protected $_values;
+    
 
     public function init() {
         $this->_authService = new Application_Service_Auth();
@@ -46,14 +47,25 @@ class AdminController extends Zend_Controller_Action {
     public function gestazieAction() {
         $paged = $this->_getParam('page', 1);
         $aziende=$this->_adminModel->getAziende($paged);
-        $this->view->assign(array('aziende' => $aziende)); 
-        
+        $elimina = $this->getParam('elimina');
+        $modifica = $this->getParam('modifica');
+        if($elimina){
+            $azie = $this->getParam('azie');
+            $this->view->assign(array('aziende' => $aziende,'azie' => $azie,'elimina' => $elimina));
+        }else if($modifica){
+            $azie = $this->getParam('azie');
+            $this->view->assign(array('aziende' => $aziende,'azie' => $azie,'modifica' => $modifica)); 
+        }else{
+           $this->view->assign(array('aziende' => $aziende)); 
+        }
+         
     }
     
     public function eliminaAction(){
         $nome = $this->getParam('nome');
+        $elimina = true;
         $this->_adminModel->deleteAzienda($nome);
-        $this->_helper->redirector('gestazie','admin');
+        $this->_helper->redirector('gestazie','admin','default',array('azie'=>$nome, 'elimina'=>$elimina));
     }
     
     
@@ -77,17 +89,31 @@ class AdminController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $nome = $values['nome'];
                 if($values['logo'] === null){
-                            $values['logo']=$values['log'];
+                            unset($values['logo']);
+                            unset($values['nome']);
+                            $this->_adminModel->updateAzienda($values,$nome);
                 }
-                unset($values['log']);
+                else{
                 $this->_adminModel->deleteAzienda($nome);
                 $this->_adminModel->saveAzienda($values);
-                $this->_helper->redirector('gestazie','admin');
+                }
+                $modifica = true;             
+                $this->_helper->redirector('gestazie','admin','default',array('azie'=>$nome,'modifica'=> $modifica));
                 
     }
 
 
     public function insazieAction() {
+        $inserita = $this->getParam('inserita');
+        $esistente= $this->getParam('esistente');
+        if($inserita){
+            $azie = $this->getParam('azie');
+            $this->view->assign(array('azie' => $azie,'inserita' => $inserita)); 
+        }
+        if($esistente){
+            $azie = $this->getParam('azie');
+            $this->view->assign(array('azie' => $azie,'esistente' => $esistente)); 
+        }
         
     }
     
@@ -99,22 +125,46 @@ class AdminController extends Zend_Controller_Action {
 		if (!$form->isValid($_POST)) {
 			return $this->render('insazie');
 		}
+                
 		$values = $form->getValues();
-		$this->_adminModel->saveAzienda($values);
-		$this->_helper->redirector('insazie','admin');
+                $azie = $values['nome'];
+                $azienda = $this->_adminModel->getAziendaByNome($azie);
+                $inserita = true;
+                $esistente=true;
+                if($azie==$azienda->nome){
+                   $inserita=false;
+                   $this->_helper->redirector('insazie','admin','default',array('azie'=>$azie,'inserita'=>$inserita,'esistente'=>$esistente));
+		}
+                else{
+                   $esistente=false;
+                   $this->_adminModel->saveAzienda($values);
+                   $this->_helper->redirector('insazie','admin','default',array('azie'=>$azie,'inserita'=>$inserita,'esistente'=>$esistente));
+                }
                 
     }
     
     public function gestuserAction() {
         $paged = $this->_getParam('page', 1);
-        $username=$this->_adminModel->getUtente($paged);
-        $this->view->assign(array('utenti' => $username)); 
+        $username=$this->_adminModel->getUtenteWAd($paged);
+        $elimina = $this->getParam('elimina');
+        $modifica = $this->getParam('modifica');
+        if($elimina){
+            $user = $this->getParam('user');
+            $this->view->assign(array('utenti' => $username,'user' => $user,'elimina' => $elimina));
+        }else if($modifica){
+            $user = $this->getParam('user');
+            $this->view->assign(array('utenti' => $username,'user' => $user,'modifica' => $modifica)); 
+        }else{
+            $this->view->assign(array('utenti' => $username));
+        }
+         
     }
     
     public function eliminauserAction(){
         $username = $this->getParam('username');
+        $elimina = true;
         $this->_adminModel->deleteUtente($username);
-        $this->_helper->redirector('gestuser','admin');
+        $this->_helper->redirector('gestuser','admin','default',array('user'=>$username, 'elimina'=>$elimina));
     }
     
     public function moduserAction() {
@@ -138,10 +188,16 @@ class AdminController extends Zend_Controller_Action {
                 $username = $values['username'];
                 $this->_adminModel->deleteUtente($username);
                 $this->_adminModel->saveUtente($values);
-                $this->_helper->redirector('gestuser','admin');
+                $modifica = true;
+                $this->_helper->redirector('gestuser','admin','default',array('user'=>$username,'modifica'=> $modifica));
     }
     
     public function insuserAction() {
+        $inserito = $this->getParam('inserito');
+        if($inserito){
+            $user = $this->getParam('user');
+            $this->view->assign(array('user' => $user,'inserito' => $inserito)); 
+        }
         
     }
     
@@ -154,8 +210,10 @@ class AdminController extends Zend_Controller_Action {
 			return $this->render('insuser');
 		}
 		$values = $form->getValues();
+                $user = $values['username'];
 		$this->_adminModel->saveUtente($values);
-		$this->_helper->redirector('insuser','admin');
+                $inserito = true;
+		$this->_helper->redirector('insuser','admin','default',array('user' => $user,'inserito' => $inserito));
                 
     }
     

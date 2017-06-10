@@ -52,6 +52,11 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Utenti')->getTable($paged);
     }
     
+    public function getUtenteWAd($paged=null) 
+    {
+        return $this->getResource('Utenti')->getUtentiWAdmin($paged);
+    }
+    
     public function getUtenteByUsername($username) 
     {
         return $this->getResource('Utenti')->getElement($username);
@@ -61,24 +66,34 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Aziende')->getTable($paged);
     }
+    
     public function getAziendaByNome($nome)
     {
         return $this->getResource('Aziende')->getElement($nome);
     }
+    
     public function getFaq()
     {
         return $this->getResource('Faq')->getTable();
     }
+    
     public function getFaqById($id)
     {
         return $this->getResource('Faq')->getElement($id);
     }
+    
     public function getCategorie()
     {
         return $this->getResource('Categorie')->getTable();
     }
+    
     public function getCategorieByCat($categoria)
     {
         return $this->getResource('Categorie')->getElement($categoria);
+    }
+    
+    public function updateAzienda($data,$nomeaz){
+        
+        return $this->getResource('Aziende')->updateElement($data,$nomeaz);
     }
 }

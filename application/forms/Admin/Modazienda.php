@@ -1,5 +1,4 @@
 <?php
-
 class Application_Form_Admin_Modazienda extends App_Form_Abstract
 {
     protected $_adminModel;
@@ -10,9 +9,8 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
         $this->setMethod('post');
         $this->setName('adminmodaz');
         $this->setAction('');
-        $this->setAttrib('enctype', 'multipart/form-data'); 
+        $this->setAttrib('enctype', 'multipart/form-data');
         
-         
     }
     
     public function setValues($values){ //per precompilare la form i valori vengono settati dopo l'init
@@ -68,13 +66,9 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
         			array('Count', false, 1),
         			array('Size', false, 102400),
         			array('Extension', false, array('jpg', 'gif', 'png'))),
-            'decorators' => $this->fileDecorators,
+                'decorators' => $this->fileDecorators,
                 ));
-        
-        $this->addElement('hidden', 'log', array(
-            'value' => $values['logo'],
-            ));
-        
+             
         $this->addElement('submit', 'modaz', array(
             'label' => 'Modifica',
             'decorators' => $this->buttonDecorators, 
@@ -88,6 +82,3 @@ class Application_Form_Admin_Modazienda extends App_Form_Abstract
        
     }
 }
-
-
-

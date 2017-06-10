@@ -1,3 +1,9 @@
 <h3>Inserisci una nuova azienda</h3>
+<?php if($this->inserita):?>
+<?php echo '<h4 style="color:red">Azienda '.$this->azie.' inserita corretamente</h4>'?>
+<?php endif?>
+<?php if ($this->esistente):?>
+<?php echo '<h4 style="color:red">Azienda '.$this->azie.' già esistente</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <?php echo $this->inserisciForm ?>

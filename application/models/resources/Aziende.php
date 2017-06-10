@@ -10,6 +10,10 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
     {
     }
     
+    public function updateElement($data,$nomeaz){
+        $this->update($data, "nome = '" . $nomeaz . "'");
+    }
+    
     public function getElement($key)
     {
         return $this->fetchRow($this->select()->where('nome = ?', $key));

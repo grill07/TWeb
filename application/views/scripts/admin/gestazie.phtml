@@ -1,4 +1,10 @@
 <h3>Gestisci le aziende inserite</h3>
+<?php if($this->elimina):?>
+<?php echo '<h4 style="color:red">Azienda '.$this->azie.' eliminata</h4>'?>
+<?php endif ?>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">Azienda '.$this->azie.' modificata</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->aziende as $azienda) :?>

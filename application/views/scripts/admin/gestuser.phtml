@@ -1,4 +1,10 @@
 <h3>Gestisci gli utenti inseriti</h3>
+<?php if($this->elimina):?>
+<?php echo '<h4 style="color:red">Utente '.$this->user.' eliminato</h4>'?>
+<?php endif ?>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">Utente '.$this->user.' modificato</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->utenti as $utente) :?>
