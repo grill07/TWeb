@@ -1,4 +1,10 @@
 <h3>Gestisci le categorie inserite</h3>
+<?php if($this->elimina):?>
+<?php echo '<h4 style="color:red">Categoria '.$this->cat.' eliminata</h4>'?>
+<?php endif ?>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">Categoria '.$this->vecchiacat.' modificata in categoria '.$this->cat.'</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->categorie as $singolacategoria) :?>
@@ -35,3 +41,12 @@
 				</li>
                             <?php endforeach ?>
 </ul>
+
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->categorie instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->categorie,'Sliding','admin/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>

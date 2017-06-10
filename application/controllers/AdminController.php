@@ -131,7 +131,7 @@ class AdminController extends Zend_Controller_Action {
                 $azienda = $this->_adminModel->getAziendaByNome($azie);
                 $inserita = true;
                 $esistente=true;
-                if($azie==$azienda->nome){
+                if(strcasecmp($azie,$azienda->nome) == 0){
                    $inserita=false;
                    $this->_helper->redirector('insazie','admin','default',array('azie'=>$azie,'inserita'=>$inserita,'esistente'=>$esistente));
 		}
@@ -219,14 +219,28 @@ class AdminController extends Zend_Controller_Action {
     
     
     public function gesttipAction() {
-        $categorie=$this->_adminModel->getCategorie();
-        $this->view->assign(array('categorie' => $categorie));  
+        $paged = $this->_getParam('page', 1);
+        $categorie=$this->_adminModel->getCategorie($paged);
+        $elimina = $this->getParam('elimina');
+        $modifica = $this->getParam('modifica');
+        if($elimina){
+            $cat = $this->getParam('cat');
+            $this->view->assign(array('categorie' => $categorie,'cat' => $cat,'elimina' => $elimina));
+        }else if($modifica){
+            $cat = $this->getParam('cat');
+            $vecchiacat = $this->getParam('vecchiacat');
+            $this->view->assign(array('categorie' => $categorie,'cat' => $cat, 'vecchiacat'=> $vecchiacat, 'modifica' => $modifica)); 
+        }else{
+           $this->view->assign(array('categorie' => $categorie));  
+        }
+         
     }
     
     public function eliminatipAction(){
         $categoria = $this->getParam('categoria');
-        $this->_adminModel->deleteCategoria($categoria);
-        $this->_helper->redirector('gesttip','admin');
+        $elimina = true;
+        $this->_adminModel->deleteCategoria($categoria);        
+        $this->_helper->redirector('gesttip','admin','default',array('cat'=>$categoria, 'elimina'=>$elimina));
     }
     
     public function modtipAction() {
@@ -249,12 +263,23 @@ class AdminController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $vecchiacategoria = $values['tipologia'];
                 unset($values['tipologia']);
+                $modifica = true;  
                 $this->_adminModel->deleteCategoria($vecchiacategoria);
-                $this->_adminModel->saveCategoria($values);
-                $this->_helper->redirector('gesttip','admin');          
+                $this->_adminModel->saveCategoria($values);                
+                $this->_helper->redirector('gesttip','admin','default',array('cat'=>$values, 'vecchiacat'=> $vecchiacategoria,'modifica'=> $modifica));          
     }
     
     public function instipAction() {
+        $inserita = $this->getParam('inserita');
+        $esistente= $this->getParam('esistente');
+        if($inserita){
+            $cat = $this->getParam('cat');
+            $this->view->assign(array('cat' => $cat,'inserita' => $inserita)); 
+        }
+        if($esistente){
+            $cat = $this->getParam('cat');
+            $this->view->assign(array('cat' => $cat,'esistente' => $esistente)); 
+        }
         
     }
     
@@ -267,8 +292,19 @@ class AdminController extends Zend_Controller_Action {
 			return $this->render('instip');
 		}
 		$values = $form->getValues();
-		$this->_adminModel->saveCategoria($values);
-		$this->_helper->redirector('instip','admin');
+                $categoria = $this->_adminModel->getCategorieByCat($values);
+                $inserita = true;
+                $esistente=true;
+                if(strcasecmp($values['categoria'], $categoria->categoria) == 0){
+                   $inserita=false;
+                   $this->_helper->redirector('instip','admin','default',array('cat'=>$values,'inserita'=>$inserita,'esistente'=>$esistente));
+		}
+                else{
+                   $esistente=false;
+                   $this->_adminModel->saveCategoria($values);
+                   $this->_helper->redirector('instip','admin','default',array('cat'=>$values,'inserita'=>$inserita,'esistente'=>$esistente));
+                }
+                  
                 
     }
     

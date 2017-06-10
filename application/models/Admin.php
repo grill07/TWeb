@@ -82,9 +82,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Faq')->getElement($id);
     }
     
-    public function getCategorie()
+    public function getCategorie($paged=null)
     {
-        return $this->getResource('Categorie')->getTable();
+        return $this->getResource('Categorie')->getTable($paged);
     }
     
     public function getCategorieByCat($categoria)
