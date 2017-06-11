@@ -37,7 +37,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	$this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/base.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/bootstrap-responsive.min.css'));
 	$this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/couponshop.css'));
-        $this->_view->headLink()->appendStylesheet("https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css");
+        $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/jquery-ui.css'));
         $this->_view->headTitle('COUPONshop');
     }
 

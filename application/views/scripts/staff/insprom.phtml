@@ -1,10 +1,19 @@
 <?php $this->headScript()
-	->appendFile('https://code.jquery.com/jquery-1.10.2.js')
-	->appendFile('https://code.jquery.com/ui/1.10.4/jquery-ui.js')
+	->appendFile($this->baseUrl('js/jquery-1.12.4.js'))
+	->appendFile($this->baseUrl('js/jquery-ui.js'))
 	->captureStart() ?>
-
+         var today = new Date();
+         var dd = today.getDate();
+         var mm = today.getMonth() + 1;
+         var yyyy = today.getFullYear();
+         if(dd<10) dd='0'+dd ;
+         if(mm<10) mm='0'+mm;
+         today = dd + "-" + mm + "-" + yyyy;
          $(function() {
-            $( ".date" ).datepicker({dateFormat: "dd-mm-yy"});
+            $( ".date" ).datepicker({
+            dateFormat: "dd-mm-yy",
+            minDate: today 
+            });
          });
 <?php $this->headScript()->captureEnd() ?>
 
