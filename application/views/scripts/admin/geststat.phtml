@@ -1,0 +1,39 @@
+<h3>Area visualizzazione statistiche</h3>
+<br class="clr"/>
+<ul class="thumbnails">
+                            
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span6">
+                                           <?php echo '<p><h5><b>Il numero totale di coupon emessi è '.$this->statistiche.'</b></h5></p>'?>
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <h4><a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'statuser',
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Visualizza statistiche coupon su utenti</a>
+                                                  <hr>
+                                                  <a class="btn" href="<?= $this->url(array(
+                                                     'controller' => 'admin',
+                                                     'action'     => 'statprom',
+                                                        ), 
+                                                                  'default',true
+                                                       ); 
+                                                     ?>">Visualizza statiche coupon su promozioni</a>
+                                              </h4>
+                                          </td>
+                                      </tr>
+				  </table>
+				</li>
+                            
+</ul>
+
+
+

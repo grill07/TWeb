@@ -50,8 +50,15 @@
                     ); 
                  ?>">Gestione FAQ</a></li>
             <li><a href="<?= $this->url(array(
-                        'controller' => 'staff',
-                        'action'     => 'gestprom',
+                        'controller' => 'admin',
+                        'action'     => 'insfaq',
+                        ), 
+                        'default',true
+                    ); 
+                 ?>">Inserimento FAQ</a></li>
+            <li><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'geststat',
                         ), 
                         'default',true
                     ); 

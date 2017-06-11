@@ -1,4 +1,10 @@
 <h3>Gestisci le FAQ inserite</h3>
+<?php if($this->elimina):?>
+<?php echo '<h4 style="color:red">FAQ eliminata</h4>'?>
+<?php endif ?>
+<?php if($this->modifica):?>
+<?php echo '<h4 style="color:red">FAQ modificata</h4>'?>
+<?php endif ?>
 <br class="clr"/>
 <ul class="thumbnails">
                             <?php foreach ($this->faq as $singolafaq) :?>
@@ -37,3 +43,12 @@
 				</li>
                             <?php endforeach ?>
 </ul>
+
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->faq instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->faq,'Sliding','admin/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>

@@ -35,5 +35,36 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
     {
         return $this->delete('id = ' . $key);
     }
+    
+    public function getCoupon()
+    {
+	$select = $this->select();
+        $contatore=0;
+        foreach ($this->fetchAll($select) as $singolocoupon){
+            $contatore++;
+        }
+        return $contatore;
+    }
+    
+    public function getCouponUser($user)
+    {
+        $select= $this->select()->where('utente = ?', $user);
+        $contatore=0;
+        foreach ($this->fetchAll($select) as $singolocoupon){
+            $contatore++;
+        }
+        return $contatore;
+    }
+    
+    public function getCouponProm($off)
+    {
+        $select= $this->select()->where('offerta = ?', $off);
+        $contatore=0;
+        foreach ($this->fetchAll($select) as $singolocoupon){
+            $contatore++;
+        }
+        return $contatore;
+    }
+    
 
 }

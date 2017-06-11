@@ -13,6 +13,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_form7; 
     protected $_form8;
     protected $_form9;
+    protected $_form10;
     protected $_logger;
     protected $_values;
     
@@ -31,17 +32,82 @@ class AdminController extends Zend_Controller_Action {
         $this->view->inseruserForm = $this->getInseruserForm();
         $this->view->modtipologiaForm = $this->getModtipologiaForm();
         $this->view->inseriscitipForm = $this->getInseriscitipForm();
+        $this->view->inseriscifaqForm = $this->getInseriscifaqForm();
+        $this->view->statisticheuserForm = $this->getStatisticheuserForm();
+        $this->view->statistichepromForm = $this->getStatistichepromForm();
     }
     
     public function indexAction() {
         $username = $this->_authService->getIdentity()->username;
-        $utente = $this->_adminModel->getUtenteByUsername($username);
-        $this->view->assign(array('utente' => $utente));
+        $statistiche=$this->_adminModel->getNumeroCoupon();
+        $this->view->assign(array('statistiche' => $statistiche)); 
     }
 
     public function logoutAction(){
 		$this->_authService->clear();
 		return $this->_helper->redirector('index','public');	
+    }
+    
+    public function geststatAction() {
+        $statistiche=$this->_adminModel->getNumeroCoupon();
+        $this->view->assign(array('statistiche' => $statistiche)); 
+   
+    }
+    
+    public function statpromAction() {
+        $off=$this->getParam('off');
+        $statistiche=$this->getParam('statistiche');
+        $visualizza=$this->getParam('visualizza');
+        if($visualizza){
+            $this->view->assign(array('off' => $off,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
+        }
+        
+    }
+    
+    public function statistichepromAction() {
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+                $form = $this->_form10;
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('statuser');
+		}
+                $values = $form->getValues();
+                $id=$values['offerta'];
+                $statistiche=$this->_adminModel->getNumCouponProm($id);
+                $visualizza = true;             
+                $this->_helper->redirector('statprom','admin','default',array('off'=>$id,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
+        
+        
+    }
+    
+    public function statuserAction() {
+        $user=$this->getParam('utente');
+        $statistiche=$this->getParam('statistiche');
+        $visualizza=$this->getParam('visualizza');
+        if($visualizza){
+            $this->view->assign(array('utente' => $user,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
+        }
+        
+    }
+    
+    public function statisticheuserAction() {
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+                $form = $this->_form9;
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('statuser');
+		}
+                $values = $form->getValues();
+                $user=$values['utente'];
+                $statistiche=$this->_adminModel->getNumCouponUser($user);
+                $visualizza = true;             
+                $this->_helper->redirector('statuser','admin','default',array('utente'=>$user,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
+        
+        
     }
     
     public function gestazieAction() {
@@ -110,7 +176,7 @@ class AdminController extends Zend_Controller_Action {
             $azie = $this->getParam('azie');
             $this->view->assign(array('azie' => $azie,'inserita' => $inserita)); 
         }
-        if($esistente){
+        elseif($esistente){
             $azie = $this->getParam('azie');
             $this->view->assign(array('azie' => $azie,'esistente' => $esistente)); 
         }
@@ -194,9 +260,14 @@ class AdminController extends Zend_Controller_Action {
     
     public function insuserAction() {
         $inserito = $this->getParam('inserito');
+        $esistente= $this->getParam('esistente');
         if($inserito){
             $user = $this->getParam('user');
             $this->view->assign(array('user' => $user,'inserito' => $inserito)); 
+        }
+        elseif($esistente){
+            $user = $this->getParam('user');
+            $this->view->assign(array('user' => $user,'esistente' => $esistente)); 
         }
         
     }
@@ -211,9 +282,18 @@ class AdminController extends Zend_Controller_Action {
 		}
 		$values = $form->getValues();
                 $user = $values['username'];
-		$this->_adminModel->saveUtente($values);
+                $utente =$this->_adminModel->getUtenteByUsername($user);
                 $inserito = true;
-		$this->_helper->redirector('insuser','admin','default',array('user' => $user,'inserito' => $inserito));
+                $esistente=true;
+                if(strcasecmp($user,$utente->username) == 0){
+                   $inserito=false;
+                   $this->_helper->redirector('insuser','admin','default',array('user'=>$user,'inserito'=>$inserito,'esistente'=>$esistente));
+		}
+                else{
+                   $esistente=false;
+                   $this->_adminModel->saveUtente($values);
+                   $this->_helper->redirector('insuser','admin','default',array('user'=>$user,'inserito'=>$inserito,'esistente'=>$esistente));
+                }
                 
     }
     
@@ -276,7 +356,7 @@ class AdminController extends Zend_Controller_Action {
             $cat = $this->getParam('cat');
             $this->view->assign(array('cat' => $cat,'inserita' => $inserita)); 
         }
-        if($esistente){
+        elseif($esistente){
             $cat = $this->getParam('cat');
             $this->view->assign(array('cat' => $cat,'esistente' => $esistente)); 
         }
@@ -307,25 +387,28 @@ class AdminController extends Zend_Controller_Action {
                   
                 
     }
-    
-    
-    
-    
-    public function statuserAction() {
-        
-    }
-    
+   
     
     
     public function gestfaqAction(){
-        $faq=$this->_adminModel->getFaq();
-        $this->view->assign(array('faq' => $faq)); 
+        $paged = $this->_getParam('page', 1);
+        $faq=$this->_adminModel->getFaq($paged);
+        $elimina = $this->getParam('elimina');
+        $modifica = $this->getParam('modifica');
+        if($elimina){
+            $this->view->assign(array('faq' => $faq, 'elimina' => $elimina));
+        }else if($modifica){
+            $this->view->assign(array('faq' => $faq, 'modifica' => $modifica)); 
+        }else{
+           $this->view->assign(array('faq' => $faq)); 
+        }
     }
     
     public function eliminafaqAction(){
         $id = $this->getParam('id');
+        $elimina = true;
         $this->_adminModel->deleteFaq($id);
-        $this->_helper->redirector('gestfaq','admin');
+        $this->_helper->redirector('gestfaq','admin','default',array('elimina'=>$elimina));
     }
     
     public function modfaqAction() {
@@ -349,16 +432,35 @@ class AdminController extends Zend_Controller_Action {
                 $id = $values['id'];
                 $this->_adminModel->deleteFaq($id);
                 $this->_adminModel->saveFaq($values);
-                $this->_helper->redirector('gestfaq','admin');
+                $modifica = true;
+                $this->_helper->redirector('gestfaq','admin','default',array('modifica'=> $modifica));
                 
+    }
+    
+    public function insfaqAction(){
+        $inserita = $this->getParam('inserita');
+        if($inserita){
+            $this->view->assign(array('inserita' => $inserita)); 
+        }
+                
+    }
+    
+    public function inseriscifaqAction(){
+                if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+		$form = $this->_form8;
+		if (!$form->isValid($_POST)) {
+			return $this->render('insfaq');
+		}
+		$values = $form->getValues();
+                $inserita = true;
+                $this->_adminModel->saveFaq($values);
+                $this->_helper->redirector('insfaq','admin','default',array('inserita'=>$inserita));
                 
     }
     
     
-    
-    public function statpromAction() {
-        
-    }
 
     public function getModaziendaForm(){
         $urlHelper = $this->_helper->getHelper('url');
@@ -434,5 +536,38 @@ class AdminController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form7;
+    }
+    
+    public function getInseriscifaqForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form8 = new Application_Form_Admin_Inseriscifaq();
+		$this->_form8->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'inseriscifaq'),
+				'default'
+				));
+		return $this->_form8;
+    }
+    
+    public function getStatisticheuserForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form9 = new Application_Form_Admin_Statisticheuser();
+		$this->_form9->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'statisticheuser'),
+				'default'
+				));
+		return $this->_form9;
+    }
+    
+    public function getStatistichepromForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form10 = new Application_Form_Admin_Statisticheprom();
+		$this->_form10->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'statisticheprom'),
+				'default'
+				));
+		return $this->_form10;
     }
 }

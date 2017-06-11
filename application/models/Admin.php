@@ -57,6 +57,11 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Utenti')->getUtentiWAdmin($paged);
     }
     
+    public function getUtenteWStaff() 
+    {
+        return $this->getResource('Utenti')->getUtWStaff();
+    }
+    
     public function getUtenteByUsername($username) 
     {
         return $this->getResource('Utenti')->getElement($username);
@@ -72,9 +77,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Aziende')->getElement($nome);
     }
     
-    public function getFaq()
+    public function getFaq($paged=null)
     {
-        return $this->getResource('Faq')->getTable();
+        return $this->getResource('Faq')->getTable($paged);
     }
     
     public function getFaqById($id)
@@ -95,5 +100,31 @@ class Application_Model_Admin extends App_Model_Abstract
     public function updateAzienda($data,$nomeaz){
         
         return $this->getResource('Aziende')->updateElement($data,$nomeaz);
+    }
+    
+    public function getOfferte()
+    {
+        return $this->getResource('Offerte')->getTable();
+    }
+    
+    public function getNumeroCoupon()
+    {
+        $contatore= $this->getResource('Coupon')->getCoupon();
+        return $contatore;
+        
+    }
+    
+    public function getNumCouponUser($user)
+    {
+        $contatore= $this->getResource('Coupon')->getCouponUser($user);
+        return $contatore;
+        
+    }
+    
+    public function getNumCouponProm($off)
+    {
+        $contatore= $this->getResource('Coupon')->getCouponProm($off);
+        return $contatore;
+        
     }
 }
