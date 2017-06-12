@@ -1,6 +1,37 @@
 <h3>Statistiche promozioni</h3>
-<?php if($this->visualizza):?>
-<?php echo '<h4>Per l\'offerta '.$this->off.' sono stati generati un numero di coupon pari a '.$this->statistiche.' </h4>'?>
-<?php endif ?>
 <br class="clr"/>
-<?php echo $this->statistichepromForm ?>
+<ul class="thumbnails"> 
+                            <?php foreach ($this->offerte as $offerta) :?>
+				<li class="span9">
+				  <table class="well">
+                                      <tr>
+                                        <td class="span3">
+					    <?php echo '<img src="' . $this->baseUrl('img/prodotti/'. $offerta->immagine). '"/>' ?>
+                                        </td>
+                                        <td class="span6">
+					   <?php echo  '<h5>'.$offerta->nome.'</h5>'?>
+                                          <hr class="soft"/>
+                                           <?php echo '<p><b>Numero Coupon scaricati: </b>'.$this->statistiche[$offerta->id].'</p>'?>
+					   <?php echo '<p><b>Descrizione: </b>'.$offerta->descrizione.'</p>'?>
+                                           <?php echo '<p><b>Categoria: </b>'.$offerta->categoria.'</p>'?>
+                                           <?php echo '<p><b>Azienda: </b>'.$offerta->azienda.'</p>'?>
+                                           <?php echo '<p><b>Data inizio: </b>'.$offerta->inizio.'</p>'?>
+                                           <?php echo '<p><b>Data fine: </b>'.$offerta->fine.'</p>'?>
+                                           <?php echo '<p><b>Prezzo: </b>'.$offerta->prezzo.'€</p>'?>
+                                           <?php echo '<p><b>Tipo Sconto: </b>'.$offerta->tipologia.'</p>'?>
+					  <br class="clr"/>
+				         </td>
+                                      </tr>
+				  </table>
+				</li> 
+                            <?php endforeach ?>
+</ul>
+
+<div class="centro">
+    <div class="pagination">
+    <?php if($this->offerte instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->offerte,'Sliding','admin/_paginator.phtml');
+	  } 
+          ?>
+    </div>
+</div>

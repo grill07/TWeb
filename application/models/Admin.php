@@ -102,11 +102,6 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Aziende')->updateElement($data,$nomeaz);
     }
     
-    public function getOfferte()
-    {
-        return $this->getResource('Offerte')->getTable();
-    }
-    
     public function getNumeroCoupon()
     {
         $contatore= $this->getResource('Coupon')->getCoupon();
@@ -126,5 +121,10 @@ class Application_Model_Admin extends App_Model_Abstract
         $contatore= $this->getResource('Coupon')->getCouponProm($off);
         return $contatore;
         
+    }
+    
+    public function getOfferte($paged=null)
+    {
+        return $this->getResource('Offerte')->getTable($paged);
     }
 }

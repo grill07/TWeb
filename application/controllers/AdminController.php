@@ -13,7 +13,6 @@ class AdminController extends Zend_Controller_Action {
     protected $_form7; 
     protected $_form8;
     protected $_form9;
-    protected $_form10;
     protected $_logger;
     protected $_values;
     
@@ -34,7 +33,6 @@ class AdminController extends Zend_Controller_Action {
         $this->view->inseriscitipForm = $this->getInseriscitipForm();
         $this->view->inseriscifaqForm = $this->getInseriscifaqForm();
         $this->view->statisticheuserForm = $this->getStatisticheuserForm();
-        $this->view->statistichepromForm = $this->getStatistichepromForm();
     }
     
     public function indexAction() {
@@ -55,30 +53,14 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function statpromAction() {
-        $off=$this->getParam('off');
-        $statistiche=$this->getParam('statistiche');
-        $visualizza=$this->getParam('visualizza');
-        if($visualizza){
-            $this->view->assign(array('off' => $off,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
+        $paged = $this->_getParam('page', 1);
+        $offerte=$this->_adminModel->getOfferte($paged);
+        $statistiche=array();
+        foreach ($offerte as $offerta){
+            $couponoff=$this->_adminModel->getNumCouponProm($offerta->id);
+            $statistiche[$offerta->id]=$couponoff;
         }
-        
-    }
-    
-    public function statistichepromAction() {
-        if (!$this->getRequest()->isPost()) {
-			$this->_helper->redirector('index','public');
-		}
-                $form = $this->_form10;
-		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('statuser');
-		}
-                $values = $form->getValues();
-                $id=$values['offerta'];
-                $statistiche=$this->_adminModel->getNumCouponProm($id);
-                $visualizza = true;             
-                $this->_helper->redirector('statprom','admin','default',array('off'=>$id,'statistiche'=>$statistiche,'visualizza'=>$visualizza));
-        
+        $this->view->assign(array('offerte' => $offerte,'statistiche'=>$statistiche));
         
     }
     
@@ -559,15 +541,5 @@ class AdminController extends Zend_Controller_Action {
 				));
 		return $this->_form9;
     }
-    
-    public function getStatistichepromForm(){
-        $urlHelper = $this->_helper->getHelper('url');
-		$this->_form10 = new Application_Form_Admin_Statisticheprom();
-		$this->_form10->setAction($urlHelper->url(array(
-				'controller' => 'admin',
-				'action' => 'statisticheprom'),
-				'default'
-				));
-		return $this->_form10;
-    }
+
 }
