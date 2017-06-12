@@ -32,7 +32,10 @@
     
     <?php if($this->ruolo == 'user'):?>   
     <?php if($this->coupon == null):?>
-        <a class="btn" target="_blank" href="<?= $this->url(array(
+        <a class="btn" target="_blank" onclick="setTimeout(function(){
+                                                        location.reload();
+                                                        },500);"
+                                        href="<?= $this->url(array(
                                                      'controller' => 'user',
                                                      'action'     => 'coupon',
                                                      'offerta' => $this->offerta->id
