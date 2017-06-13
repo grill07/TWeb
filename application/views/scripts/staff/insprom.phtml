@@ -18,8 +18,14 @@
 <?php $this->headScript()->captureEnd() ?>
 
 <h3>Inserisci una nuova promozione</h3>
+<p>Fare attenzione all'inserimento del prezzo e della tipologia di sconto. 
+   <br>Il sistema gestisce solo sconti di tipo percentuale(10%,50%,...) e di tipo 3x2(6x3,4x2,..),
+   quindi inserire i caratteri correttamente con carattere %.
+   <br>Il prezzo è inteso come originale prima dello sconto. Nel caso 3x2 va inserito il prezzo totale dei prodotti
+   senza sconto ,quindi sarà 3 volte il prezzo originale del singolo prodotto.
+   <br><b>ATTENZIONE:Se non si carica un'immagine,ne verrà inserita una di default.</b>
+</p>
 <?php if($this->inserita):?>
 <?php echo '<h4 style="color:red">La promozione '.$this->off.' è stata inserita corretamente</h4>'?>
 <?php endif ?>
-<br class="clr"/>
 <?php echo $this->inserisciForm ?>
