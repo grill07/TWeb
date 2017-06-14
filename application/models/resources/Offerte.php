@@ -112,9 +112,18 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
 			$paginator = new Zend_Paginator($adapter);
                         $paginator->setItemCountPerPage(4)
 		          	  ->setCurrentPageNumber((int) $paged);
+                        foreach ($paginator as $offerta){
+                                   $offerta['inizio']= date('d-m-Y', strtotime($offerta['inizio']));
+                                   $offerta['fine']= date('d-m-Y', strtotime($offerta['fine']));
+                        }
 			return $paginator;
 		}
-        return $this->fetchAll($select);
+        $offerte = $this->fetchAll($select);
+        foreach ($offerte as $offerta){
+            $offerta['inizio']= date('d-m-Y', strtotime($offerta['inizio']));
+            $offerta['fine']= date('d-m-Y', strtotime($offerta['fine']));
+        }
+        return $offerte;
     }
     
     public function getOfferteScaricate()
