@@ -2,14 +2,15 @@
 	->appendFile($this->baseUrl('js/jquery.js'))
 	->appendFile($this->baseUrl('js/jquery-ui.js'))
 	->captureStart() ?>
-         var today = new Date();
-         var dd = today.getDate();
-         var mm = today.getMonth() + 1;
-         var yyyy = today.getFullYear();
-         if(dd<10) dd='0'+dd ;
-         if(mm<10) mm='0'+mm;
-         today = dd + "-" + mm + "-" + yyyy;
+         
          $(function() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            if(dd<10) dd='0'+dd ;
+            if(mm<10) mm='0'+mm;
+            today = dd + "-" + mm + "-" + yyyy;
             $( ".date" ).datepicker({
             dateFormat: "dd-mm-yy",
             minDate: today 
@@ -19,8 +20,8 @@
 
 <h3>Inserisci una nuova promozione</h3>
 <p>Fare attenzione all'inserimento del prezzo e della tipologia di sconto. 
-   <br>Il sistema gestisce solo sconti di tipo percentuale(10%,50%,...) e di tipo 3x2(6x3,4x2,..),
-   quindi inserire i caratteri correttamente con carattere %.
+   <br>Il sistema gestisce solo sconti di tipo percentuale(10%,50%,...) e di tipo 3x2(6x3,4x2,..).
+   <br>Quindi inserire i caratteri correttamente,utilizzando il % per le percentuali e la x per il 3x2.
    <br>Il prezzo è inteso come originale prima dello sconto. Nel caso 3x2 va inserito il prezzo totale dei prodotti
    senza sconto ,quindi sarà 3 volte il prezzo originale del singolo prodotto.
    <br><b>ATTENZIONE:Se non si carica un'immagine,ne verrà inserita una di default.</b>
