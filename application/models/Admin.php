@@ -127,4 +127,19 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Offerte')->getTable($paged);
     }
+    
+    public function getStaff() 
+    {
+        return $this->getResource('Utenti')->getOnlyStaff();
+    }
+    
+    public function getAziendeStaff()
+    {
+        return $this->getResource('Aziendestaff')->getTable();
+    }
+    
+    public function saveAziendaStaff($aziendastaff)
+    {
+    	return $this->getResource('Aziendestaff')->addElement($aziendastaff);
+    }
 }

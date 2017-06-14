@@ -54,4 +54,25 @@ class Application_Model_Staff extends App_Model_Abstract
     {
         return $this->getResource('Categorie')->getTable();
     }
+    
+    public function getAziendeStaff()
+    {
+        return $this->getResource('Aziendestaff')->getTable();
+    }
+    
+    public function getStaffAzienda($staff,$azienda)
+    {
+        return $this->getResource('Aziendestaff')->getStaffAzie($staff,$azienda);
+    }
+    
+    public function getOnlyAzienda($staff,$azienda)
+    {
+        return $this->getResource('Aziendestaff')->getOnlyAzie($staff,$azienda);
+    }
+    
+    public function getOffStaff($aziende,$paged=null)
+    {
+        return $this->getResource('Offerte')->getOfferteStaff($aziende,$paged);
+    }
+    
 }

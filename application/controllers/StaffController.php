@@ -45,18 +45,36 @@ class StaffController extends Zend_Controller_Action {
     }
     
     public function gestpromAction() {
-        $paged = $this->_getParam('page', 1);
-        $offerte=$this->_staffModel->getOfferte($paged);
+        $user = $this->_authService->getIdentity()->username;
+        $paged = $this->_getParam('page', 1);        
+        $aziendestaff=array();
+        $flag=0;
+        $flag2=0;
+        $aziende = $this->_staffModel->getAziende();
+        foreach ($aziende as $azienda){
+           $flag=$this->_staffModel->getStaffAzienda($user, $azienda->nome);
+           $flag2=$this->_staffModel->getOnlyAzienda($user,$azienda->nome);
+                if($flag!=0 || $flag2==0){
+                        $aziendestaff[$azienda->nome]= $azienda->nome;
+                        $flag=0;
+                        $flag2=0;
+                }
+           
+        }
+        
+        $offertestaff=$this->_staffModel->getOffStaff($aziendestaff, $paged);
+        
+       
         $elimina = $this->getParam('elimina');
         $modifica = $this->getParam('modifica');
         if($elimina){
             $off = $this->getParam('off');
-            $this->view->assign(array('offerte' => $offerte,'off' => $off,'elimina' => $elimina));
+            $this->view->assign(array('offerte' => $offertestaff,'off' => $off,'elimina' => $elimina));
         }else if($modifica){
             $off = $this->getParam('off');
-            $this->view->assign(array('offerte' => $offerte,'off' => $off,'modifica' => $modifica)); 
+            $this->view->assign(array('offerte' => $offertestaff,'off' => $off,'modifica' => $modifica)); 
         }else{
-           $this->view->assign(array('offerte' => $offerte)); 
+           $this->view->assign(array('offerte' => $offertestaff)); 
         }
     }
     
@@ -66,12 +84,17 @@ class StaffController extends Zend_Controller_Action {
             $off = $this->getParam('off');
             $this->view->assign(array('off' => $off,'inserita' => $inserita)); 
         }
+        $user = $this->_authService->getIdentity()->username;
+        $this->_form1->setValues($user);
+        $this->view->inserisciForm =$this->_form1;
+        
     }
     
     public function modpromAction() {
         $id = $this->getParam('id');
         $offerta = $this->_staffModel->getOffertaById($id);
-        $this->_form3->setValues($offerta);
+        $user = $this->_authService->getIdentity()->username;
+        $this->_form3->setValues($offerta,$user);
         $this->view->modoffertaForm = $this->_form3;
     }
 
@@ -80,6 +103,8 @@ class StaffController extends Zend_Controller_Action {
 			$this->_helper->redirector('index','public');
 		}
 		$form = $this->_form1;
+                $user = $this->_authService->getIdentity()->username;
+                $form->setValues($_POST,$user);
 		if (!$form->isValid($_POST)) {
 			return $this->render('insprom');
 		}
@@ -123,7 +148,8 @@ class StaffController extends Zend_Controller_Action {
 			$this->_helper->redirector('index','public');
 		}
                 $form = $this->_form3;
-                $form->setValues($_POST); //viene creata la form con gli elementi già compilati
+                $user = $this->_authService->getIdentity()->username;
+                $form->setValues($_POST,$user); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
 			return $this->render('modprom');
 		}

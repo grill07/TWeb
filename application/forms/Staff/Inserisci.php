@@ -12,6 +12,9 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
         
+    }
+    
+        public function setValues($user){
         $this->addElement('text', 'nome', array(
             'label' => 'Nome prodotto',
             'filters' => array('StringTrim'),
@@ -42,17 +45,30 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
 		));
         
-        $nomi = array();
+        
+        
+        $aziendestaff=array();
+        $flag=0;
+        $flag2=0;
         $aziende = $this->_staffModel->getAziende();
         foreach ($aziende as $azienda){
-           $nomi[$azienda->nome] = $azienda->nome; 
+           $flag=$this->_staffModel->getStaffAzienda($user, $azienda->nome);
+           $flag2=$this->_staffModel->getOnlyAzienda($user,$azienda->nome);
+                if($flag!=0 || $flag2 == 0){
+                        $aziendestaff[$azienda->nome]= $azienda->nome;
+                        $flag=0;
+                        $flag2=0;
+                }
+           
         }
+          
         $this->addElement('select', 'azienda', array(
             'label' => 'Azienda',
             'required' => true,
-        	'multiOptions' => $nomi,
+        	'multiOptions' => $aziendestaff,
             'decorators' => $this->elementDecorators,
         ));
+        
         
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
@@ -103,10 +119,13 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'value' => 0,
             ));
         
+    
+    
         $this->addElement('submit', 'inserofferta', array(
             'label' => 'Inserisci',
             'decorators' => $this->buttonDecorators,
 		));
+        
         
         $this->setDecorators(array(
 			'FormElements',
@@ -115,4 +134,11 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
 			'Form'
 		));
     }
-}
+    
+    
+        
+        
+        
+        
+    }
+
