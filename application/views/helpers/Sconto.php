@@ -18,8 +18,7 @@ class Zend_View_Helper_Sconto extends Zend_View_Helper_Abstract
         $sconto = intval($sconto);
         $p_scontato = round($offerta->prezzo *(1 -($sconto/100)),2);
         }
-        $string = '<p><b>Prezzo scontato: </b>'.$p_scontato.'€</p>';
-        return $string ;
+        return $p_scontato ;
     }
 }
 

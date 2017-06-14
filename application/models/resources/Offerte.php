@@ -102,6 +102,21 @@ class Application_Resource_Offerte extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
     
+    public function getOfferteStaff($azie, $paged=null)
+    {
+        $string=("azienda = ''");
+        foreach ($azie as $a) {$string.=" or azienda = '".$a."' ";}
+        $select=$this->select()->where($string);
+        if (null !== $paged) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+			$paginator = new Zend_Paginator($adapter);
+                        $paginator->setItemCountPerPage(4)
+		          	  ->setCurrentPageNumber((int) $paged);
+			return $paginator;
+		}
+        return $this->fetchAll($select);
+    }
+    
     public function getOfferteScaricate()
     {
         $date = new Zend_Date();

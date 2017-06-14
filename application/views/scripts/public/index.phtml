@@ -56,7 +56,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $this->new[$i]->prezzo ?>€</span></h4>
+                                            <span class="pull-right"><?= $this->sconto($this->new[$i]) ?>€</span></h4>
                                         </div>
 				  </div>
 				</li>
@@ -91,7 +91,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $this->new[$i]->prezzo ?>€</span></h4>
+                                            <span class="pull-right"><?= $this->sconto($this->new[$i]) ?>€</span></h4>
                                         </div>
 				  </div>
 				</li>
@@ -132,7 +132,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $s->prezzo ?>€</span></h4>
+                                            <span class="pull-right"><?= $this->sconto($s) ?>€</span></h4>
 					</div>
 				  </div>
 				</li>

@@ -13,6 +13,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_form7; 
     protected $_form8;
     protected $_form9;
+    protected $_form10;
     protected $_logger;
     protected $_values;
     
@@ -33,6 +34,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->inseriscitipForm = $this->getInseriscitipForm();
         $this->view->inseriscifaqForm = $this->getInseriscifaqForm();
         $this->view->statisticheuserForm = $this->getStatisticheuserForm();
+        $this->view->gestionestaffForm = $this->getGestionestaffForm();
     }
     
     public function indexAction() {
@@ -442,7 +444,51 @@ class AdminController extends Zend_Controller_Action {
                 
     }
     
+    public function geststaffAction(){
+        $assegnata=$this->getParam('assegnata');
+        $esistente=$this->getParam('esistente');
+        $staff=$this->getParam('staff');
+        $azienda=$this->getParam('azienda');
+        $this->view->assign(array('staff'=>$staff,'azienda'=>$azienda,'assegnata'=>$assegnata,'esistente'=>$esistente));
+        
+        
+    }
     
+    public function gestionestaffAction(){
+        if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index','public');
+		}
+                $form = $this->_form10;
+		if (!$form->isValid($_POST)) {
+                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+			return $this->render('geststaff');
+		}
+                $values = $form->getValues();
+                $staff=$values['utente'];
+                $azienda=$values['azienda'];
+                $aziendestaff=$this->_adminModel->getAziendeStaff();
+                $assegnata=true;
+                $esistente=false;
+                foreach($aziendestaff as $azstaff){
+                    if(strcasecmp($values['utente'], $azstaff->utente) == 0){
+                        if(strcasecmp($values['azienda'], $azstaff->azienda) == 0){       
+                            $assegnata=false;
+                            $esistente=true;
+                        }
+                    }
+                }
+                if($esistente){
+                    $this->_helper->redirector('geststaff','admin','default',array('staff'=>$staff,'azienda'=>$azienda,'assegnata'=>$assegnata,'esistente'=>$esistente));
+                }
+                elseif($assegnata){
+                    $this->_adminModel->saveAziendaStaff($values);
+                    $this->_helper->redirector('geststaff','admin','default',array('staff'=>$staff,'azienda'=>$azienda,'assegnata'=>$assegnata,'esistente'=>$esistente));
+                }
+                
+        
+    }
+
+        
 
     public function getModaziendaForm(){
         $urlHelper = $this->_helper->getHelper('url');
@@ -540,6 +586,17 @@ class AdminController extends Zend_Controller_Action {
 				'default'
 				));
 		return $this->_form9;
+    }
+    
+    public function getGestionestaffForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+		$this->_form10 = new Application_Form_Admin_Gestionestaff();
+		$this->_form10->setAction($urlHelper->url(array(
+				'controller' => 'admin',
+				'action' => 'gestionestaff'),
+				'default'
+				));
+		return $this->_form10;
     }
 
 }
