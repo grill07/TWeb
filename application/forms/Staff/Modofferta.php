@@ -118,8 +118,8 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'value' => $values['tipologia'],
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(3,3)),
-                                  array('Regex',true, array('pattern' => '/[0-9](x|[0-9])(%|[0-9])/'))),
+            'validators' => array(array('StringLength',true, array(2,3)),
+                                  array('Regex',true, array('pattern' => '/[0-9](%|(x|[0-9])(%|[0-9]))/'))),
             'decorators' => $this->elementDecorators,
 		));
         
