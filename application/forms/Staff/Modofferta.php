@@ -10,10 +10,11 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         $this->setMethod('post');
         $this->setName('staffmodoff');
         $this->setAction('');
-        $this->setAttrib('enctype', 'multipart/form-data');    
+        $this->setAttrib('enctype', 'multipart/form-data');
+        
     }
     
-    public function setValues($values){ //per precompilare la form i valori vengono settati dopo l'init
+    public function setValues($values,$user){ //per precompilare la form i valori vengono settati dopo l'init
         $this->addElement('text', 'nome', array(
             'label' => 'Nome prodotto',
             'value' => $values['nome'],
@@ -47,16 +48,29 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
 		));
         
-        $nomi = array();
+        $aziendestaff=array();
+        $flag=0;
+        $flag2=0;
         $aziende = $this->_staffModel->getAziende();
         foreach ($aziende as $azienda){
-           $nomi[$azienda->nome] = $azienda->nome; 
+           $flag=$this->_staffModel->getStaffAzienda($user, $azienda->nome);
+           $flag2=$this->_staffModel->getOnlyAzienda($user,$azienda->nome);
+                if($flag!=0 || $flag2==0){
+                        $aziendestaff[$azienda->nome]= $azienda->nome;
+                        $flag=0;
+                        $flag2=0;
+                }
+           
         }
+        
+        
+          
+        
         $this->addElement('select', 'azienda', array(
             'label' => 'Azienda',
-            'value' => $values['azienda'],
+
             'required' => true,
-        	'multiOptions' => $nomi,
+        	'multiOptions' => $aziendestaff,
             'decorators' => $this->elementDecorators,
         ));
         

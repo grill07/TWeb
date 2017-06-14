@@ -1,4 +1,9 @@
-<div class="mainBody container">
+<?php $this->headScript()
+	->appendFile($this->baseUrl('js/jquery.js'))
+        ->appendFile($this->baseUrl('js/couponshop.js'))
+	->appendFile($this->baseUrl('js/bootstrap-carousel.js')) ?>
+
+  <div class="mainBody container">
     <img class="larg marsu" src="<?=$this->baseUrl('img/home.jpg')?>" alt=""/>
 
 
@@ -135,8 +140,3 @@
 			  </ul>
 </div>
 </div>
-
-<!-- TODO spostare in bootstrap.php -->
-<script src="<?=$this->baseUrl('js/jquery.js')?>" type="text/javascript"></script>
-<script src="<?=$this->baseUrl('js/bootstrap.min.js')?>" type="text/javascript"></script>
-<script src="<?=$this->baseUrl('js/bootshop.js')?>"></script>

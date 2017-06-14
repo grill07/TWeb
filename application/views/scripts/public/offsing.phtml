@@ -34,7 +34,7 @@
     <?php if($this->ruolo == 'user'):?>   
     <?php if($this->coupon == null):?>
         <a class="btn" target="_blank" onclick="setTimeout(function(){
-                                                        location.reload();
+                                                        location.reload(true);
                                                         },500);"
                                         href="<?= $this->url(array(
                                                      'controller' => 'user',
