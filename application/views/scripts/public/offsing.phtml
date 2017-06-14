@@ -5,8 +5,9 @@
     <div class="larg">
         			<h3><?= $this->offerta->nome ?></h3>
 				<hr class="soft"/>
-                                <p>Sconto: <?= $this->offerta->tipologia ?></p>
-                                <p class="destra"><?= $this->offerta->prezzo ?>€</p>
+                                <p class="centro"><b>Sconto: </b> <?= $this->offerta->tipologia ?>
+                                <br><b>Prezzo originale: </b><?= $this->offerta->prezzo ?>€
+                                <br><b>Prezzo scontato: </b><?= $this->sconto($this->offerta)?>€</p>
 				<hr class="soft"/>
 				<p><?= $this->offerta->descrizione ?></p>
 				<br class="clr"/>
