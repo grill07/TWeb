@@ -104,7 +104,7 @@ class StaffController extends Zend_Controller_Action {
 		}
 		$form = $this->_form1;
                 $user = $this->_authService->getIdentity()->username;
-                $form->setValues($_POST,$user);
+                $form->setValues($user);
 		if (!$form->isValid($_POST)) {
 			return $this->render('insprom');
 		}
