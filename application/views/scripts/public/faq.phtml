@@ -1,11 +1,7 @@
 <?php $this->headScript()
 	->appendFile($this->baseUrl('js/jquery.js'))
 	->appendFile($this->baseUrl('js/jquery-ui.js'))
-	->captureStart() ?>
-  $( function() {
-    $( "#accordion" ).accordion();
-  } );
-<?php $this->headScript()->captureEnd() ?>
+        ->appendFile($this->baseUrl('js/faq.js')) ?>
   
 <div class="container">
     <h1>FAQ</h1>
