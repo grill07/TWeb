@@ -19,6 +19,7 @@
                 allo scopo di poter ottenere il coupon relativo all'offerta a 
                 cui si è interessati. Per ulteriori informazioni visitare la 
                 sezione FAQ.</p>
+    <a href="<?=$this->baseUrl('/../docs/Relazione.pdf')?>" target="_blank"><h4 class="centro">LINK ALLA DOCUMENTAZIONE DESCRITTIVA DEL SITO</h4></a>
 </div>
 
 
@@ -56,7 +57,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $this->sconto($this->new[$i]) ?>€</span></h4>
+                                            <span class="pull-right">Sconto: <?= $this->new[$i]->tipologia ?></span></h4>
                                         </div>
 				  </div>
 				</li>
@@ -91,7 +92,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $this->sconto($this->new[$i]) ?>€</span></h4>
+                                            <span class="pull-right">Sconto: <?= $this->new[$i]->tipologia ?></span></h4>
                                         </div>
 				  </div>
 				</li>
@@ -132,7 +133,7 @@
                                             'default',true
                                             ); 
                                             ?>">VEDI</a>
-                                            <span class="pull-right"><?= $this->sconto($s) ?>€</span></h4>
+                                            <span class="pull-right">Sconto: <?= $s->tipologia ?></span></h4>
 					</div>
 				  </div>
 				</li>

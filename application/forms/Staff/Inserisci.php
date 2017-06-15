@@ -19,7 +19,7 @@ class Application_Form_Staff_Inserisci extends App_Form_Abstract
             'label' => 'Nome prodotto',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,30))),
+            'validators' => array('Alnum',array('StringLength',true, array(1,30))),
             'decorators' => $this->elementDecorators,
 		));
         

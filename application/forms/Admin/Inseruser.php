@@ -15,7 +15,7 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array (array('StringLength',true, array(1,15))),
+            'validators' => array ('Alnum',array('StringLength',true, array(1,15))),
             'decorators' => $this->elementDecorators,
             ));
         
@@ -23,7 +23,7 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'label' => 'Password',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,15))),
+            'validators' => array('Alnum',array('StringLength',true, array(1,15))),
             'decorators' => $this->elementDecorators,
 		));
         
@@ -31,7 +31,7 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'label' => 'Nome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
            'decorators' => $this->elementDecorators,
 		));
         
@@ -40,7 +40,7 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'label' => 'Cognome',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(1,20))),
+            'validators' => array('Alpha',array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
 		));
         

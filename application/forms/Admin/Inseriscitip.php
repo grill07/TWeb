@@ -15,7 +15,7 @@ class Application_Form_Admin_Inseriscitip extends App_Form_Abstract
             'label' => 'Nuova categoria',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array (array('StringLength',true, array(1,20))),
+            'validators' => array ('Alnum',array('StringLength',true, array(1,20))),
             'decorators' => $this->elementDecorators,
             ));
 

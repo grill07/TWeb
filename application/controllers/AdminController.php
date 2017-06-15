@@ -82,8 +82,7 @@ class AdminController extends Zend_Controller_Action {
 		}
                 $form = $this->_form9;
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('statuser');
+                    return $this->render('statuser');
 		}
                 $values = $form->getValues();
                 $user=$values['utente'];
@@ -133,8 +132,7 @@ class AdminController extends Zend_Controller_Action {
                 $form = $this->_form1;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('modazie');
+                    return $this->render('modazie');
 		}
                 $values = $form->getValues();
                 $nome = $values['nome'];
@@ -231,8 +229,7 @@ class AdminController extends Zend_Controller_Action {
                 $form = $this->_form4;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('moduser');
+                    return $this->render('moduser');
 		}   
                 $values = $form->getValues();
                 $username = $values['username'];
@@ -321,8 +318,7 @@ class AdminController extends Zend_Controller_Action {
                 $form = $this->_form6;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('modtip');
+                    return $this->render('modtip');
 		}   
                 $values = $form->getValues();
                 $vecchiacategoria = $values['tipologia'];
@@ -409,8 +405,7 @@ class AdminController extends Zend_Controller_Action {
                 $form = $this->_form3;
                 $form->setValues($_POST); //viene creata la form con gli elementi già compilati
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('modfaq');
+                    return $this->render('modfaq');
 		}
                 $values = $form->getValues();
                 $id = $values['id'];
@@ -460,8 +455,7 @@ class AdminController extends Zend_Controller_Action {
 		}
                 $form = $this->_form10;
 		if (!$form->isValid($_POST)) {
-                    $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-			return $this->render('geststaff');
+                    return $this->render('geststaff');
 		}
                 $values = $form->getValues();
                 $staff=$values['utente'];
