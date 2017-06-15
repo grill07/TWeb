@@ -142,4 +142,10 @@ class Application_Model_Admin extends App_Model_Abstract
     {
     	return $this->getResource('Aziendestaff')->addElement($aziendastaff);
     }
+    
+    public function deleteMembroStaff($staff){
+        
+        return $this->getResource('Aziendestaff')->deleteStaff($staff);
+    }
+    
 }

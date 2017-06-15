@@ -212,6 +212,7 @@ class AdminController extends Zend_Controller_Action {
         $username = $this->getParam('username');
         $elimina = true;
         $this->_adminModel->deleteUtente($username);
+        $this->_adminModel->deleteMembroStaff($username);
         $this->_helper->redirector('gestuser','admin','default',array('user'=>$username, 'elimina'=>$elimina));
     }
     

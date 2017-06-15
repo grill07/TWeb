@@ -58,5 +58,10 @@ class Application_Resource_Aziendestaff extends Zend_Db_Table_Abstract
         
     }
     
+    public function deleteStaff($staff)
+    {
+        return $this->delete("utente = '" . $staff . "'");
+    }
+    
 
 }
