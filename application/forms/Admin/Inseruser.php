@@ -15,7 +15,10 @@ class Application_Form_Admin_Inseruser extends App_Form_Abstract
             'label' => 'Username',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array ('Alnum',array('StringLength',true, array(1,15))),
+            'validators' => array ('Alnum',array('StringLength',true, array(1,15)),
+                array('Db_NoRecordExists',true, 
+                array('table'   => 'utenti',
+                      'field'   => 'username'))),
             'decorators' => $this->elementDecorators,
             ));
         

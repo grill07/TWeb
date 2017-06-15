@@ -19,7 +19,7 @@ class Application_Form_Admin_Modutenti extends App_Form_Abstract
             'filters' => array('StringTrim'),
             'required' => true,
             'multiOptions' => array(
-                        'staff' => 'Staff',  'User' => 'User'  ),
+                        'staff' => 'Staff',  'user' => 'User'  ),
             'decorators' => $this->elementDecorators,
 		));
         

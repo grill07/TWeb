@@ -68,7 +68,7 @@ class Application_Form_Staff_Modofferta extends App_Form_Abstract
         
         $this->addElement('select', 'azienda', array(
             'label' => 'Azienda',
-
+            'value' => $values['azienda'],
             'required' => true,
         	'multiOptions' => $aziendestaff,
             'decorators' => $this->elementDecorators,
