@@ -235,6 +235,9 @@ class AdminController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $username = $values['username'];
                 $this->_adminModel->deleteUtente($username);
+                if($values['ruolo'] == 'user'){
+                    $this->_adminModel->deleteMembroStaff($username);
+                }
                 $this->_adminModel->saveUtente($values);
                 $modifica = true;
                 $this->_helper->redirector('gestuser','admin','default',array('user'=>$username,'modifica'=> $modifica));
